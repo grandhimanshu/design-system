@@ -1,10 +1,5 @@
 # Personal notes (ask user before removing this file on PR merge)
 
-## General
-- Close icon has bad styling
-- Tabbing on list does not take to footer
-- Tabbing on search skips list
-- Enter does not move focus back to the trigger
 
 ---
 
