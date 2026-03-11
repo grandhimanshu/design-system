@@ -1,4 +1,5 @@
 import React from 'react';
+import { getAllFocusableElements } from '@/utils/overlayHelper';
 
 export const handleKeyDown = (
   event: React.KeyboardEvent,
@@ -23,7 +24,21 @@ export const handleKeyDown = (
       event.preventDefault();
       navigateOptions('down', focusedOption, setFocusedOption, listRef);
       break;
+    case 'Home':
+      event.preventDefault();
+      navigateOptions('first', focusedOption, setFocusedOption, listRef);
+      break;
+    case 'End':
+      event.preventDefault();
+      navigateOptions('last', focusedOption, setFocusedOption, listRef);
+      break;
     case 'Enter':
+      (focusedOption as HTMLElement)?.click();
+      setOpenPopover?.(false);
+      break;
+    case ' ':
+    case 'Spacebar':
+      event.preventDefault();
       (focusedOption as HTMLElement)?.click();
       setOpenPopover?.(false);
       break;
@@ -56,21 +71,28 @@ const navigateOptions = (
   setFocusedOption?: React.Dispatch<React.SetStateAction<HTMLElement | undefined>>,
   listRef?: any
 ) => {
-  const listItems = listRef.current?.querySelectorAll('[data-test="DesignSystem-Listbox-ItemWrapper"]');
-  let index = Array.from(listItems).findIndex((item) => {
-    return item == focusedOption;
-  });
+  if (!listRef?.current) return;
 
-  if (index === -1) {
-    index = direction === 'up' ? listItems.length - 1 : 0;
+  // Scope to 'menu' role to exclude nested submenu items
+  const focusables = getAllFocusableElements(listRef.current, 'menu');
+  if (focusables.length === 0) return;
+
+  let index = focusables.findIndex((item) => item === focusedOption || item === document.activeElement);
+
+  if (direction === 'first') {
+    index = 0;
+  } else if (direction === 'last') {
+    index = focusables.length - 1;
+  } else if (index === -1) {
+    index = direction === 'up' ? focusables.length - 1 : 0;
   } else {
-    index = direction === 'up' ? (index - 1 + listItems.length) % listItems.length : (index + 1) % listItems.length;
+    index = direction === 'up' ? (index - 1 + focusables.length) % focusables.length : (index + 1) % focusables.length;
   }
 
-  const targetOption = listItems[index];
-  (targetOption as HTMLElement).focus();
+  const targetOption = focusables[index];
+  targetOption.focus({ preventScroll: true });
   setFocusedOption && setFocusedOption(targetOption);
-  targetOption?.scrollIntoView?.({ block: 'center' });
+  targetOption.scrollIntoView?.({ block: 'center' });
 };
 
 const navigateSubMenu = (
@@ -89,8 +111,13 @@ const navigateSubMenu = (
       (direction === 'right' && menuPlacement?.includes('right')) ||
       (direction === 'left' && menuPlacement?.includes('left'))
     ) {
-      const listItems = subListRef?.current?.querySelectorAll('[data-test="DesignSystem-Listbox-ItemWrapper"]');
-      (listItems?.[0] as HTMLElement).focus();
+      if (subListRef?.current) {
+        // Scope to 'menu' role for submenu navigation
+        const focusables = getAllFocusableElements(subListRef.current, 'menu');
+        if (focusables.length > 0) {
+          focusables[0].focus({ preventScroll: true });
+        }
+      }
     }
   } else if (
     (direction === 'left' && menuPlacement?.includes('right')) ||

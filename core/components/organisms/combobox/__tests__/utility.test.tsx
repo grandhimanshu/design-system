@@ -93,4 +93,25 @@ describe('handleKeyDown function', () => {
     expect(inputTriggerRef.current.focus).toHaveBeenCalled();
     expect(setFocusedOption).toHaveBeenCalledWith(undefined);
   });
+
+  it('should close popover and focus input when Tab is pressed on an option', () => {
+    const event = new KeyboardEvent('keydown', { key: 'Tab' }) as any;
+    jest.spyOn(event, 'preventDefault');
+
+    handleKeyDown(
+      event,
+      focusedOption,
+      setFocusedOption,
+      setOpenPopover,
+      inputTriggerRef,
+      setHighlightFirstItem,
+      setHighlightLastItem,
+      false,
+      listRef
+    );
+
+    expect(event.preventDefault).toHaveBeenCalled();
+    expect(setOpenPopover).toHaveBeenCalledWith(false);
+    expect(inputTriggerRef.current.focus).toHaveBeenCalled();
+  });
 });

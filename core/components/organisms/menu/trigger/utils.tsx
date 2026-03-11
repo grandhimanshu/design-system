@@ -1,4 +1,5 @@
 import React from 'react';
+import { getAllFocusableElements } from '@/utils/overlayHelper';
 
 export const handleKeyDown = (
   event: React.KeyboardEvent,
@@ -7,6 +8,17 @@ export const handleKeyDown = (
   setHighlightLastItem?: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   switch (event.key) {
+    case 'Enter':
+      event.preventDefault();
+      setOpenPopover?.(true);
+      setHighlightFirstItem?.(true);
+      break;
+    case ' ':
+    case 'Spacebar':
+      event.preventDefault();
+      setOpenPopover?.(true);
+      setHighlightFirstItem?.(true);
+      break;
     case 'ArrowUp':
       event.preventDefault();
       setOpenPopover?.(true);
@@ -31,18 +43,18 @@ export const focusListItem = (
   setFocusedOption?: React.Dispatch<React.SetStateAction<HTMLElement | undefined>>,
   listRef?: any
 ) => {
-  const listItems = listRef.current?.querySelectorAll('[data-test="DesignSystem-Listbox-ItemWrapper"]');
-  let targetOption;
+  if (!listRef?.current) return;
 
-  if (position === 'down') {
-    targetOption = listItems?.[0];
-  } else {
-    targetOption = listItems?.[listItems.length - 1];
-  }
-  (targetOption as HTMLElement)?.focus();
+  // Scope to 'menu' role to exclude nested submenu items
+  const focusables = getAllFocusableElements(listRef.current, 'menu');
+  if (focusables.length === 0) return;
 
-  if (targetOption && typeof targetOption.scrollIntoView === 'function') {
-    (targetOption as HTMLElement)?.scrollIntoView({ block: 'end' });
+  const targetOption = position === 'down' ? focusables[0] : focusables[focusables.length - 1];
+
+  targetOption.focus({ preventScroll: true });
+
+  if (typeof targetOption.scrollIntoView === 'function') {
+    targetOption.scrollIntoView({ block: 'end' });
   }
   setFocusedOption && setFocusedOption(targetOption);
 };

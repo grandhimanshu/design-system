@@ -50,7 +50,8 @@ Update strikethrough as fixes ship. Avoid aria things unless they affect keyboar
 | 18 | Dropzone | Root drop area not keyboard-operable; only "Browse files" link works | Partial | |
 | 18 | Combobox | Missing Home/End in option list | Partial | |
 | 18 | Menu | Missing Space to activate, Home/End, type-ahead | Partial | |
-| 18 | TimePicker | Inherits Dropdown gaps (Space, Escape, Home/End) | Partial | |
+| 18 | TimePicker | Inherits Dropdown gaps (Space, Escape, Home/End) | Partial | Dropdown is deprecated — out of scope. |
+| — | ~~Dropdown~~ | ~~Deprecated component~~ | ~~Out of scope~~ | Component deprecated; not fixing. |
 | — | ~~Button~~ | ~~None~~ | ~~—~~ | |
 | — | ~~Checkbox~~ | ~~None~~ | ~~—~~ | |
 | — | ~~Radio~~ | ~~None~~ | ~~—~~ | |

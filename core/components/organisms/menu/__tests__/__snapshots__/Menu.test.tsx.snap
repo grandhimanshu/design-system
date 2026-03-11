@@ -35,6 +35,7 @@ exports[`Menu component snapshot
       data-test="DesignSystem-Menu-Wrapper"
       role="menu"
       style="max-height: 256px;"
+      tabindex="-1"
     >
       <nav
         class="Listbox"
@@ -111,6 +112,7 @@ exports[`Menu component with Nesting snapshot
       data-test="DesignSystem-Menu-Wrapper"
       role="menu"
       style="max-height: 256px;"
+      tabindex="-1"
     >
       <nav
         class="Listbox"
@@ -265,6 +267,7 @@ exports[`Menu component with Trigger snapshot
       data-test="DesignSystem-Menu-Wrapper"
       role="menu"
       style="max-height: 256px;"
+      tabindex="-1"
     >
       <nav
         class="Listbox"

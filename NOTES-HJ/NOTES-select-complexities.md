@@ -79,6 +79,8 @@ These behave differently after Enter/Space on an option.
 - Any element whose action duplicates the option's primary action (e.g., checkbox in multi-select toggles selection, but so does clicking/Enter on the option itself)
 - These should be hidden from keyboard (`tabIndex={-1}`) so they don't create extra tab stops or arrow stops. The option surface already performs the same action.
 
+**Decision.** Item makes redundant children inert. See D4 in Playbook.
+
 **With non-redundant interactive elements:**
 
 - A button inside the option (e.g., delete, edit, dropdown)
@@ -89,14 +91,16 @@ These behave differently after Enter/Space on an option.
   - **C:** Tab visits sub-elements within the focused option before moving to the next zone. Breaks the clean zone model.
 - If this case comes up frequently, consider whether the UI should be a standalone list or table instead of a Select.
 
+**Decision.** Phase 1: arrows navigate options only. Phase 2: adopt Grid pattern when needed. See D3 in Playbook.
+
 ---
 
-## 6. Disabled options
+## 6. Disabled options skip focus or take
 
-- Some options can be disabled.
+- If option is invisible to focus screen reader users might be confused on why is that not present is it supposed to be there
+
 - Arrow keys should skip over them (move to the next non-disabled option).
-- They should not be selectable via Enter/Space.
-- Currently, arrow navigation does NOT skip disabled options — this is a bug.
+**Decision.** Arrow keys focus disabled options. Need to update D5 in Playbook.
 
 ---
 
@@ -123,6 +127,8 @@ These behave differently after Enter/Space on an option.
 - **List + other zones** (search, footer, or both): Tab should cycle between zones inside the popover. Escape is the way to close.
 
 This means Tab does different things depending on the popover content. The behavior needs to be detected automatically.
+
+**Decision.** Tab always traps (cycles zones). See D1 in Playbook for rationale.
 
 ---
 
@@ -184,6 +190,8 @@ When the popover closes, where does focus go? It depends on *how* it closed:
 - The Select organism (`select/utils.tsx`) has a completely separate arrow key handler that does NOT skip disabled items.
 - Both run on the same DOM elements. They need to be aligned or unified.
 
+**Decision.** Select overrides Listbox keyboard handling. See D6 in Playbook.
+
 ---
 
 ## 17. Roving tabindex
@@ -207,54 +215,58 @@ When the popover closes, where does focus go? It depends on *how* it closed:
 - Clicking outside the popover closes it.
 - Focus goes to whatever the user clicked — not back to the trigger.
 - This is different from Escape (which always returns focus to the trigger).
-- If the outside click lands on a non-focusable area, focus may end up on `<body>`, which can be disorienting for keyboard users. No easy fix; this is standard browser behavior.
+
 
 ---
 
-## 20. Home / End keys
 
-- **Home:** Focus moves to the first option (or search input if present).
-- **End:** Focus moves to the last option.
-- Already implemented. Mentioning here because it interacts with search wrapping (section 10) and disabled option skipping (section 6).
-- Home/End should also skip disabled options (same as ArrowUp/Down).
 
----
 
-## 21. Trigger toggle (Enter/Space when popover is already open)
-
-- If the popover is already open and focus is on the trigger (e.g., user Shift+Tabbed back to it), pressing Enter/Space should close the popover — not re-open it.
-- Currently, the trigger's `handleKeyDownTrigger` only calls `setOpenPopover(true)`. The toggle behavior is handled by the Popover component's `onToggle`. These two can conflict if not coordinated.
-
----
 
 ## 22. Focus persistence after selection in multi-select
 
 - In multi-select, selecting an option (Enter/Space) keeps the popover open.
 - Focus should stay on the same option after toggling it.
 - If the list re-renders (e.g., search filter changes the list), the focused option may disappear from the DOM. Focus needs to fall back to the nearest valid option or the search input.
-- The current code stores `focusedOption` as a DOM reference (`HTMLElement`). If the DOM element is removed and re-created by React, the reference becomes stale.
+
 
 ---
 
-## 23. Screen reader announcements
 
-- When options are filtered by search, the count of visible options should be announced (e.g., "3 results available"). This requires an `aria-live` region.
-- When an option is selected/deselected in multi-select, the state change should be perceivable. `aria-selected` handles this for screen readers that read option state, but an explicit live announcement (e.g., "Option A selected, 2 of 5 selected") improves the experience.
-- The empty state template already has `aria-live="polite"` and `role="alert"` — this is correct.
 
----
-
-## 24. Focus visible (styling)
-
-- Every focusable element inside the popover (search input, options, footer buttons) must have a visible focus ring.
-- Use `:focus-visible` (not `:focus`) so the ring only shows for keyboard users, not mouse clicks.
-- The current Listbox item styles include focus styling, but any custom content inside options or footer may not.
 
 ---
 
 ## 25. Combobox: trigger lives outside the popover
 
 - Hence we cannot say popover should close anytime focus goes outside
+
+---
+
+## 26. Arrow navigation scope — focus on items only vs all focusables
+
+- Components are composable. Users can add custom inputs, buttons, switches inside popovers.
+- Arrow keys currently navigate only Menu.Item/Combobox.Option/Select.Option elements (via specific selector).
+- Custom focusables (inputs, buttons) are unreachable by arrows — only Tab can reach them.
+- Two options: (A) arrows navigate items only, or (B) arrows navigate all focusables.
+- Trade-off: (A) is faster for large lists but makes custom content inaccessible. (B) makes arrows slower (stop at every element) but everything is reachable.
+
+**Decision.**  Menu/Combobox = all focusables; Select = options only. See D14 in Playbook for details
+
+
+---
+
+## 27. Combobox input outside the popover so outside focus should not always close popover
+- Alternative pattern (Google/Slack search): input inside the popover, Tab traps making consitent with select.
+
+---
+
+## 28. Tab behavior — trap vs escape
+
+- Select uses tab trap (Tab cycles inside popover).
+- Menu/Combobox use tab escape (Tab closes popover and moves focus to next page element).
+
+**Decision.** Select traps Tab; Menu/Combobox use tab-escape. See D1 and D13 in Playbook for rationale.
 
 ---
 

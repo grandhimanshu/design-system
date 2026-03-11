@@ -414,6 +414,49 @@ describe('Menu Component - SubMenu nested menu functionality and accessibility',
     // The submenu trigger should handle the keyboard event
     expect(subMenuTrigger).toBeInTheDocument();
   });
+
+  it('should NOT navigate into closed submenu items with arrow keys', () => {
+    const { getAllByTestId } = render(
+      <Menu trigger={<Menu.Trigger />} open={true}>
+        <Menu.List>
+          <Menu.Item>Item 1</Menu.Item>
+          <Menu.SubMenu>
+            <Menu.Item className="d-flex align-items-center justify-content-between w-100">
+              SubMenu Trigger
+              <Icon name="chevron_right" />
+            </Menu.Item>
+            <Menu position="right-start">
+              <Menu.List>
+                <Menu.Item>Hidden Sub Item 1</Menu.Item>
+                <Menu.Item>Hidden Sub Item 2</Menu.Item>
+              </Menu.List>
+            </Menu>
+          </Menu.SubMenu>
+          <Menu.Item>Item 3</Menu.Item>
+        </Menu.List>
+      </Menu>
+    );
+
+    const menuItems = getAllByTestId('DesignSystem-Menu-ListItem');
+    const item1 = menuItems[0];
+    const subMenuTrigger = menuItems[1];
+    const item3 = menuItems[2];
+
+    // Focus Item 1
+    item1.focus();
+    expect(document.activeElement).toBe(item1);
+
+    // Arrow Down should go to SubMenu trigger, NOT into closed submenu
+    fireEvent.keyDown(item1, { key: 'ArrowDown' });
+    expect(document.activeElement).toBe(subMenuTrigger);
+
+    // Arrow Down again should go to Item 3, NOT into closed submenu
+    fireEvent.keyDown(subMenuTrigger, { key: 'ArrowDown' });
+    expect(document.activeElement).toBe(item3);
+
+    // Verify submenu items are NOT in the navigation sequence
+    // (They should only be navigable after opening the submenu with hover/ArrowRight)
+  });
 });
 
 describe('Menu Component - Context provider and state management for menu interactions', () => {
@@ -534,5 +577,136 @@ describe('Menu Component - Event listener lifecycle management and cleanup', () 
 
     // Should handle events without errors
     expect(menuItem).toBeInTheDocument();
+  });
+});
+
+describe('Menu Component - Keyboard accessibility', () => {
+  it('should open menu with Enter key on trigger', () => {
+    const { getByTestId, queryByTestId } = render(
+      <Menu trigger={<Menu.Trigger />}>
+        <Menu.List>
+          <Menu.Item>Menu Item 1</Menu.Item>
+        </Menu.List>
+      </Menu>
+    );
+
+    const trigger = getByTestId('DesignSystem-Menu-Trigger');
+    expect(queryByTestId('DesignSystem-Popover')).not.toBeInTheDocument();
+
+    fireEvent.keyDown(trigger, { key: 'Enter' });
+    expect(queryByTestId('DesignSystem-Popover')).toBeInTheDocument();
+  });
+
+  it('should open menu with Space key on trigger', () => {
+    const { getByTestId, queryByTestId } = render(
+      <Menu trigger={<Menu.Trigger />}>
+        <Menu.List>
+          <Menu.Item>Menu Item 1</Menu.Item>
+        </Menu.List>
+      </Menu>
+    );
+
+    const trigger = getByTestId('DesignSystem-Menu-Trigger');
+    expect(queryByTestId('DesignSystem-Popover')).not.toBeInTheDocument();
+
+    fireEvent.keyDown(trigger, { key: ' ' });
+    expect(queryByTestId('DesignSystem-Popover')).toBeInTheDocument();
+  });
+
+  it('should activate menu item with Space key', () => {
+    const onClickHandler = jest.fn();
+    const { getAllByTestId } = render(
+      <Menu trigger={<Menu.Trigger />} open={true}>
+        <Menu.List>
+          <Menu.Item onClick={onClickHandler}>Menu Item 1</Menu.Item>
+          <Menu.Item>Menu Item 2</Menu.Item>
+        </Menu.List>
+      </Menu>
+    );
+
+    const menuItems = getAllByTestId('DesignSystem-Menu-ListItem');
+    menuItems[0].focus();
+    fireEvent.keyDown(menuItems[0], { key: ' ' });
+    expect(onClickHandler).toHaveBeenCalled();
+  });
+
+  it('should activate menu item with Enter key', () => {
+    const onClickHandler = jest.fn();
+    const { getAllByTestId } = render(
+      <Menu trigger={<Menu.Trigger />} open={true}>
+        <Menu.List>
+          <Menu.Item onClick={onClickHandler}>Menu Item 1</Menu.Item>
+          <Menu.Item>Menu Item 2</Menu.Item>
+        </Menu.List>
+      </Menu>
+    );
+
+    const menuItems = getAllByTestId('DesignSystem-Menu-ListItem');
+    menuItems[0].focus();
+    fireEvent.keyDown(menuItems[0], { key: 'Enter' });
+    expect(onClickHandler).toHaveBeenCalled();
+  });
+
+  it('should navigate to first item with Home key', () => {
+    const { getAllByTestId } = render(
+      <Menu trigger={<Menu.Trigger />} open={true}>
+        <Menu.List>
+          <Menu.Item>Menu Item 1</Menu.Item>
+          <Menu.Item>Menu Item 2</Menu.Item>
+          <Menu.Item>Menu Item 3</Menu.Item>
+        </Menu.List>
+      </Menu>
+    );
+
+    const menuItems = getAllByTestId('DesignSystem-Menu-ListItem');
+    menuItems[2].focus();
+
+    fireEvent.keyDown(menuItems[2], { key: 'Home' });
+    expect(document.activeElement).toBe(menuItems[0]);
+  });
+
+  it('should navigate to last item with End key', () => {
+    const { getAllByTestId } = render(
+      <Menu trigger={<Menu.Trigger />} open={true}>
+        <Menu.List>
+          <Menu.Item>Menu Item 1</Menu.Item>
+          <Menu.Item>Menu Item 2</Menu.Item>
+          <Menu.Item>Menu Item 3</Menu.Item>
+        </Menu.List>
+      </Menu>
+    );
+
+    const menuItems = getAllByTestId('DesignSystem-Menu-ListItem');
+    menuItems[0].focus();
+
+    fireEvent.keyDown(menuItems[0], { key: 'End' });
+    expect(document.activeElement).toBe(menuItems[2]);
+  });
+
+  it('should close menu and move focus with Tab key from menu item', () => {
+    const { getByTestId, getAllByTestId } = render(
+      <>
+        <Menu trigger={<Menu.Trigger />} open={true}>
+          <Menu.List>
+            <Menu.Item>Menu Item 1</Menu.Item>
+          </Menu.List>
+        </Menu>
+        <button data-testid="next-button">Next Button</button>
+      </>
+    );
+
+    const menuItem = getAllByTestId('DesignSystem-Menu-ListItem')[0];
+    menuItem.focus();
+
+    const menuWrapper = getByTestId('DesignSystem-Menu-Wrapper');
+    const popover = getByTestId('DesignSystem-Popover');
+
+    // Verify menu is open initially
+    expect(popover).toHaveAttribute('data-opened', 'true');
+
+    fireEvent.keyDown(menuWrapper, { key: 'Tab' });
+
+    // Menu should close (popover data-opened should be false)
+    expect(popover).toHaveAttribute('data-opened', 'false');
   });
 });

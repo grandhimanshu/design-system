@@ -137,6 +137,80 @@ These are not in scope for the main keyboard navigation work:
 
 ---
 
+## D12. Hover vs Click focus trap rule
+
+**Applies to:** Any popover or overlay that appears on user interaction.
+
+**Decision:**
+
+**Don't trap focus if:**
+- Content appears on **hover** (tooltip, info popover)
+- No action required, just informational
+- User did not explicitly request it
+
+**Can trap focus if:**
+- Content appears on **click/Enter/Space** (dialog, menu, select)
+- User explicitly opened it and expects to interact
+- Contains actionable content (buttons, options, inputs)
+
+**Why:** Hover content is passive and temporary. Trapping focus would be disorienting. Click/keyboard-opened content is intentional — users expect to interact with it.
+
+**Examples:**
+- Tooltip on hover → no trap (closes on mouse leave or Escape)
+- Menu on click → trap or Tab-escape depending on content
+- Select on click → trap (footer buttons need to be reachable)
+
+---
+
+## D13. Select tab trapping justified by large datasets + footer
+
+**Applies to:** Select with 50+ options and footer buttons (Apply/Cancel pattern).
+
+**Decision:** Select traps Tab to enable reaching footer buttons without arrowing through all options.
+
+**Context:** Multi-select with Apply/Cancel workflow:
+1. User opens Select (50+ medicine options)
+2. Focus on search input, user types to filter
+3. User arrows down, selects multiple options
+4. **User needs to press "Apply" to commit selections**
+
+**Problem without trap:** Tab exits popover → selections lost/uncommitted. Footer buttons unreachable without arrowing through all 50+ options.
+
+**Solution:** Tab cycles search → options → footer → search. Provides fast path to footer buttons.
+
+**Why arrows don't navigate footer:** Arrows are optimized for fast data navigation (skip header/footer, focus on options only). Tab provides comprehensive navigation across all zones.
+
+**Trade-off accepted:** Even simple single-select (no search/footer) traps Tab for consistency. User must press Escape to exit.
+
+**Related:** See D1 for original tab trap decision.
+
+---
+
+## D14. Arrow navigation — Menu/Combobox navigate all focusables, Select navigates options only
+
+**Applies to:** Menu, Combobox, Select.
+
+**Decision (subject to change):**
+- **Menu & Combobox:** Arrow keys navigate all focusable elements (items, inputs, buttons).
+- **Select:** Arrow keys navigate options only (skip search input and footer buttons).
+
+**Why:**
+- Components are composable — users can add custom content. Arrow keys must reach custom inputs/buttons for keyboard accessibility (WCAG SC 2.1.1).
+- Menu/Combobox typically have short lists (5-20 items). Navigating all focusables adds ~2-5 arrow presses. Acceptable.
+- Select often has 50-200 options. Navigating search and footer with arrows every cycle would make data navigation tedious. Select uses Tab for comprehensive navigation (search → options → footer). Arrows stay fast.
+
+**Implementation (Menu/Combobox):**
+```typescript
+const listItems = getFocusableElements(listRef.current);
+// Instead of: querySelectorAll('[data-test="DesignSystem-Listbox-ItemWrapper"]')
+```
+
+**ARIA adjustment:** Menu changes from `role="menu"` to `role="dialog"` (or removes role) since it contains mixed content, not just menuitems.
+
+**May change if:** User feedback shows arrows navigating search/footer in Select is valuable, or if Menu/Combobox lists grow large enough that stopping at every focusable becomes tedious.
+
+---
+
 # Part 2: Future Improvements
 
 Items ordered roughly by impact. Each references the decision it extends.
