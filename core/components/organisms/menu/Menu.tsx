@@ -68,6 +68,7 @@ export const Menu = (props: MenuProps) => {
   const [focusedOption, setFocusedOption] = React.useState<HTMLElement | undefined>();
   const listRef = React.createRef<HTMLDivElement>();
   const menuTriggerRef = React.useRef<HTMLButtonElement>(null);
+  const isKeyboardNavigating = React.useRef<boolean>(false);
   const subMenuContextProp = React.useContext(SubMenuContext);
 
   const { menuID } = subMenuContextProp;
@@ -98,7 +99,11 @@ export const Menu = (props: MenuProps) => {
     onToggle?.(openPopover);
   }, [openPopover]);
 
-  const onToggleHandler = (open: boolean) => {
+  const onToggleHandler = (open: boolean, type?: string) => {
+    // Don't close during keyboard navigation
+    if (!open && type === 'onBlur' && isKeyboardNavigating.current) {
+      return;
+    }
     setOpenPopover(open);
   };
 
@@ -127,6 +132,7 @@ export const Menu = (props: MenuProps) => {
     setFocusedOption,
     menuTriggerRef,
     listRef,
+    isKeyboardNavigating,
   };
 
   return (

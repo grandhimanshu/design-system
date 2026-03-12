@@ -54,7 +54,7 @@ const handleEnterKey = (
   } else {
     // to focus first option by default when last option is selected
     if (!listRef?.current) return;
-    
+
     // Scope to 'listbox' role to exclude nested elements
     const focusables = getAllFocusableElements(listRef.current, 'listbox');
     const index = focusables.findIndex((item) => item === focusedOption);

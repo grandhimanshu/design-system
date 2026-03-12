@@ -13,7 +13,8 @@ export const handleKeyDown = (
   triggerRef?: React.RefObject<HTMLDivElement> | React.MutableRefObject<HTMLDivElement>,
   menuID?: string,
   triggerID?: string,
-  parentListRef?: React.RefObject<HTMLDivElement> | null
+  parentListRef?: React.RefObject<HTMLDivElement> | null,
+  isKeyboardNavigating?: React.MutableRefObject<boolean>
 ) => {
   switch (event.key) {
     case 'ArrowUp':
@@ -55,10 +56,10 @@ export const handleKeyDown = (
       setOpenPopover?.(false);
       break;
     case 'ArrowRight':
-      navigateSubMenu(isSubMenuTrigger, 'right', subListRef, menuID, triggerID, parentListRef);
+      navigateSubMenu(isSubMenuTrigger, 'right', subListRef, menuID, triggerID, parentListRef, isKeyboardNavigating);
       break;
     case 'ArrowLeft':
-      navigateSubMenu(isSubMenuTrigger, 'left', subListRef, menuID, triggerID, parentListRef);
+      navigateSubMenu(isSubMenuTrigger, 'left', subListRef, menuID, triggerID, parentListRef, isKeyboardNavigating);
       break;
     default:
       break;
@@ -101,29 +102,58 @@ const navigateSubMenu = (
   subListRef?: React.RefObject<HTMLDivElement> | null,
   menuID?: string,
   triggerID?: string,
-  parentListRef?: React.RefObject<HTMLDivElement> | null
+  parentListRef?: React.RefObject<HTMLDivElement> | null,
+  isKeyboardNavigating?: React.MutableRefObject<boolean>
 ) => {
   const element = document.querySelector(`[data-name="${menuID}"]`);
   const menuPlacement = element?.getAttribute('data-placement');
 
-  if (isSubMenuTrigger) {
+  // Case 1: On a SubMenu trigger item - ArrowRight/Left opens the submenu
+  if (isSubMenuTrigger && subListRef?.current) {
     if (
       (direction === 'right' && menuPlacement?.includes('right')) ||
       (direction === 'left' && menuPlacement?.includes('left'))
     ) {
-      if (subListRef?.current) {
-        // Scope to 'menu' role for submenu navigation
-        const focusables = getAllFocusableElements(subListRef.current, 'menu');
-        if (focusables.length > 0) {
-          focusables[0].focus({ preventScroll: true });
+      // Don't scope by role here because subListRef points to a wrapper div,
+      // not the Menu.List component with role="menu"
+      const focusables = getAllFocusableElements(subListRef.current);
+      if (focusables.length > 0) {
+        // Set flag to indicate keyboard navigation is happening
+        if (isKeyboardNavigating) {
+          isKeyboardNavigating.current = true;
         }
+
+        focusables[0].focus({ preventScroll: true });
+
+        // Clear flag after microtask to allow blur handlers to check it
+        requestAnimationFrame(() => {
+          if (isKeyboardNavigating) {
+            isKeyboardNavigating.current = false;
+          }
+        });
       }
     }
-  } else if (
-    (direction === 'left' && menuPlacement?.includes('right')) ||
-    (direction === 'right' && menuPlacement?.includes('left'))
-  ) {
-    const triggerElement = parentListRef?.current?.querySelector(`#${triggerID}`)?.firstChild;
-    (triggerElement as HTMLElement)?.focus();
+  }
+
+  // Case 2: Inside a submenu - ArrowLeft/Right goes back to parent trigger
+  if (!isSubMenuTrigger && triggerID && parentListRef?.current) {
+    if (
+      (direction === 'left' && menuPlacement?.includes('right')) ||
+      (direction === 'right' && menuPlacement?.includes('left'))
+    ) {
+      // Set flag for keyboard navigation
+      if (isKeyboardNavigating) {
+        isKeyboardNavigating.current = true;
+      }
+
+      const triggerElement = parentListRef.current.querySelector(`#${triggerID}`)?.firstChild;
+      (triggerElement as HTMLElement)?.focus();
+
+      requestAnimationFrame(() => {
+        if (isKeyboardNavigating) {
+          isKeyboardNavigating.current = false;
+        }
+      });
+    }
   }
 };
