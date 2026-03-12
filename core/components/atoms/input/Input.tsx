@@ -4,6 +4,7 @@ import { Tooltip, Icon, Text } from '@/index';
 import { IconProps } from '@/index.type';
 import { BaseHtmlProps, BaseProps, extractBaseProps } from '@/utils/types';
 import { AutoComplete, IconType } from '@/common.type';
+import { isEnterKey, isSpaceKey } from '@/accessibility/utils';
 import ActionButton from './actionButton';
 import styles from '@css/components/input.module.css';
 import verificationCodeStyles from '@css/components/verificationCodeInput.module.css';
@@ -236,10 +237,20 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, forw
     [styles['Input-iconWrapper--right']]: true,
   });
 
+  const handleInfoKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (isEnterKey(e) || isSpaceKey(e)) {
+      e.preventDefault();
+      (e.currentTarget as HTMLDivElement).click();
+    }
+  };
+
   const trigger = (
     <div
-      className={rightIconClass} // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+      className={rightIconClass}
+      role="button"
       tabIndex={0}
+      aria-label="Show information"
+      onKeyDown={handleInfoKeyDown}
     >
       <Icon name={'info'} size={sizeMapping[size]} className={styles['Input-icon--right']} />
     </div>
@@ -302,18 +313,22 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, forw
       ) : (
         onClear &&
         (value || defaultValue) && (
-          <div className={rightIconClass}>
+          <button
+            type="button"
+            className={classNames(rightIconClass, styles['Input-clearButton'])}
+            aria-label="Clear input"
+            onClick={(e) => {
+              ref.current?.focus({ preventScroll: true });
+              onClear(e);
+            }}
+          >
             <Icon
               data-test="DesignSystem-Input--closeIcon"
-              onClick={(e) => {
-                ref.current?.focus({ preventScroll: true });
-                onClear(e);
-              }}
               name={'close'}
               size={sizeMapping[size]}
               className={styles['Input-icon--right']}
             />
-          </div>
+          </button>
         )
       )}
     </div>
