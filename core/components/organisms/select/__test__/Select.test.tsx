@@ -308,17 +308,17 @@ describe('Select Tab always-trap (D1)', () => {
     const trigger = getByTestId('DesignSystem-Select-trigger');
     fireEvent.click(trigger);
     await waitFor(() => {
-      const wrappers = getAllByTestId('DesignSystem-Listbox-ItemWrapper');
-      expect(wrappers.some((w) => w.getAttribute('tabindex') === '0')).toBe(true);
+      const options = getAllByTestId('DesignSystem-Select-Option');
+      expect(options.some((opt) => opt.getAttribute('tabindex') === '0')).toBe(true);
     });
-    const rovingWrapper = getAllByTestId('DesignSystem-Listbox-ItemWrapper').find(
-      (w) => w.getAttribute('tabindex') === '0'
+    const rovingOption = getAllByTestId('DesignSystem-Select-Option').find(
+      (opt) => opt.getAttribute('tabindex') === '0'
     )!;
-    rovingWrapper.scrollIntoView = jest.fn();
-    rovingWrapper.focus();
+    rovingOption.scrollIntoView = jest.fn();
+    rovingOption.focus();
     const searchInput = getByTestId('DesignSystem-Select--Input');
     act(() => {
-      fireEvent.keyDown(rovingWrapper, { key: 'Tab', shiftKey: false });
+      fireEvent.keyDown(rovingOption, { key: 'Tab', shiftKey: false });
     });
     await waitFor(() => {
       expect(document.activeElement).toBe(searchInput);
@@ -366,8 +366,8 @@ describe('Select multiselect Tab and Enter', () => {
     const trigger = getByTestId('DesignSystem-Select-trigger');
     fireEvent.click(trigger);
     await waitFor(() => {
-      const wrappers = getAllByTestId('DesignSystem-Listbox-ItemWrapper');
-      expect(wrappers.some((w) => w.getAttribute('tabindex') === '0')).toBe(true);
+      const options = getAllByTestId('DesignSystem-Select-Option');
+      expect(options.some((opt) => opt.getAttribute('tabindex') === '0')).toBe(true);
     });
     const searchInput = getByTestId('DesignSystem-Select--Input');
     searchInput.focus();
@@ -585,20 +585,19 @@ describe('Select keyboard integration tests', () => {
     );
     const trigger = getByTestId('DesignSystem-Select-trigger');
     fireEvent.click(trigger);
-    // Wait for rAF to fire so focusedOption is set to the first ItemWrapper
+    // Wait for rAF to fire so focusedOption is set to the first option
     await waitFor(() => {
-      const wrappers = getAllByTestId('DesignSystem-Listbox-ItemWrapper');
-      expect(wrappers.some((w) => w.getAttribute('tabindex') === '0')).toBe(true);
+      const options = getAllByTestId('DesignSystem-Select-Option');
+      expect(options.some((opt) => opt.getAttribute('tabindex') === '0')).toBe(true);
     });
-    // focusedOption is the inner ItemWrapper; fire Space on the outer SelectOption which bubbles
-    const rovingWrapper = getAllByTestId('DesignSystem-Listbox-ItemWrapper').find(
-      (w) => w.getAttribute('tabindex') === '0'
+    // Focus the roving option and fire Space
+    const rovingOption = getAllByTestId('DesignSystem-Select-Option').find(
+      (opt) => opt.getAttribute('tabindex') === '0'
     )!;
-    rovingWrapper.scrollIntoView = jest.fn();
-    rovingWrapper.focus();
-    const outerOption = getAllByTestId('DesignSystem-Select-Option')[0];
+    rovingOption.scrollIntoView = jest.fn();
+    rovingOption.focus();
     act(() => {
-      fireEvent.keyDown(outerOption, { key: ' ' });
+      fireEvent.keyDown(rovingOption, { key: ' ' });
     });
     await waitFor(() => {
       expect(trigger).toHaveAttribute('aria-expanded', 'false');
@@ -621,17 +620,16 @@ describe('Select keyboard integration tests', () => {
     fireEvent.click(trigger);
     // Wait for rAF so focusedOption is set
     await waitFor(() => {
-      const wrappers = getAllByTestId('DesignSystem-Listbox-ItemWrapper');
-      expect(wrappers.some((w) => w.getAttribute('tabindex') === '0')).toBe(true);
+      const options = getAllByTestId('DesignSystem-Select-Option');
+      expect(options.some((opt) => opt.getAttribute('tabindex') === '0')).toBe(true);
     });
-    const rovingWrapper = getAllByTestId('DesignSystem-Listbox-ItemWrapper').find(
-      (w) => w.getAttribute('tabindex') === '0'
+    const rovingOption = getAllByTestId('DesignSystem-Select-Option').find(
+      (opt) => opt.getAttribute('tabindex') === '0'
     )!;
-    rovingWrapper.scrollIntoView = jest.fn();
-    rovingWrapper.focus();
-    const outerOption = getAllByTestId('DesignSystem-Select-Option')[0];
+    rovingOption.scrollIntoView = jest.fn();
+    rovingOption.focus();
     act(() => {
-      fireEvent.keyDown(outerOption, { key: ' ' });
+      fireEvent.keyDown(rovingOption, { key: ' ' });
     });
     await new Promise((r) => setTimeout(r, 50));
     // Multi-select: popover stays open

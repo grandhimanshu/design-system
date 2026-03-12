@@ -107,21 +107,27 @@ export const Menu = (props: MenuProps) => {
     setOpenPopover(open);
   };
 
-  const handlePopoverKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (!openPopover || e.key !== 'Tab' || !listRef.current) return;
-    const container = listRef.current;
-    if (!container.contains(document.activeElement as Node)) return;
-
-    e.preventDefault();
+  const handleEscape = React.useCallback(() => {
     setOpenPopover(false);
+    menuTriggerRef.current?.focus({ preventScroll: true });
+  }, []);
 
-    const nextFocusable = getNextFocusableAfterTrigger(menuTriggerRef.current, e.shiftKey, container);
-    if (nextFocusable) {
-      nextFocusable.focus({ preventScroll: true });
-    } else {
-      menuTriggerRef.current?.focus({ preventScroll: true });
-    }
-  };
+  const handleTabEscape = React.useCallback(
+    (e: React.KeyboardEvent<HTMLDivElement>) => {
+      setOpenPopover(false);
+      const nextFocusable = getNextFocusableAfterTrigger(
+        menuTriggerRef.current,
+        e.shiftKey,
+        listRef.current ?? undefined
+      );
+      if (nextFocusable) {
+        nextFocusable.focus({ preventScroll: true });
+      } else {
+        menuTriggerRef.current?.focus({ preventScroll: true });
+      }
+    },
+    []
+  );
 
   const contextProp = {
     openPopover,
@@ -145,6 +151,8 @@ export const Menu = (props: MenuProps) => {
         open={openPopover}
         customStyle={{ width }}
         onToggle={onToggleHandler}
+        onEscape={handleEscape}
+        onTabEscape={handleTabEscape}
       >
         <div
           ref={listRef}
@@ -153,7 +161,6 @@ export const Menu = (props: MenuProps) => {
           data-test={props['data-test'] || 'DesignSystem-Menu-Wrapper'}
           className={popoverClassName}
           style={{ maxHeight, minHeight }}
-          onKeyDown={handlePopoverKeyDown}
         >
           {children}
         </div>

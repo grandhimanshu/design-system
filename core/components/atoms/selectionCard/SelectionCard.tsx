@@ -59,7 +59,10 @@ export const SelectionCard = (props: SelectionCardProps) => {
   };
 
   const onKeyDownHandler = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter' && !disabled) {
+    // WAI-ARIA checkbox pattern: Space activates, Enter does nothing
+    // (Enter may be used for form submission in containing forms)
+    if (event.key === ' ' && !disabled) {
+      event.preventDefault(); // Prevent page scroll
       onClickHandler(event);
     }
   };

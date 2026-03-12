@@ -9,6 +9,23 @@ Contains: finalized decisions, reasoning, trade-offs, and planned future improve
 
 ---
 
+# Architecture: Unified Keyboard Handling (Popover vs Listbox)
+
+**Separation of concerns:**
+- **Popover layer:** Owns Tab trap, Escape, focus containment. Exposes optional props: `trapFocus`, `onEscape`, `onFocusMove`, `onTabEscape`. Components (Select, Menu, Combobox) pass these to centralize Escape/Tab handling.
+- **Listbox layer:** Owns arrow navigation, Home/End, Enter/Space, roving tabindex. `ListboxKeyboardConfig` in context documents component-specific behavior for future shared handler.
+- **Component layer:** Configuration, state management, selection logic. Passes keyboard config to Popover and Listbox.
+
+**Popover keyboard props:**
+- `trapFocus`: When true, Tab cycles within popover. When false, Tab calls `onTabEscape`.
+- `onEscape`: Called when Escape pressed; consumer closes and returns focus to trigger.
+- `onFocusMove`: Called when Tab trap moves focus; consumer syncs state (e.g. `focusedOption`, `rovingIndex`).
+- `onTabEscape`: Called when Tab pressed and `trapFocus` is false; consumer closes and focuses next element.
+
+**Critical edge case:** When focus is on an element with `tabIndex=-1` (roving tabindex), `getFocusableElements` excludes it. Popover's handler treats `currentIndex === -1` by jumping to first/last focusable so Tab still works.
+
+---
+
 # Part 1: Decisions
 
 ## D1. Tab always traps inside popovers

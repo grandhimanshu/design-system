@@ -267,6 +267,17 @@ export const Combobox = (props: ComboboxProps) => {
     open ? setOpenPopover(true) : setOpenPopover(false);
   };
 
+  const handleEscape = React.useCallback(() => {
+    setOpenPopover(false);
+    inputTriggerRef.current?.focus({ preventScroll: true });
+    setFocusedOption(undefined);
+  }, []);
+
+  const handleTabEscape = React.useCallback(() => {
+    setOpenPopover(false);
+    inputTriggerRef.current?.focus({ preventScroll: true });
+  }, []);
+
   const triggerProps = {
     value,
     placeholder,
@@ -319,6 +330,8 @@ export const Combobox = (props: ComboboxProps) => {
             onToggle={onToggleHandler}
             trigger={<ComboboxTrigger {...triggerProps} />}
             computeStyles={popoverComputeStyle}
+            onEscape={handleEscape}
+            onTabEscape={handleTabEscape}
           >
             <div style={wrapperStyle} ref={listRef} id={popoverId}>
               {children && typeof children === 'function' ? children(contextProp) : children}

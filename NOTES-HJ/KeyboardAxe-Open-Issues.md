@@ -17,12 +17,12 @@ Update strikethrough as fixes ship. Avoid aria things unless they affect keyboar
 
 | Order | Component | Issue | Severity | Notes |
 |------:|-----------|--------|----------|-------|
-| 1 | isSpaceKey utility | Bug: `e.key === 'Space'` (should be `' '` or `'Spacebar'`) | 🔴 Low | 1-line fix; unblocks Switch and others. **Bug exists in code.** |
+| 1 | ~~isSpaceKey utility~~ | ~~Bug: `e.key === 'Space'` (should be `' '` or `'Spacebar'`)~~ | ✅ Low | **Fixed:** supports `' '`, `'Space'`, `'Spacebar'`. Unblocks Switch. |
 | 1 | Switch | isSpaceKey bug; onKeyUp vs onKeyDown | 🔴 High | After isSpaceKey fix. |
 | 2 | Tooltip | No Escape to dismiss; may not show on focus | 🔴 High | **Hoverable default true ✓** implemented. Escape NOT implemented yet. |
 | 2 | Popover | No Escape to close; no focus management on open/close | 🔴 Critical | Focus management NOT implemented yet. Escape NOT implemented yet. |
-| 3 | Collapsible | Toggles on ANY key (Tab, Shift, arrows) | 🔴 Critical | Restrict to Enter/Space only; small change. |
-| 4 | SelectionCard | No Space to toggle; Enter incorrectly toggles | 🔴 Critical | Space to toggle; fix Enter behavior. |
+| 3 | ~~Collapsible~~ | ~~Toggles on ANY key (Tab, Shift, arrows)~~ | ✅ Critical | **Fixed:** Enter/Space only; preventDefault on Space. |
+| 4 | ~~SelectionCard~~ | ~~No Space to toggle; Enter incorrectly toggles~~ | ✅ Critical | **Fixed:** Space toggles (WAI-ARIA checkbox); Enter does nothing; preventDefault on Space. |
 | 5 | Modal, Dialog, FullscreenModal, Sidesheet | No focus trap; closeOnEscape defaults false; no initial/return focus | 🔴 Critical | **Discuss later:** shared focus-trap primitive vs per-component. Default closeOnEscape→true done elsewhere. Implement hardest (e.g. Modal) first, then rest. |
 | 6 | Editable | No keyboard to enter edit mode; no Enter to confirm, no Escape to cancel | 🔴 Critical | **Discuss later:** Editable atom vs molecules — who owns Enter confirm / Escape cancel? Implement atom contract first. |
 | 6 | EditableChipInput | No keyboard to enter edit mode (uses Editable); no Escape to cancel | 🔴 Critical | After Editable; uses same contract. |

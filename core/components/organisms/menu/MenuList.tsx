@@ -26,7 +26,11 @@ export const MenuList = (props: MenuListProps) => {
   const { children, ...rest } = props;
 
   return (
-    <Listbox data-test="DesignSystem-Menu-List" {...rest}>
+    <Listbox
+      data-test="DesignSystem-Menu-List"
+      keyboardConfig={{ role: 'menu', spaceActivates: true }}
+      {...rest}
+    >
       <MenuListContext.Provider value={{ size: props.size }}>{children}</MenuListContext.Provider>
     </Listbox>
   );
