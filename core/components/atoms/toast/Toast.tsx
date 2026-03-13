@@ -101,15 +101,6 @@ export const Toast = (props: ToastProps) => {
     [styles[`Toast-heading--${appearance}`]]: appearance,
   });
 
-  const toastRef = React.useRef<HTMLDivElement>(null);
-  const dismissibleOnMount = React.useRef(!!onClose);
-
-  React.useEffect(() => {
-    if (dismissibleOnMount.current && toastRef.current) {
-      toastRef.current.focus({ preventScroll: true });
-    }
-  }, []);
-
   const onCloseHandler = () => {
     if (onClose) onClose();
   };
@@ -124,7 +115,6 @@ export const Toast = (props: ToastProps) => {
   return (
     <div
       {...baseProps}
-      ref={toastRef}
       className={wrapperClass}
       role={appearance === 'alert' || appearance === 'warning' ? 'alert' : 'status'}
       aria-live={appearance === 'alert' || appearance === 'warning' ? 'assertive' : 'polite'}
@@ -144,7 +134,7 @@ export const Toast = (props: ToastProps) => {
               onClick={onCloseHandler}
               aria-label="Close"
             >
-              <Icon name="close" appearance={appearance !== 'warning' ? 'white' : 'default'} aria-hidden="true" />
+              <Icon name="close" className={styles[`Toast-icon--${appearance}`]} appearance={appearance !== 'warning' ? 'white' : 'default'} aria-hidden="true" />
             </button>
           )}
         </div>
