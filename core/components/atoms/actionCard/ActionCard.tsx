@@ -51,6 +51,10 @@ export const ActionCard = (props: ActionCardProps) => {
     }
   };
 
+  const onBlurHandler = () => {
+    setIsKeyActive(false);
+  };
+
   const onClickHandler = (event: React.MouseEvent<HTMLDivElement>) => {
     if (!disabled && onClick) {
       onClick(event);
@@ -66,6 +70,7 @@ export const ActionCard = (props: ActionCardProps) => {
       onClick={onClickHandler}
       onKeyDown={onKeyDownHandler}
       onKeyUp={onKeyUpHandler}
+      onBlur={onBlurHandler}
       {...rest}
     >
       {disabled && (
