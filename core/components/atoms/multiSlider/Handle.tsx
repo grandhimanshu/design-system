@@ -124,6 +124,8 @@ export class Handle extends React.Component<InternalHandleProps, HandleState> {
       }
     } else {
       // For non-directional movement (mouse, initial value, labels), use nearest step to newValue
+      // Preserve value as-is when there is no positional change (e.g., click without drag)
+      if (newValue === currentValue) return currentValue;
       const stepsFromMin = (newValue - min) / stepSize;
       const lowerStep = min + Math.floor(stepsFromMin) * stepSize;
       const upperStep = min + Math.ceil(stepsFromMin) * stepSize;
