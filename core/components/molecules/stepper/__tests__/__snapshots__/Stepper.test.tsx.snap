@@ -5,8 +5,10 @@ exports[`Stepper component
  1`] = `
 <DocumentFragment>
   <div
+    aria-label="Steps"
     class="Stepper"
     data-test="DesignSystem-Stepper"
+    role="group"
   >
     <div
       class="Step Stepper-animate Step--completed"

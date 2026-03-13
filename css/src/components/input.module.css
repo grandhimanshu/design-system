@@ -174,3 +174,15 @@
 .Input-iconWrapper--right:focus-visible {
   outline: none;
 }
+
+/* Button reset for clear icon - maintains visual appearance */
+.Input-clearButton {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}

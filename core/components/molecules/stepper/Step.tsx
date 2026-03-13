@@ -1,6 +1,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import { Icon, Text } from '@/index';
+import { isSpaceKey } from '@/accessibility/utils';
 import styles from '@css/components/stepper.module.css';
 
 export interface StepProps {
@@ -10,10 +11,11 @@ export interface StepProps {
   active: boolean;
   completed: boolean;
   onChange?: (label: string, value?: React.ReactText) => void;
+  onKeyDown?: (e: React.KeyboardEvent) => void;
 }
 
-export const Step = (props: StepProps) => {
-  const { label, value, disabled, active, completed, onChange } = props;
+export const Step = React.forwardRef<HTMLDivElement, StepProps>((props, ref) => {
+  const { label, value, disabled, active, completed, onChange, onKeyDown } = props;
 
   const StepClass = classNames({
     [styles['Step']]: true,
@@ -39,7 +41,11 @@ export const Step = (props: StepProps) => {
   };
 
   const onKeyDownHandler = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter' || event.key === ' ') {
+    if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
+      onKeyDown?.(event);
+      return;
+    }
+    if (event.key === 'Enter' || isSpaceKey(event)) {
       event.preventDefault();
       onClickHandle();
     }
@@ -49,6 +55,7 @@ export const Step = (props: StepProps) => {
 
   return (
     <div
+      ref={ref}
       data-test="DesignSystem-Step"
       className={StepClass}
       onKeyDown={(e) => onKeyDownHandler(e)}
@@ -70,7 +77,7 @@ export const Step = (props: StepProps) => {
       )}
     </div>
   );
-};
+});
 
 Step.displayName = 'Step';
 

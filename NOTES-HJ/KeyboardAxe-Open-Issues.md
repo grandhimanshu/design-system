@@ -35,21 +35,21 @@ Update strikethrough as fixes ship. Avoid aria things unless they affect keyboar
 | 11 | Calendar | No keyboard support; date cells click-only | 🔴 Critical | Implement here first; DatePicker/DateRangePicker inherit. |
 | 11 | DatePicker | Inherits Calendar — no keyboard | 🔴 Critical | After Calendar. |
 | 11 | DateRangePicker | Inherits Calendar — no keyboard | 🔴 Critical | After Calendar. |
-| 12 | Grid/Table | No cell/row keyboard nav or activation | 🔴 Critical | Implement here first; List uses Grid. |
-| 12 | List | Uses Grid — inherits no keyboard | 🔴 Critical | After Grid. |
+| 12 | ~~Grid/Table~~ | ~~No cell/row keyboard nav or activation~~ | ✅ Critical | **Fixed:** Arrow keys, Home/End, Ctrl+Home/End, Enter/Space (WAI-ARIA Grid). |
+| 12 | ~~List~~ | ~~Uses Grid — inherits no keyboard~~ | ✅ Critical | **Fixed:** Inherits Grid keyboard nav. |
 | 13 | VerticalNav | No Arrow Up/Down, no expand/collapse (Arrow Right/Left); no Home/End | 🔴 Critical | |
 | 14 | Slider / RangeSlider / MultiSlider | No Arrow Up/Down, Home, End, Page Up/Down | 🔴 High | Reusable: implement hardest (e.g. MultiSlider or RangeSlider) first, then Slider. |
 | 15 | Toast | No Escape to dismiss; no focus management | 🔴 High | |
 | 16 | Tabs | No Space to activate; no Home/End; all tabs in tab order | 🔴 High | |
 | 17 | HorizontalNav | No Space to activate; no Arrow Left/Right; no roving tabindex | 🔴 High | |
 | 18 | ActionCard | Space activation when used as button (conditional) | 🟢 Partial | **Technically passes:** Likely has button role with click handler. |
-| 18 | Input | Info icon and clear icon not keyboard-operable | 🔴 Partial | |
+| 18 | ~~Input~~ | ~~Info icon and clear icon not keyboard-operable~~ | ✅ Partial | **Fixed:** Info icon has role=button, aria-label, onKeyDown (Enter/Space). Clear icon uses `<button>` with aria-label. |
 | 18 | MetricInput | Optional Home/End for min/max | 🟢 Partial | **Technically passes:** Home/End are optional enhancements, not required. |
 | 18 | ChipInput | No arrow key chip navigation | 🟢 Partial | **Technically passes:** Chips individually focusable via Tab. |
 | 18 | EditableInput | No keyboard to enter edit mode (Editable is mouse-only) | 🔴 Partial | After Editable family. |
-| 18 | Stepper | No Space to activate; no arrow navigation | 🔴 Partial | |
+| 18 | ~~Stepper~~ | ~~No Space to activate; no arrow navigation~~ | ✅ Partial | **Fixed:** Space/Enter activate; Arrow Left/Right, Home/End navigate. |
 | 18 | FileUploader | Verify button triggers file input (keyboard opens dialog) | 🟢 Partial | **Technically passes:** If button is keyboard-accessible. Needs verification. |
-| 18 | Dropzone | Root drop area not keyboard-operable; only "Browse files" link works | 🔴 Partial | |
+| 18 | ~~Dropzone~~ | ~~Root drop area not keyboard-operable; only "Browse files" link works~~ | ✅ Partial | **Fixed:** Root has tabIndex=0, role=button, Enter/Space opens file picker. |
 | 18 | Combobox | Missing Home/End in option list | 🟢 Partial | **Technically passes:** Home/End optional for combobox. Core nav (arrows/Enter/Tab) works. NOT implemented. |
 | 18 | ~~Menu~~ | ~~Missing Space to activate, Home/End, type-ahead~~ | ✅ Partial → **DONE** | **Space + Home/End implemented.** Type-ahead optional (🟢). |
 | 18 | TimePicker | Inherits Dropdown gaps (Space, Escape, Home/End) | 🔴 Partial | Dropdown is deprecated — out of scope. |
