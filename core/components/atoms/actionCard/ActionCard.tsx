@@ -24,19 +24,30 @@ export interface ActionCardProps extends BaseProps, BaseHtmlProps<HTMLDivElement
 
 export const ActionCard = (props: ActionCardProps) => {
   const { children, disabled, className, zIndex, onClick, ...rest } = props;
+  const [isKeyActive, setIsKeyActive] = React.useState(false);
 
   const classes = classNames(
     {
       [styles['ActionCard']]: true,
       [styles['ActionCard--default']]: !disabled,
       [styles['ActionCard--disabled']]: disabled,
+      [styles['ActionCard--keyActive']]: isKeyActive && !disabled,
     },
     className
   );
 
   const onKeyDownHandler = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter' && onClick && !disabled) {
-      onClick(event);
+    if (event.key === 'Enter' && !disabled) {
+      setIsKeyActive(true);
+      if (onClick) {
+        onClick(event);
+      }
+    }
+  };
+
+  const onKeyUpHandler = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      setIsKeyActive(false);
     }
   };
 
@@ -54,6 +65,7 @@ export const ActionCard = (props: ActionCardProps) => {
       className={classes}
       onClick={onClickHandler}
       onKeyDown={onKeyDownHandler}
+      onKeyUp={onKeyUpHandler}
       {...rest}
     >
       {disabled && (

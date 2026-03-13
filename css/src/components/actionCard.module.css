@@ -25,6 +25,11 @@
   transition: var(--duration--fast-01) var(--standard-productive-curve);
 }
 
+.ActionCard--default.ActionCard--keyActive {
+  box-shadow: var(--shadow-m);
+  transition: var(--duration--fast-01) var(--standard-productive-curve);
+}
+
 .ActionCard--disabled {
   cursor: not-allowed;
   position: relative;

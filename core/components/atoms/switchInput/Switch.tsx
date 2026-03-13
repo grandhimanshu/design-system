@@ -92,7 +92,21 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>((props, re
   });
 
   const onChangeHandler = (event: ChangeEvent | KeyboardEvent) => {
-    if (event.type == 'change' || isSpaceKey(event as React.KeyboardEvent<HTMLElement>)) {
+    const evt = event as KeyboardEvent;
+    const isKb = evt.type === 'keydown' || evt.type === 'keyup';
+
+    if (isKb && evt.repeat) {
+      return;
+    }
+
+    const spaceMatch = isKb ? isSpaceKey(event as React.KeyboardEvent<HTMLElement>) : false;
+    const enterMatch = isKb && evt.key === 'Enter';
+    const shouldToggle = event.type === 'change' || spaceMatch || enterMatch;
+
+    if (shouldToggle) {
+      if (spaceMatch) {
+        evt.preventDefault();
+      }
       if (checkedProp === undefined) setChecked(!checked);
       if (onChange) onChange(event, !checked);
     }
@@ -113,7 +127,7 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>((props, re
         name={name}
         value={value}
         className={styles['Switch-input']}
-        onKeyUp={onChangeHandler}
+        onKeyDown={onChangeHandler}
       />
       <span className={SwitchWrapper} />
     </div>

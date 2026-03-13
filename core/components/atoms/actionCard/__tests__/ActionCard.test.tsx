@@ -79,3 +79,61 @@ describe('Action Card component disabled state', () => {
     expect(overlayElement).toBeInTheDocument();
   });
 });
+
+describe('Action Card keyboard interactions', () => {
+  it('should trigger onClick on Enter key', () => {
+    const onClick = jest.fn();
+    const { getByTestId } = render(<ActionCard onClick={onClick}>{children}</ActionCard>);
+    const cardElement = getByTestId('DesignSystem-ActionCard');
+
+    fireEvent.keyDown(cardElement, { key: 'Enter' });
+    expect(onClick).toHaveBeenCalled();
+  });
+
+  it('should apply active class on Enter keydown', () => {
+    const onClick = jest.fn();
+    const { getByTestId } = render(<ActionCard onClick={onClick}>{children}</ActionCard>);
+    const cardElement = getByTestId('DesignSystem-ActionCard');
+
+    fireEvent.keyDown(cardElement, { key: 'Enter' });
+    expect(cardElement).toHaveClass('ActionCard--keyActive');
+  });
+
+  it('should remove active class on Enter keyup', () => {
+    const onClick = jest.fn();
+    const { getByTestId } = render(<ActionCard onClick={onClick}>{children}</ActionCard>);
+    const cardElement = getByTestId('DesignSystem-ActionCard');
+
+    fireEvent.keyDown(cardElement, { key: 'Enter' });
+    expect(cardElement).toHaveClass('ActionCard--keyActive');
+
+    fireEvent.keyUp(cardElement, { key: 'Enter' });
+    expect(cardElement).not.toHaveClass('ActionCard--keyActive');
+  });
+
+  it('should NOT trigger onClick or apply active class when disabled', () => {
+    const onClick = jest.fn();
+    const { getByTestId } = render(
+      <ActionCard onClick={onClick} disabled={true}>
+        {children}
+      </ActionCard>
+    );
+    const cardElement = getByTestId('DesignSystem-ActionCard');
+
+    fireEvent.keyDown(cardElement, { key: 'Enter' });
+    expect(onClick).not.toHaveBeenCalled();
+    expect(cardElement).not.toHaveClass('ActionCard--keyActive');
+  });
+
+  it('should NOT trigger onClick on other keys', () => {
+    const onClick = jest.fn();
+    const { getByTestId } = render(<ActionCard onClick={onClick}>{children}</ActionCard>);
+    const cardElement = getByTestId('DesignSystem-ActionCard');
+
+    fireEvent.keyDown(cardElement, { key: 'Space' });
+    expect(onClick).not.toHaveBeenCalled();
+
+    fireEvent.keyDown(cardElement, { key: 'Escape' });
+    expect(onClick).not.toHaveBeenCalled();
+  });
+});
