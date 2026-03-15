@@ -129,6 +129,10 @@ export interface SelectProps extends BaseProps {
    */
 
   triggerOptions?: SelectTriggerProps;
+  /**
+   * Container element ref for focus restoration
+   */
+  container?: HTMLElement | null;
 }
 
 export interface SelectMethods {
@@ -235,7 +239,16 @@ export const Select = React.forwardRef<SelectMethods, SelectProps>((props, ref) 
       setHighlightLastItem(false);
       setRovingIndex(-1);
       if (wasOpenRef.current && !closedByOutsideClickRef.current) {
-        triggerRef.current?.focus({ preventScroll: true });
+        const container = props.container;
+        const isInsideClosingOverlay =
+          container &&
+          document.body.contains(container) &&
+          container.offsetParent !== null &&
+          !!container.closest('.Modal-animation--close, .Sidesheet-animation--close, .FullscreenModal-animation--close');
+
+        if (!isInsideClosingOverlay) {
+          triggerRef.current?.focus({ preventScroll: true });
+        }
       }
       closedByOutsideClickRef.current = false;
     }
@@ -310,7 +323,16 @@ export const Select = React.forwardRef<SelectMethods, SelectProps>((props, ref) 
     onSelect?.(option);
     if (!multiSelect) {
       setOpenPopover(false);
-      triggerRef.current?.focus({ preventScroll: true });
+      const container = props.container;
+      const isInsideClosingOverlay =
+        container &&
+        document.body.contains(container) &&
+        container.offsetParent !== null &&
+        !!container.closest('.Modal-animation--close, .Sidesheet-animation--close, .FullscreenModal-animation--close');
+
+      if (!isInsideClosingOverlay) {
+        triggerRef.current?.focus({ preventScroll: true });
+      }
     }
   };
 
@@ -321,7 +343,16 @@ export const Select = React.forwardRef<SelectMethods, SelectProps>((props, ref) 
 
   const handleEscape = React.useCallback(() => {
     setOpenPopover(false);
-    triggerRef.current?.focus({ preventScroll: true });
+    const container = props.container;
+    const isInsideClosingOverlay =
+      container &&
+      document.body.contains(container) &&
+      container.offsetParent !== null &&
+      !!container.closest('.Modal-animation--close, .Sidesheet-animation--close, .FullscreenModal-animation--close');
+
+    if (!isInsideClosingOverlay) {
+      triggerRef.current?.focus({ preventScroll: true });
+    }
     setFocusedOption(undefined);
   }, []);
 
@@ -390,6 +421,7 @@ export const Select = React.forwardRef<SelectMethods, SelectProps>((props, ref) 
           trapFocus={true}
           onEscape={handleEscape}
           onFocusMove={handleFocusMove}
+          container={props.container}
         >
           <OutsideClick onOutsideClick={onOutsideClickHandler}>
             <div

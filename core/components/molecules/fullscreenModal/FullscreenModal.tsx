@@ -7,8 +7,10 @@ import { OverlayHeader, OverlayHeaderProps } from '@/components/molecules/overla
 import { OverlayBody } from '@/components/molecules/overlayBody';
 import { Row, Column, Button, Tooltip } from '@/index';
 import { ColumnProps } from '@/index.type';
-import { getWrapperElement, getUpdatedZIndex, closeOnEscapeKeypress } from '@/utils/overlayHelper';
+import { getWrapperElement, getUpdatedZIndex, closeOnEscapeKeypress, getFocusableElements, handleFocusTrapKeyDown } from '@/utils/overlayHelper';
 import OverlayManager from '@/utils/OverlayManager';
+import FocusScopeManager from '@/utils/FocusScopeManager';
+import DismissableLayerManager from '@/utils/DismissableLayerManager';
 import { FooterOptions } from '@/common.type';
 import styles from '@css/components/fullscreenModal.module.css';
 
@@ -103,6 +105,9 @@ interface ModalState {
 
 class FullscreenModal extends React.Component<FullscreenModalProps, ModalState> {
   modalRef = React.createRef<HTMLDivElement>();
+  modalContentRef = React.createRef<HTMLDivElement>();
+  previousActiveElement: HTMLElement | null = null;
+  focusTrapActive: boolean = false;
   element: Element;
 
   static defaultProps = {
@@ -121,6 +126,7 @@ class FullscreenModal extends React.Component<FullscreenModalProps, ModalState> 
   }
 
   onOutsideClickHandler = (event: Event) => {
+    this.deactivateFocusTrap();
     OverlayManager.remove(this.modalRef.current);
 
     if (this.props.onClose) {
@@ -141,9 +147,54 @@ class FullscreenModal extends React.Component<FullscreenModalProps, ModalState> 
     }
   };
 
+  onFocusTrapKeyDown = (event: KeyboardEvent) => {
+    const container = this.modalContentRef.current;
+    if (!container) return;
+    handleFocusTrapKeyDown(event, container);
+  };
+
   onCloseHandler = (event: KeyboardEvent) => {
     const isTopOverlay = OverlayManager.isTopOverlay(this.modalRef.current);
     closeOnEscapeKeypress(event, isTopOverlay, this.onOutsideClickHandler);
+  };
+
+  activateFocusTrap = () => {
+    this.previousActiveElement = document.activeElement as HTMLElement | null;
+    const container = this.modalContentRef.current;
+    if (!container) return;
+
+    DismissableLayerManager.add(this.modalRef.current);
+    FocusScopeManager.add(this.previousActiveElement, container);
+
+    window.requestAnimationFrame(() => {
+      const focusable = getFocusableElements(container);
+      if (focusable.length > 0) {
+        focusable[0].focus({ preventScroll: true });
+      } else {
+        container.setAttribute('tabindex', '-1');
+        container.focus({ preventScroll: true });
+      }
+    });
+
+    document.addEventListener('keydown', this.onFocusTrapKeyDown, true);
+    container.addEventListener('keydown', this.onCloseHandler);
+    this.focusTrapActive = true;
+  };
+
+  deactivateFocusTrap = () => {
+    if (!this.focusTrapActive) return;
+    this.focusTrapActive = false;
+
+    document.removeEventListener('keydown', this.onFocusTrapKeyDown, true);
+
+    const container = this.modalContentRef.current;
+    if (container) {
+      container.removeEventListener('keydown', this.onCloseHandler);
+      container.removeAttribute('tabindex');
+    }
+
+    DismissableLayerManager.remove(this.modalRef.current);
+    FocusScopeManager.remove(container);
   };
 
   componentDidMount() {
@@ -151,12 +202,27 @@ class FullscreenModal extends React.Component<FullscreenModalProps, ModalState> 
       if (this.state.open) {
         OverlayManager.add(this.modalRef.current);
       }
-      document.addEventListener('keydown', this.onCloseHandler);
+    }
+
+    const zIndex = getUpdatedZIndex({
+      element: this.element,
+      containerClassName: '.Overlay-container',
+      elementRef: this.modalRef,
+    });
+    this.setState({
+      zIndex,
+    });
+
+    if (this.state.open) {
+      this.activateFocusTrap();
     }
   }
 
   componentWillUnmount() {
-    if (this.props.closeOnEscape) document.removeEventListener('keydown', this.onCloseHandler);
+    if (this.state.open) {
+      this.deactivateFocusTrap();
+      OverlayManager.remove(this.modalRef.current);
+    }
   }
 
   componentDidUpdate(prevProps: FullscreenModalProps) {
@@ -175,7 +241,12 @@ class FullscreenModal extends React.Component<FullscreenModalProps, ModalState> 
         });
 
         if (this.props.closeOnEscape) OverlayManager.add(this.modalRef.current);
+
+        this.activateFocusTrap();
       } else {
+        this.deactivateFocusTrap();
+        if (this.props.closeOnEscape) OverlayManager.remove(this.modalRef.current);
+
         this.setState(
           {
             animate: false,
@@ -188,8 +259,6 @@ class FullscreenModal extends React.Component<FullscreenModalProps, ModalState> 
             }, 120);
           }
         );
-
-        if (this.props.closeOnEscape) OverlayManager.remove(this.modalRef.current);
       }
     }
   }
@@ -235,7 +304,15 @@ class FullscreenModal extends React.Component<FullscreenModalProps, ModalState> 
         data-layer={true}
         style={{ zIndex }}
       >
-        <div data-test="DesignSystem-FullscreenModal" {...baseProps} className={classes} ref={this.modalRef}>
+        <div
+          data-test="DesignSystem-FullscreenModal"
+          {...baseProps}
+          className={classes}
+          ref={(el) => {
+            (this.modalContentRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
+            (this.modalRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
+          }}
+        >
           <Row className="justify-content-center">
             <Column {...sizeMap[dimension]}>
               <Row className={styles['FullscreenModal-header']}>

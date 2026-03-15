@@ -69,6 +69,10 @@ export interface PopperWrapperProps {
   open?: boolean;
   hide?: boolean;
   /**
+   * Container element ref for focus restoration
+   */
+  container?: HTMLElement | null;
+  /**
    * Callback after `Popover` is toggled
    *
    * type: 'onMouseLeave' | 'onMouseEnter' | 'outsideClick' | 'onClick';
@@ -534,7 +538,7 @@ export class PopperWrapper extends React.Component<PopperWrapperProps, PopperWra
 
     const element = React.cloneElement(
       children,
-      animationClass ? { ...childProps, className: classes } : { ...childProps }
+      animationClass ? { ...childProps, className: classes, container: this.props.container } : { ...childProps, container: this.props.container }
     );
     return element;
   }

@@ -15,6 +15,8 @@ import {
   handleFocusTrapKeyDown,
 } from '@/utils/overlayHelper';
 import OverlayManager from '@/utils/OverlayManager';
+import FocusScopeManager from '@/utils/FocusScopeManager';
+import DismissableLayerManager from '@/utils/DismissableLayerManager';
 import { FooterOptions } from '@/common.type';
 import styles from '@css/components/sidesheet.module.css';
 
@@ -126,6 +128,7 @@ class Sidesheet extends React.Component<SidesheetProps, SidesheetState> {
   sidesheetRef = React.createRef<HTMLDivElement>();
   sidesheetContentRef = React.createRef<HTMLDivElement>();
   previousActiveElement: HTMLElement | null = null;
+  focusTrapActive: boolean = false;
   autofocusRAF: number | null = null;
 
   element: Element;
@@ -187,6 +190,9 @@ class Sidesheet extends React.Component<SidesheetProps, SidesheetState> {
     const container = this.sidesheetContentRef.current;
     if (!container) return;
 
+    DismissableLayerManager.add(this.sidesheetRef.current);
+    FocusScopeManager.add(this.previousActiveElement, container);
+
     this.autofocusRAF = window.requestAnimationFrame(() => {
       this.autofocusRAF = null;
       this.focusFirstFocusable();
@@ -194,9 +200,13 @@ class Sidesheet extends React.Component<SidesheetProps, SidesheetState> {
 
     document.addEventListener('keydown', this.onFocusTrapKeyDown, true);
     container.addEventListener('keydown', this.onCloseHandler);
+    this.focusTrapActive = true;
   };
 
   deactivateFocusTrap = () => {
+    if (!this.focusTrapActive) return;
+    this.focusTrapActive = false;
+
     if (this.autofocusRAF !== null) {
       window.cancelAnimationFrame(this.autofocusRAF);
       this.autofocusRAF = null;
@@ -209,12 +219,8 @@ class Sidesheet extends React.Component<SidesheetProps, SidesheetState> {
       container.removeAttribute('tabindex');
     }
 
-    const elementToFocus = this.previousActiveElement;
-    this.previousActiveElement = null;
-
-    if (elementToFocus?.focus && OverlayManager.isTopOverlay(this.sidesheetRef.current)) {
-      window.requestAnimationFrame(() => elementToFocus.focus({ preventScroll: true }));
-    }
+    DismissableLayerManager.remove(this.sidesheetRef.current);
+    FocusScopeManager.remove(container);
   };
 
   componentDidMount() {

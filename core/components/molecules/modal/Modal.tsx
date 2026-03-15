@@ -15,6 +15,8 @@ import {
   handleFocusTrapKeyDown,
 } from '@/utils/overlayHelper';
 import OverlayManager from '@/utils/OverlayManager';
+import FocusScopeManager from '@/utils/FocusScopeManager';
+import DismissableLayerManager from '@/utils/DismissableLayerManager';
 import { FooterOptions } from '@/common.type';
 import styles from '@css/components/modal.module.css';
 import rowStyles from '@css/components/column.module.css';
@@ -140,6 +142,7 @@ class Modal extends React.Component<ModalProps, ModalState> {
   modalRef = React.createRef<HTMLDivElement>();
   modalContentRef = React.createRef<HTMLDivElement>();
   previousActiveElement: HTMLElement | null = null;
+  focusTrapActive: boolean = false;
 
   element: Element;
 
@@ -176,6 +179,9 @@ class Modal extends React.Component<ModalProps, ModalState> {
     const container = this.modalContentRef.current;
     if (!container) return;
 
+    DismissableLayerManager.add(this.modalRef.current);
+    FocusScopeManager.add(this.previousActiveElement, container);
+
     window.requestAnimationFrame(() => {
       const focusable = getFocusableElements(container);
       if (focusable.length > 0) {
@@ -188,9 +194,13 @@ class Modal extends React.Component<ModalProps, ModalState> {
 
     document.addEventListener('keydown', this.onFocusTrapKeyDown, true);
     container.addEventListener('keydown', this.onCloseHandler);
+    this.focusTrapActive = true;
   };
 
   deactivateFocusTrap = () => {
+    if (!this.focusTrapActive) return;
+    this.focusTrapActive = false;
+
     document.removeEventListener('keydown', this.onFocusTrapKeyDown, true);
 
     const container = this.modalContentRef.current;
@@ -199,13 +209,8 @@ class Modal extends React.Component<ModalProps, ModalState> {
       container.removeAttribute('tabindex');
     }
 
-    // Capture in variable so RAF callback has stable reference (previousActiveElement is cleared below)
-    const elementToFocus = this.previousActiveElement;
-    this.previousActiveElement = null;
-
-    if (elementToFocus?.focus && OverlayManager.isTopOverlay(this.modalRef.current)) {
-      window.requestAnimationFrame(() => elementToFocus.focus({ preventScroll: true }));
-    }
+    DismissableLayerManager.remove(this.modalRef.current);
+    FocusScopeManager.remove(container);
   };
 
   componentDidMount() {
