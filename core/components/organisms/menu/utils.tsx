@@ -19,19 +19,19 @@ export const handleKeyDown = (
   switch (event.key) {
     case 'ArrowUp':
       event.preventDefault();
-      navigateOptions('up', focusedOption, setFocusedOption, listRef);
+      navigateOptions('up', focusedOption, setFocusedOption, listRef, isKeyboardNavigating);
       break;
     case 'ArrowDown':
       event.preventDefault();
-      navigateOptions('down', focusedOption, setFocusedOption, listRef);
+      navigateOptions('down', focusedOption, setFocusedOption, listRef, isKeyboardNavigating);
       break;
     case 'Home':
       event.preventDefault();
-      navigateOptions('first', focusedOption, setFocusedOption, listRef);
+      navigateOptions('first', focusedOption, setFocusedOption, listRef, isKeyboardNavigating);
       break;
     case 'End':
       event.preventDefault();
-      navigateOptions('last', focusedOption, setFocusedOption, listRef);
+      navigateOptions('last', focusedOption, setFocusedOption, listRef, isKeyboardNavigating);
       break;
     case 'Enter':
       (focusedOption as HTMLElement)?.click();
@@ -44,11 +44,35 @@ export const handleKeyDown = (
       setOpenPopover?.(false);
       break;
     case 'Escape':
-      setOpenPopover?.(false);
-      if (triggerRef && !isSubMenuTrigger) {
-        triggerRef?.current?.focus();
+      event.preventDefault();
+      event.stopPropagation();
+      
+      // Set keyboard nav flag to prevent unwanted closes
+      if (isKeyboardNavigating) {
+        isKeyboardNavigating.current = true;
+      }
+      
+      // If we're inside a submenu, focus the parent trigger
+      if (triggerID && parentListRef?.current) {
+        const submenuTrigger = parentListRef.current.querySelector(`#${triggerID}`)?.firstChild;
+        if (submenuTrigger) {
+          (submenuTrigger as HTMLElement)?.focus();
+          
+          // Keep flag set for 500ms to block outsideClick
+          setTimeout(() => {
+            if (isKeyboardNavigating) {
+              isKeyboardNavigating.current = false;
+            }
+          }, 500);
+        }
       } else {
-        menuTriggerRef?.current?.focus();
+        // Root menu - close it and focus the root trigger
+        setOpenPopover?.(false);
+        if (triggerRef && !isSubMenuTrigger) {
+          triggerRef?.current?.focus();
+        } else {
+          menuTriggerRef?.current?.focus();
+        }
       }
       setFocusedOption?.(undefined);
       break;
@@ -56,9 +80,13 @@ export const handleKeyDown = (
       setOpenPopover?.(false);
       break;
     case 'ArrowRight':
+      event.preventDefault();
+      event.stopPropagation();
       navigateSubMenu(isSubMenuTrigger, 'right', subListRef, menuID, triggerID, parentListRef, isKeyboardNavigating);
       break;
     case 'ArrowLeft':
+      event.preventDefault();
+      event.stopPropagation();
       navigateSubMenu(isSubMenuTrigger, 'left', subListRef, menuID, triggerID, parentListRef, isKeyboardNavigating);
       break;
     default:
@@ -70,9 +98,15 @@ const navigateOptions = (
   direction: string,
   focusedOption: Element | undefined,
   setFocusedOption?: React.Dispatch<React.SetStateAction<HTMLElement | undefined>>,
-  listRef?: any
+  listRef?: any,
+  isKeyboardNavigating?: React.MutableRefObject<boolean>
 ) => {
   if (!listRef?.current) return;
+
+  // Set keyboard navigation flag to prevent blur from closing menu
+  if (isKeyboardNavigating) {
+    isKeyboardNavigating.current = true;
+  }
 
   // Scope to 'menu' role to exclude nested submenu items
   const focusables = getAllFocusableElements(listRef.current, 'menu');
@@ -94,6 +128,15 @@ const navigateOptions = (
   targetOption.focus({ preventScroll: true });
   setFocusedOption && setFocusedOption(targetOption);
   targetOption.scrollIntoView?.({ block: 'center' });
+
+  // Clear flag after microtask to allow blur handlers to check it
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      if (isKeyboardNavigating) {
+        isKeyboardNavigating.current = false;
+      }
+    }, 300);
+  });
 };
 
 const navigateSubMenu = (
@@ -105,8 +148,22 @@ const navigateSubMenu = (
   parentListRef?: React.RefObject<HTMLDivElement> | null,
   isKeyboardNavigating?: React.MutableRefObject<boolean>
 ) => {
+  // #region agent log
+  if (typeof window !== 'undefined' && (window as any).addDebugLog) {
+    (window as any).addDebugLog(
+      `navigateSubMenu: isSubMenuTrigger=${isSubMenuTrigger}, direction=${direction}, menuID=${menuID}, triggerID=${triggerID}`
+    );
+  }
+  // #endregion
+  
   const element = document.querySelector(`[data-name="${menuID}"]`);
   const menuPlacement = element?.getAttribute('data-placement');
+  
+  // #region agent log
+  if (typeof window !== 'undefined' && (window as any).addDebugLog) {
+    (window as any).addDebugLog(`navigateSubMenu: menuPlacement=${menuPlacement}`);
+  }
+  // #endregion
 
   // Case 1: On a SubMenu trigger item - ArrowRight/Left opens the submenu
   if (isSubMenuTrigger && subListRef?.current) {
@@ -114,6 +171,11 @@ const navigateSubMenu = (
       (direction === 'right' && menuPlacement?.includes('right')) ||
       (direction === 'left' && menuPlacement?.includes('left'))
     ) {
+      // #region agent log
+      if (typeof window !== 'undefined' && (window as any).addDebugLog) {
+        (window as any).addDebugLog(`navigateSubMenu: CASE 1 - opening submenu from trigger`);
+      }
+      // #endregion
       // Don't scope by role here because subListRef points to a wrapper div,
       // not the Menu.List component with role="menu"
       const focusables = getAllFocusableElements(subListRef.current);
@@ -141,19 +203,35 @@ const navigateSubMenu = (
       (direction === 'left' && menuPlacement?.includes('right')) ||
       (direction === 'right' && menuPlacement?.includes('left'))
     ) {
-      // Set flag for keyboard navigation
+      // #region agent log
+      if (typeof window !== 'undefined' && (window as any).addDebugLog) {
+        (window as any).addDebugLog(`navigateSubMenu: CASE 2 - going back to parent trigger from submenu`);
+      }
+      // #endregion
+      
+      // Set flag for keyboard navigation to prevent blur from closing
       if (isKeyboardNavigating) {
         isKeyboardNavigating.current = true;
       }
 
       const triggerElement = parentListRef.current.querySelector(`#${triggerID}`)?.firstChild;
+      
+      // Focus the parent trigger - this will trigger the submenu to close via normal blur handling
       (triggerElement as HTMLElement)?.focus();
 
-      requestAnimationFrame(() => {
+      // Keep the flag set for 500ms to block outsideClick
+      setTimeout(() => {
         if (isKeyboardNavigating) {
           isKeyboardNavigating.current = false;
         }
-      });
+      }, 500);
+
+      // Keep the flag set for 500ms to block outsideClick
+      setTimeout(() => {
+        if (isKeyboardNavigating) {
+          isKeyboardNavigating.current = false;
+        }
+      }, 500);
     }
   }
 };

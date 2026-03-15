@@ -60,6 +60,24 @@ export const SubMenu = (props: SubMenuProps) => {
   const triggerElement = React.cloneElement(submenuTrigger as React.ReactElement, {
     ...(submenuTrigger as React.ReactElement)?.props,
     onKeyDown: onKeyDownHandler,
+    onMouseEnter: (e: React.MouseEvent) => {
+      // #region agent log
+      if (typeof window !== 'undefined' && (window as any).addDebugLog) {
+        const text = (e.currentTarget as HTMLElement)?.textContent?.trim();
+        (window as any).addDebugLog(`SubMenu trigger onMouseEnter: ${text}`);
+      }
+      // #endregion
+      (submenuTrigger as React.ReactElement)?.props?.onMouseEnter?.(e);
+    },
+    onMouseLeave: (e: React.MouseEvent) => {
+      // #region agent log
+      if (typeof window !== 'undefined' && (window as any).addDebugLog) {
+        const text = (e.currentTarget as HTMLElement)?.textContent?.trim();
+        (window as any).addDebugLog(`SubMenu trigger onMouseLeave: ${text}`);
+      }
+      // #endregion
+      (submenuTrigger as React.ReactElement)?.props?.onMouseLeave?.(e);
+    },
     ref: triggerRef,
     'aria-haspopup': 'menu',
     'aria-expanded': subListRef.current ? 'true' : 'false',

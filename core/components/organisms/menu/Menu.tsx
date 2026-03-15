@@ -80,7 +80,20 @@ export const Menu = (props: MenuProps) => {
   }, [open]);
 
   React.useEffect(() => {
+    // #region agent log
+    const listReady = !!listRef.current;
+    const itemCount = listRef.current
+      ? listRef.current.querySelectorAll('[data-test="DesignSystem-Listbox-ItemWrapper"]').length
+      : 0;
+    const msg = `Effect highlightFirstItem: highlightFirstItem=${highlightFirstItem}, openPopover=${openPopover}, listReady=${listReady}, itemCount=${itemCount}`;
+    if (typeof window !== 'undefined' && (window as any).addDebugLog) {
+      (window as any).addDebugLog(msg);
+    }
+    // #endregion
     if (highlightFirstItem && openPopover) {
+      if (typeof window !== 'undefined' && (window as any).addDebugLog) {
+        (window as any).addDebugLog('About to call requestAnimationFrame -> focusListItem');
+      }
       requestAnimationFrame(() => focusListItem('down', setFocusedOption, listRef));
     }
   }, [highlightFirstItem]);
@@ -100,11 +113,40 @@ export const Menu = (props: MenuProps) => {
   }, [openPopover]);
 
   const onToggleHandler = (open: boolean, type?: string) => {
+    // #region agent log
+    if (typeof window !== 'undefined' && (window as any).addDebugLog) {
+      (window as any).addDebugLog(`onToggleHandler START: open=${open}, type=${type}, isKeyboardNavigating=${isKeyboardNavigating.current}`);
+      
+      const menuElement = listRef.current;
+      const focusWithinMenu = menuElement && menuElement.contains(document.activeElement);
+      (window as any).addDebugLog(`onToggleHandler: focusWithinMenu=${focusWithinMenu}`);
+    }
+    // #endregion
+    
     // Don't close during keyboard navigation
-    if (!open && type === 'onBlur' && isKeyboardNavigating.current) {
+    if (!open && (type === 'onBlur' || type === 'outsideClick') && isKeyboardNavigating.current) {
+      if (typeof window !== 'undefined' && (window as any).addDebugLog) {
+        (window as any).addDebugLog(`onToggleHandler: BLOCKED close (${type} during keyboard nav)`);
+      }
       return;
     }
+    
+    // Don't close on mouseLeave if focus is within the menu (keyboard navigation active)
+    if (!open && (type === 'mouseLeave' || type === 'onMouseLeave')) {
+      const menuElement = listRef.current;
+      if (menuElement && menuElement.contains(document.activeElement)) {
+        if (typeof window !== 'undefined' && (window as any).addDebugLog) {
+          (window as any).addDebugLog('onToggleHandler: BLOCKED close (mouseLeave but focus within menu)');
+        }
+        return;
+      }
+    }
+    
     setOpenPopover(open);
+    // Only auto-focus on click/keyboard opens, not hover
+    if (open && type !== 'mouseEnter' && type !== 'onMouseEnter') {
+      setHighlightFirstItem(true);
+    }
   };
 
   const handlePopoverKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {

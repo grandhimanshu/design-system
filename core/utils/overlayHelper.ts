@@ -107,3 +107,71 @@ export const handleFocusTrapKeyDown = (event: KeyboardEvent, container: HTMLElem
 
   return false;
 };
+
+/**
+ * Returns the next (or previous if shiftKey) focusable element in document order
+ * after the trigger, excluding elements inside excludeContainer (e.g. the popover list).
+ * Used for Tab-escape: when user presses Tab from inside a popover, close it and
+ * move focus to the next focusable on the page.
+ */
+export const getNextFocusableAfterTrigger = (
+  trigger: HTMLElement | null,
+  shiftKey: boolean,
+  excludeContainer?: HTMLElement | null
+): HTMLElement | null => {
+  if (!trigger || !trigger.ownerDocument?.body) return null;
+  const focusables = getFocusableElements(trigger.ownerDocument.body).filter(
+    (el) => !excludeContainer || !excludeContainer.contains(el)
+  );
+  const idx = focusables.indexOf(trigger);
+  if (idx === -1) return null;
+  const nextIdx = shiftKey ? idx - 1 : idx + 1;
+  if (nextIdx < 0 || nextIdx >= focusables.length) return null;
+  return focusables[nextIdx];
+};
+
+/**
+ * Gets all elements that can receive focus programmatically within a container, including:
+ * - Naturally focusable elements (buttons, inputs, links with href, etc.)
+ * - Elements with tabindex="-1" (can be focused via .focus() but not via Tab)
+ *
+ * For nested menus/popovers: excludes elements inside nested containers with the same role
+ * to prevent arrow keys from navigating into closed submenus.
+ *
+ * @param container - The container element to search within
+ * @param scopeToRole - Optional ARIA role to scope navigation (e.g., 'menu', 'listbox').
+ * @returns Array of focusable HTMLElements sorted in DOM order
+ */
+export const getAllFocusableElements = (container: HTMLElement, scopeToRole?: string): HTMLElement[] => {
+  const naturallyFocusable = getFocusableElements(container);
+
+  const programmaticallyFocusable = Array.from(container.querySelectorAll<HTMLElement>('[tabindex="-1"]')).filter(
+    (el) => {
+      const style = window.getComputedStyle(el);
+      const isVisible = style.visibility !== 'hidden' && style.display !== 'none';
+      const isAriaHidden = el.getAttribute('aria-hidden') === 'true';
+      const isInert = el.closest('[inert]') !== null;
+
+      if (!isVisible || isAriaHidden || isInert) return false;
+
+      if (scopeToRole) {
+        const closestRoleContainer = el.closest(`[role="${scopeToRole}"]`);
+        if (closestRoleContainer !== container) return false;
+      }
+
+      return true;
+    }
+  );
+
+  const allFocusables = [...naturallyFocusable, ...programmaticallyFocusable];
+  const unique = Array.from(new Set(allFocusables));
+
+  const filtered = unique.filter((el) => {
+    return !unique.some((other) => other !== el && other.contains(el));
+  });
+
+  return filtered.sort((a, b) => {
+    if (a === b) return 0;
+    return a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
+  });
+};

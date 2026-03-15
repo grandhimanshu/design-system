@@ -107,6 +107,11 @@ export const MenuItem = (props: MenuItemProps) => {
   }, [triggerID]);
 
   const onFocusHandler = (event: React.FocusEvent) => {
+    // #region agent log
+    if (typeof window !== 'undefined' && (window as any).addDebugLog) {
+      (window as any).addDebugLog(`MenuItem onFocus: ${(event.target as HTMLElement)?.textContent?.trim()}`);
+    }
+    // #endregion
     setFocusedOption?.(event.target as HTMLElement);
     setOpenPopover?.(true);
     onFocus?.(event);
@@ -139,6 +144,26 @@ export const MenuItem = (props: MenuItemProps) => {
     setParentOpen?.(false);
   };
 
+  const onMouseEnterHandler = (event: React.MouseEvent) => {
+    // #region agent log
+    if (typeof window !== 'undefined' && (window as any).addDebugLog) {
+      const text = (event.currentTarget as HTMLElement)?.textContent?.trim();
+      (window as any).addDebugLog(`MenuItem onMouseEnter: ${text}`);
+    }
+    // #endregion
+    (rest as any).onMouseEnter?.(event);
+  };
+
+  const onMouseLeaveHandler = (event: React.MouseEvent) => {
+    // #region agent log
+    if (typeof window !== 'undefined' && (window as any).addDebugLog) {
+      const text = (event.currentTarget as HTMLElement)?.textContent?.trim();
+      (window as any).addDebugLog(`MenuItem onMouseLeave: ${text}`);
+    }
+    // #endregion
+    (rest as any).onMouseLeave?.(event);
+  };
+
   return (
     <Listbox.Item
       data-test="DesignSystem-Menu-ListItem"
@@ -147,6 +172,8 @@ export const MenuItem = (props: MenuItemProps) => {
       onKeyDown={onKeyDownHandler}
       onFocus={onFocusHandler}
       onClick={onClickHandler}
+      onMouseEnter={onMouseEnterHandler}
+      onMouseLeave={onMouseLeaveHandler}
       disabled={disabled}
       role="menuitem"
       aria-disabled={disabled}
