@@ -28,7 +28,7 @@ export const SubMenu = (props: SubMenuProps) => {
 
   let subMenuElement = <></>;
 
-  const { setOpenPopover, focusedOption, setFocusedOption, menuTriggerRef, listRef, isKeyboardNavigating } =
+  const { setOpenPopover, focusedOption, setFocusedOption, menuTriggerRef, listRef, isKeyboardNavigating, inputMode, setInputMode } =
     contextProp;
 
   const onKeyDownHandler = (event: React.KeyboardEvent) => {
@@ -45,7 +45,9 @@ export const SubMenu = (props: SubMenuProps) => {
       menuID,
       undefined,
       undefined,
-      isKeyboardNavigating
+      isKeyboardNavigating,
+      inputMode,
+      setInputMode
     );
   };
 
@@ -61,6 +63,11 @@ export const SubMenu = (props: SubMenuProps) => {
     ...(submenuTrigger as React.ReactElement)?.props,
     onKeyDown: onKeyDownHandler,
     onMouseEnter: (e: React.MouseEvent) => {
+      // Switch to mouse mode
+      if (setInputMode && inputMode?.current !== 'mouse') {
+        setInputMode('mouse');
+      }
+      
       // #region agent log
       if (typeof window !== 'undefined' && (window as any).addDebugLog) {
         const text = (e.currentTarget as HTMLElement)?.textContent?.trim();

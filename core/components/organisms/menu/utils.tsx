@@ -14,8 +14,15 @@ export const handleKeyDown = (
   menuID?: string,
   triggerID?: string,
   parentListRef?: React.RefObject<HTMLDivElement> | null,
-  isKeyboardNavigating?: React.MutableRefObject<boolean>
+  isKeyboardNavigating?: React.MutableRefObject<boolean>,
+  inputMode?: React.MutableRefObject<'mouse' | 'keyboard'>,
+  setInputMode?: (mode: 'mouse' | 'keyboard') => void
 ) => {
+  // Switch to keyboard mode on first keyboard input
+  if (setInputMode && inputMode?.current !== 'keyboard') {
+    setInputMode('keyboard');
+  }
+  
   switch (event.key) {
     case 'ArrowUp':
       event.preventDefault();
@@ -47,23 +54,11 @@ export const handleKeyDown = (
       event.preventDefault();
       event.stopPropagation();
       
-      // Set keyboard nav flag to prevent unwanted closes
-      if (isKeyboardNavigating) {
-        isKeyboardNavigating.current = true;
-      }
-      
       // If we're inside a submenu, focus the parent trigger
       if (triggerID && parentListRef?.current) {
         const submenuTrigger = parentListRef.current.querySelector(`#${triggerID}`)?.firstChild;
         if (submenuTrigger) {
           (submenuTrigger as HTMLElement)?.focus();
-          
-          // Keep flag set for 500ms to block outsideClick
-          setTimeout(() => {
-            if (isKeyboardNavigating) {
-              isKeyboardNavigating.current = false;
-            }
-          }, 500);
         }
       } else {
         // Root menu - close it and focus the root trigger
@@ -103,11 +98,6 @@ const navigateOptions = (
 ) => {
   if (!listRef?.current) return;
 
-  // Set keyboard navigation flag to prevent blur from closing menu
-  if (isKeyboardNavigating) {
-    isKeyboardNavigating.current = true;
-  }
-
   // Scope to 'menu' role to exclude nested submenu items
   const focusables = getAllFocusableElements(listRef.current, 'menu');
   if (focusables.length === 0) return;
@@ -128,15 +118,6 @@ const navigateOptions = (
   targetOption.focus({ preventScroll: true });
   setFocusedOption && setFocusedOption(targetOption);
   targetOption.scrollIntoView?.({ block: 'center' });
-
-  // Clear flag after microtask to allow blur handlers to check it
-  requestAnimationFrame(() => {
-    setTimeout(() => {
-      if (isKeyboardNavigating) {
-        isKeyboardNavigating.current = false;
-      }
-    }, 300);
-  });
 };
 
 const navigateSubMenu = (
@@ -180,19 +161,7 @@ const navigateSubMenu = (
       // not the Menu.List component with role="menu"
       const focusables = getAllFocusableElements(subListRef.current);
       if (focusables.length > 0) {
-        // Set flag to indicate keyboard navigation is happening
-        if (isKeyboardNavigating) {
-          isKeyboardNavigating.current = true;
-        }
-
         focusables[0].focus({ preventScroll: true });
-
-        // Clear flag after microtask to allow blur handlers to check it
-        requestAnimationFrame(() => {
-          if (isKeyboardNavigating) {
-            isKeyboardNavigating.current = false;
-          }
-        });
       }
     }
   }
@@ -208,30 +177,11 @@ const navigateSubMenu = (
         (window as any).addDebugLog(`navigateSubMenu: CASE 2 - going back to parent trigger from submenu`);
       }
       // #endregion
-      
-      // Set flag for keyboard navigation to prevent blur from closing
-      if (isKeyboardNavigating) {
-        isKeyboardNavigating.current = true;
-      }
 
       const triggerElement = parentListRef.current.querySelector(`#${triggerID}`)?.firstChild;
       
-      // Focus the parent trigger - this will trigger the submenu to close via normal blur handling
+      // Focus the parent trigger - submenu will close naturally via blur
       (triggerElement as HTMLElement)?.focus();
-
-      // Keep the flag set for 500ms to block outsideClick
-      setTimeout(() => {
-        if (isKeyboardNavigating) {
-          isKeyboardNavigating.current = false;
-        }
-      }, 500);
-
-      // Keep the flag set for 500ms to block outsideClick
-      setTimeout(() => {
-        if (isKeyboardNavigating) {
-          isKeyboardNavigating.current = false;
-        }
-      }, 500);
     }
   }
 };

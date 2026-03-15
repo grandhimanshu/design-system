@@ -69,6 +69,11 @@ export const Menu = (props: MenuProps) => {
   const listRef = React.createRef<HTMLDivElement>();
   const menuTriggerRef = React.useRef<HTMLButtonElement>(null);
   const isKeyboardNavigating = React.useRef<boolean>(false);
+  
+  // Input mode tracking: 'mouse' or 'keyboard'
+  // This is the source of truth for how the menu should behave
+  const inputMode = React.useRef<'mouse' | 'keyboard'>('mouse');
+  
   const subMenuContextProp = React.useContext(SubMenuContext);
 
   const { menuID } = subMenuContextProp;
@@ -112,33 +117,51 @@ export const Menu = (props: MenuProps) => {
     onToggle?.(openPopover);
   }, [openPopover]);
 
+  const setInputModeHandler = React.useCallback((mode: 'mouse' | 'keyboard') => {
+    if (inputMode.current !== mode) {
+      inputMode.current = mode;
+      // #region agent log
+      if (typeof window !== 'undefined' && (window as any).addDebugLog) {
+        (window as any).addDebugLog(`setInputMode: switched to ${mode} mode`);
+      }
+      // #endregion
+    }
+  }, []);
+
   const onToggleHandler = (open: boolean, type?: string) => {
     // #region agent log
     if (typeof window !== 'undefined' && (window as any).addDebugLog) {
-      (window as any).addDebugLog(`onToggleHandler START: open=${open}, type=${type}, isKeyboardNavigating=${isKeyboardNavigating.current}`);
-      
-      const menuElement = listRef.current;
-      const focusWithinMenu = menuElement && menuElement.contains(document.activeElement);
-      (window as any).addDebugLog(`onToggleHandler: focusWithinMenu=${focusWithinMenu}`);
+      (window as any).addDebugLog(
+        `onToggleHandler: open=${open}, type=${type}, inputMode=${inputMode.current}, isKeyboardNavigating=${isKeyboardNavigating.current}`
+      );
     }
     // #endregion
     
-    // Don't close during keyboard navigation
-    if (!open && (type === 'onBlur' || type === 'outsideClick') && isKeyboardNavigating.current) {
-      if (typeof window !== 'undefined' && (window as any).addDebugLog) {
-        (window as any).addDebugLog(`onToggleHandler: BLOCKED close (${type} during keyboard nav)`);
+    // In keyboard mode: ignore ALL mouse-triggered events
+    if (inputMode.current === 'keyboard') {
+      const mouseEvents = ['mouseEnter', 'onMouseEnter', 'mouseLeave', 'onMouseLeave', 'outsideClick'];
+      if (mouseEvents.includes(type || '')) {
+        // #region agent log
+        if (typeof window !== 'undefined' && (window as any).addDebugLog) {
+          (window as any).addDebugLog(`onToggleHandler: BLOCKED ${type} (keyboard mode active)`);
+        }
+        // #endregion
+        return;
       }
-      return;
     }
     
-    // Don't close on mouseLeave if focus is within the menu (keyboard navigation active)
-    if (!open && (type === 'mouseLeave' || type === 'onMouseLeave')) {
-      const menuElement = listRef.current;
-      if (menuElement && menuElement.contains(document.activeElement)) {
-        if (typeof window !== 'undefined' && (window as any).addDebugLog) {
-          (window as any).addDebugLog('onToggleHandler: BLOCKED close (mouseLeave but focus within menu)');
+    // In mouse mode: block blur if focus is within menu (keyboard fallback)
+    if (inputMode.current === 'mouse') {
+      if (!open && (type === 'mouseLeave' || type === 'onMouseLeave')) {
+        const menuElement = listRef.current;
+        if (menuElement && menuElement.contains(document.activeElement)) {
+          // #region agent log
+          if (typeof window !== 'undefined' && (window as any).addDebugLog) {
+            (window as any).addDebugLog('onToggleHandler: BLOCKED close (mouseLeave but focus within menu)');
+          }
+          // #endregion
+          return;
         }
-        return;
       }
     }
     
@@ -175,6 +198,8 @@ export const Menu = (props: MenuProps) => {
     menuTriggerRef,
     listRef,
     isKeyboardNavigating,
+    inputMode,
+    setInputMode: setInputModeHandler,
   };
 
   return (

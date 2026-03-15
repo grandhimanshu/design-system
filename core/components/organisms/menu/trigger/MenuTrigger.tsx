@@ -24,7 +24,7 @@ export interface MenuTriggerProps extends BaseProps {
 export const MenuTrigger = (props: MenuTriggerProps) => {
   const { className } = props;
   const contextProp = React.useContext(MenuContext);
-  const { openPopover, setOpenPopover, setHighlightFirstItem, setHighlightLastItem, menuTriggerRef } = contextProp;
+  const { openPopover, setOpenPopover, setHighlightFirstItem, setHighlightLastItem, menuTriggerRef, inputMode, setInputMode } = contextProp;
 
   const triggerClassName = classNames(
     {
@@ -34,6 +34,11 @@ export const MenuTrigger = (props: MenuTriggerProps) => {
   );
 
   const onKeyDownHandler = (event: React.KeyboardEvent) => {
+    // Switch to keyboard mode
+    if (setInputMode && inputMode?.current !== 'keyboard') {
+      setInputMode('keyboard');
+    }
+    
     // #region agent log
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
       if (typeof window !== 'undefined' && (window as any).addDebugLog) {
@@ -42,6 +47,13 @@ export const MenuTrigger = (props: MenuTriggerProps) => {
     }
     // #endregion
     handleKeyDown(event, setOpenPopover, setHighlightFirstItem, setHighlightLastItem);
+  };
+
+  const onMouseEnterHandler = () => {
+    // Switch to mouse mode on hover
+    if (setInputMode && inputMode?.current !== 'mouse') {
+      setInputMode('mouse');
+    }
   };
 
   return (
@@ -55,6 +67,7 @@ export const MenuTrigger = (props: MenuTriggerProps) => {
       {...props}
       className={triggerClassName}
       onKeyDown={onKeyDownHandler}
+      onMouseEnter={onMouseEnterHandler}
     />
   );
 };

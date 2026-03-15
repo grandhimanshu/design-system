@@ -47,7 +47,7 @@ export const MenuItem = (props: MenuItemProps) => {
 
   const { triggerRef, menuID, setParentOpen, triggerID, parentListRef } = subMenuContextProp;
 
-  const { setOpenPopover, focusedOption, setFocusedOption, menuTriggerRef, listRef, isKeyboardNavigating } =
+  const { setOpenPopover, focusedOption, setFocusedOption, menuTriggerRef, listRef, isKeyboardNavigating, inputMode, setInputMode } =
     contextProp;
 
   const MenuItemClassName = classNames(
@@ -131,7 +131,9 @@ export const MenuItem = (props: MenuItemProps) => {
       menuID,
       triggerID,
       parentListRef,
-      isKeyboardNavigating
+      isKeyboardNavigating,
+      inputMode,
+      setInputMode
     );
   };
 
@@ -145,6 +147,11 @@ export const MenuItem = (props: MenuItemProps) => {
   };
 
   const onMouseEnterHandler = (event: React.MouseEvent) => {
+    // Switch to mouse mode on mouse movement
+    if (setInputMode && inputMode?.current !== 'mouse') {
+      setInputMode('mouse');
+    }
+    
     // #region agent log
     if (typeof window !== 'undefined' && (window as any).addDebugLog) {
       const text = (event.currentTarget as HTMLElement)?.textContent?.trim();
