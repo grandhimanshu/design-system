@@ -134,7 +134,7 @@ export const Toast = (props: ToastProps) => {
               onClick={onCloseHandler}
               aria-label="Close"
             >
-              <Icon name="close" className={styles[`Toast-icon--${appearance}`]} appearance={appearance !== 'warning' ? 'white' : 'default'} aria-hidden="true" />
+              <Icon name="close" appearance={appearance !== 'warning' ? 'white' : 'warning_darker'} aria-hidden="true" />
             </button>
           )}
         </div>
