@@ -1,15 +1,12 @@
 import * as React from 'react';
 
-export type InputMode = 'mouse' | 'keyboard';
-
 export type ContextProps = {
   openPopover?: boolean;
   focusedOption?: Element;
   menuTriggerRef?: React.RefObject<HTMLButtonElement>;
   listRef?: React.RefObject<HTMLDivElement>;
   isKeyboardNavigating?: React.MutableRefObject<boolean>;
-  inputMode?: React.MutableRefObject<InputMode>;
-  setInputMode?: (mode: InputMode) => void;
+  lastKeyboardActionTime?: React.MutableRefObject<number>;
   setOpenPopover?: React.Dispatch<React.SetStateAction<boolean | undefined>>;
   setHighlightFirstItem?: React.Dispatch<React.SetStateAction<boolean>>;
   setHighlightLastItem?: React.Dispatch<React.SetStateAction<boolean>>;

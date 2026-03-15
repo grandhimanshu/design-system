@@ -15,12 +15,11 @@ export const handleKeyDown = (
   triggerID?: string,
   parentListRef?: React.RefObject<HTMLDivElement> | null,
   isKeyboardNavigating?: React.MutableRefObject<boolean>,
-  inputMode?: React.MutableRefObject<'mouse' | 'keyboard'>,
-  setInputMode?: (mode: 'mouse' | 'keyboard') => void
+  lastKeyboardActionTime?: React.MutableRefObject<number>
 ) => {
-  // Switch to keyboard mode on first keyboard input
-  if (setInputMode && inputMode?.current !== 'keyboard') {
-    setInputMode('keyboard');
+  // Update keyboard action timestamp for grace period
+  if (lastKeyboardActionTime) {
+    lastKeyboardActionTime.current = Date.now();
   }
   
   switch (event.key) {
@@ -53,6 +52,12 @@ export const handleKeyDown = (
     case 'Escape':
       event.preventDefault();
       event.stopPropagation();
+      
+      // #region agent log
+      if (typeof window !== 'undefined' && (window as any).addDebugLog) {
+        (window as any).addDebugLog(`Escape: triggerID=${triggerID}, isSubMenu=${!!triggerID}`);
+      }
+      // #endregion
       
       // If we're inside a submenu, focus the parent trigger
       if (triggerID && parentListRef?.current) {
@@ -132,19 +137,15 @@ const navigateSubMenu = (
   // #region agent log
   if (typeof window !== 'undefined' && (window as any).addDebugLog) {
     (window as any).addDebugLog(
-      `navigateSubMenu: isSubMenuTrigger=${isSubMenuTrigger}, direction=${direction}, menuID=${menuID}, triggerID=${triggerID}`
+      `navigateSubMenu: isSubMenuTrigger=${isSubMenuTrigger}, direction=${direction}, triggerID=${triggerID}`
     );
   }
   // #endregion
   
+  if (!menuID) return; // Early exit if no menuID
+  
   const element = document.querySelector(`[data-name="${menuID}"]`);
   const menuPlacement = element?.getAttribute('data-placement');
-  
-  // #region agent log
-  if (typeof window !== 'undefined' && (window as any).addDebugLog) {
-    (window as any).addDebugLog(`navigateSubMenu: menuPlacement=${menuPlacement}`);
-  }
-  // #endregion
 
   // Case 1: On a SubMenu trigger item - ArrowRight/Left opens the submenu
   if (isSubMenuTrigger && subListRef?.current) {
