@@ -228,13 +228,13 @@ export const Combobox = (props: ComboboxProps) => {
     if (highlightFirstItem && openPopover) {
       requestAnimationFrame(() => focusListItem('down', setFocusedOption, listRef));
     }
-  }, [highlightFirstItem]);
+  }, [highlightFirstItem, openPopover]);
 
   React.useEffect(() => {
     if (highlightLastItem && openPopover) {
       requestAnimationFrame(() => focusListItem('up', setFocusedOption, listRef));
     }
-  }, [highlightLastItem]);
+  }, [highlightLastItem, openPopover]);
 
   React.useEffect(() => {
     if (!openPopover) {
