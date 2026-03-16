@@ -22,16 +22,21 @@ export const SubMenu = (props: SubMenuProps) => {
 
   const [submenuTrigger, submenuContent] = React.Children.toArray(children);
   const contextProp = React.useContext(MenuContext);
+  const parentSubMenuContext = React.useContext(SubMenuContext); // Get parent submenu's context
   const subListRef = React.useRef<HTMLDivElement>(null);
   const triggerRef = React.useRef<HTMLDivElement>(null);
   const isSubMenuTrigger = true;
 
   let subMenuElement = <></>;
 
-  const { setOpenPopover, focusedOption, setFocusedOption, menuTriggerRef, listRef, isKeyboardNavigating, lastKeyboardActionTime } =
+  const { setOpenPopover, focusedOption, setFocusedOption, menuTriggerRef, listRef, isKeyboardNavigating, lastKeyboardActionTime, lastNavigationCall } =
     contextProp;
 
   const onKeyDownHandler = (event: React.KeyboardEvent) => {
+    // #region agent log
+    const triggerText = (event.currentTarget as HTMLElement)?.textContent?.trim();
+    typeof fetch === 'function' && fetch('http://127.0.0.1:7740/ingest/a079587f-b583-4696-8c0d-1727ae7ce7c2',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'fcaea9'},body:JSON.stringify({sessionId:'fcaea9',location:'SubMenu.tsx:onKeyDown',message:'SubMenu trigger key pressed',data:{key:event.key,triggerText,menuID,parentTriggerID:parentSubMenuContext.triggerID},timestamp:Date.now(),hypothesisId:'B'})}).catch(()=>{});
+    // #endregion
     handleKeyDown(
       event,
       focusedOption,
@@ -43,10 +48,11 @@ export const SubMenu = (props: SubMenuProps) => {
       isSubMenuTrigger,
       triggerRef,
       menuID,
-      undefined,
-      undefined,
+      parentSubMenuContext.triggerID, // Pass parent's triggerID
+      parentSubMenuContext.parentListRef, // Pass parent's listRef
       isKeyboardNavigating,
-      lastKeyboardActionTime
+      lastKeyboardActionTime,
+      lastNavigationCall // Phase 6: Pass context ref
     );
   };
 
@@ -61,24 +67,6 @@ export const SubMenu = (props: SubMenuProps) => {
   const triggerElement = React.cloneElement(submenuTrigger as React.ReactElement, {
     ...(submenuTrigger as React.ReactElement)?.props,
     onKeyDown: onKeyDownHandler,
-    onMouseEnter: (e: React.MouseEvent) => {
-      // #region agent log
-      if (typeof window !== 'undefined' && (window as any).addDebugLog) {
-        const text = (e.currentTarget as HTMLElement)?.textContent?.trim();
-        (window as any).addDebugLog(`SubMenu trigger onMouseEnter: ${text}`);
-      }
-      // #endregion
-      (submenuTrigger as React.ReactElement)?.props?.onMouseEnter?.(e);
-    },
-    onMouseLeave: (e: React.MouseEvent) => {
-      // #region agent log
-      if (typeof window !== 'undefined' && (window as any).addDebugLog) {
-        const text = (e.currentTarget as HTMLElement)?.textContent?.trim();
-        (window as any).addDebugLog(`SubMenu trigger onMouseLeave: ${text}`);
-      }
-      // #endregion
-      (submenuTrigger as React.ReactElement)?.props?.onMouseLeave?.(e);
-    },
     ref: triggerRef,
     'aria-haspopup': 'menu',
     'aria-expanded': subListRef.current ? 'true' : 'false',
