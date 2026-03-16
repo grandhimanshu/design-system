@@ -34,13 +34,6 @@ export const MenuTrigger = (props: MenuTriggerProps) => {
   );
 
   const onKeyDownHandler = (event: React.KeyboardEvent) => {
-    // #region agent log
-    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
-      if (typeof window !== 'undefined' && (window as any).addDebugLog) {
-        (window as any).addDebugLog(`Trigger keydown: ${event.key}`);
-      }
-    }
-    // #endregion
     handleKeyDown(event, setOpenPopover, setHighlightFirstItem, setHighlightLastItem);
   };
 

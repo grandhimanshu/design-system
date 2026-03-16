@@ -1,6 +1,7 @@
 import React from 'react';
-import { Combobox, Spinner, Label } from '@/index';
+import { Combobox, Spinner, Label, Button } from '@/index';
 import { OptionType } from '@/common.type';
+import { ComboboxDebugLogPanel } from './ComboboxDebugPanel';
 
 export const KeyboardEvents = () => {
   function useFetchOption() {
@@ -95,19 +96,26 @@ export const KeyboardEvents = () => {
   };
 
   return (
-    <div className="w-50">
-      <Label withInput={true}>Drug Name</Label>
-      <Combobox
-        multiSelect={false}
-        onKeyDown={(ev) => console.log('onKeyDown :: ', ev)}
-        onKeyUp={(ev) => console.log('onKeyUp :: ', ev)}
-        onChange={onChangeHandler}
-        icon="search"
-        placeholder="Enter drug name"
-      >
-        <PopoverContent loading={loading} optionList={optionList} />
-      </Combobox>
-    </div>
+    <>
+      <ComboboxDebugLogPanel />
+      <div className="w-50">
+        <Label withInput={true}>Drug Name</Label>
+        <Combobox
+          multiSelect={false}
+          onKeyDown={(ev) => console.log('onKeyDown :: ', ev)}
+          onKeyUp={(ev) => console.log('onKeyUp :: ', ev)}
+          onChange={onChangeHandler}
+          icon="search"
+          placeholder="Enter drug name"
+        >
+          <PopoverContent loading={loading} optionList={optionList} />
+        </Combobox>
+        
+        <div style={{ marginTop: '20px' }}>
+          <Button data-test="next-focusable">Next Focusable Element</Button>
+        </div>
+      </div>
+    </>
   );
 };
 

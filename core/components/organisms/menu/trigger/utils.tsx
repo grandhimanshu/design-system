@@ -32,17 +32,16 @@ export const focusListItem = (
   listRef?: any
 ) => {
   // #region agent log
+  const stack = new Error().stack;
+  const caller = stack?.split('\n')[2]?.trim();
   if (typeof window !== 'undefined' && (window as any).addDebugLog) {
-    (window as any).addDebugLog(`focusListItem START: position=${position}, listRefExists=${!!listRef?.current}`);
+    (window as any).addDebugLog(`⚡ focusListItem called: position=${position} caller=${caller?.substring(0, 80)}`);
   }
   // #endregion
+  
   const listItems = listRef?.current?.querySelectorAll('[data-test="DesignSystem-Listbox-ItemWrapper"]');
   const itemCount = listItems ? listItems.length : 0;
-  // #region agent log
-  if (typeof window !== 'undefined' && (window as any).addDebugLog) {
-    (window as any).addDebugLog(`focusListItem found items: ${itemCount}`);
-  }
-  // #endregion
+  
   let targetOption;
 
   if (position === 'down') {
@@ -50,27 +49,19 @@ export const focusListItem = (
   } else {
     targetOption = listItems?.[listItems.length - 1];
   }
-  const hadTarget = !!targetOption;
   
   // Focus the parent <li> element (Listbox.Item) which has tabIndex={-1}, not the inner div
   const focusableElement = targetOption?.parentElement as HTMLElement;
   
   // #region agent log
+  const targetText = focusableElement?.textContent?.trim();
   if (typeof window !== 'undefined' && (window as any).addDebugLog) {
-    (window as any).addDebugLog(`focusListItem about to call focus() on parent <li>: ${focusableElement?.tagName}`);
+    (window as any).addDebugLog(`⚡ focusListItem focusing: "${targetText}"`);
   }
   // #endregion
+  
   focusableElement?.focus();
-  const activeAfter = document.activeElement;
-  const focusMoved = focusableElement && activeAfter === focusableElement;
-
-  // #region agent log
-  if (typeof window !== 'undefined' && (window as any).addDebugLog) {
-    (window as any).addDebugLog(
-      `focusListItem RESULT: focusMoved=${focusMoved}, activeAfterTag=${(activeAfter as HTMLElement)?.tagName}, itemCount=${itemCount}`
-    );
-  }
-  // #endregion
+  const focusMoved = focusableElement && document.activeElement === focusableElement;
 
   if (focusableElement && typeof focusableElement.scrollIntoView === 'function') {
     focusableElement.scrollIntoView({ block: 'end' });

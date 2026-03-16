@@ -150,3 +150,14 @@
     </tr>
   </tbody>
 </table>
+
+### Nested Menu Keyboard Navigation
+
+When using menus with submenus (e.g. `Menu.SubMenu`), the following behavior applies in addition to the table above:
+
+- **&#60;Escape&#62; in submenu:** Closes only the current submenu and moves focus to the parent menuitem that opened it. Press Escape again to close the root menu and focus the menu button.
+- **&#60;Escape&#62; in root menu:** Closes the menu and moves focus to the menu button.
+- **&#60;Tab&#62; from any level:** Closes all menu levels (root and all open submenus) and moves focus to the next focusable element on the page after the root menu trigger.
+- **&#60;ArrowLeft&#62; in submenu (when submenu opens to the right):** Closes the current submenu and moves focus to the parent menuitem.
+- **&#60;ArrowRight&#62; on submenu trigger:** Opens the submenu and moves focus to the first item in the submenu.
+- **Grace period:** A 150ms grace period after keyboard actions prevents mouse events (e.g. outside click) from closing the menu immediately, so focus can move correctly when using Escape or ArrowLeft from a submenu.

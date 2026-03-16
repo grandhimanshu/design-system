@@ -1,6 +1,20 @@
 import { handleKeyDown } from '../utils';
 import { handleKeyDown as triggerHandleKeyDown, focusListItem } from '../trigger/utils';
 
+jest.mock('@/utils/overlayHelper', () => {
+  const actual = jest.requireActual('@/utils/overlayHelper');
+  return {
+    ...actual,
+    getAllFocusableElements: jest.fn((container: any) => {
+      if (container && typeof container.querySelectorAll === 'function') {
+        const result = container.querySelectorAll();
+        return Array.isArray(result) ? result : Array.from(result || []);
+      }
+      return [];
+    }),
+  };
+});
+
 describe('Menu Utils - handleKeyDown function for Menu component keyboard navigation and interactions', () => {
   let inputTriggerRef: any;
   let focusedOption: Element;
@@ -10,6 +24,8 @@ describe('Menu Utils - handleKeyDown function for Menu component keyboard naviga
   let subListRef: any;
   let triggerRef: any;
   let parentListRef: any;
+  let lastKeyboardActionTime: React.MutableRefObject<number>;
+  let lastNavigationCall: React.MutableRefObject<{ key: string; triggerID: string | undefined; timestamp: number } | null>;
 
   const mockListItems = [document.createElement('div'), document.createElement('div'), document.createElement('div')];
   mockListItems.forEach((item, index) => {
@@ -46,6 +62,8 @@ describe('Menu Utils - handleKeyDown function for Menu component keyboard naviga
         querySelector: jest.fn(),
       },
     };
+    lastKeyboardActionTime = { current: 0 };
+    lastNavigationCall = { current: null };
     focusedOption = mockListItems[1]; // Start with middle item focused
 
     // Mock document.querySelector for submenu tests
@@ -69,7 +87,14 @@ describe('Menu Utils - handleKeyDown function for Menu component keyboard naviga
         inputTriggerRef,
         listRef,
         subListRef,
-        false
+        false,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        lastKeyboardActionTime,
+        lastNavigationCall
       );
 
       expect(event.preventDefault).toHaveBeenCalled();
@@ -89,7 +114,14 @@ describe('Menu Utils - handleKeyDown function for Menu component keyboard naviga
         inputTriggerRef,
         listRef,
         subListRef,
-        false
+        false,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        lastKeyboardActionTime,
+        lastNavigationCall
       );
 
       expect(event.preventDefault).toHaveBeenCalled();
@@ -110,7 +142,14 @@ describe('Menu Utils - handleKeyDown function for Menu component keyboard naviga
         inputTriggerRef,
         listRef,
         subListRef,
-        false
+        false,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        lastKeyboardActionTime,
+        lastNavigationCall
       );
 
       expect(mockListItems[2].focus).toHaveBeenCalled();
@@ -130,7 +169,14 @@ describe('Menu Utils - handleKeyDown function for Menu component keyboard naviga
         inputTriggerRef,
         listRef,
         subListRef,
-        false
+        false,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        lastKeyboardActionTime,
+        lastNavigationCall
       );
 
       expect(mockListItems[0].focus).toHaveBeenCalled();
@@ -150,7 +196,14 @@ describe('Menu Utils - handleKeyDown function for Menu component keyboard naviga
         inputTriggerRef,
         listRef,
         subListRef,
-        false
+        false,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        lastKeyboardActionTime,
+        lastNavigationCall
       );
 
       expect(mockListItems[0].focus).toHaveBeenCalled();
@@ -170,7 +223,14 @@ describe('Menu Utils - handleKeyDown function for Menu component keyboard naviga
         inputTriggerRef,
         listRef,
         subListRef,
-        false
+        false,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        lastKeyboardActionTime,
+        lastNavigationCall
       );
 
       expect(mockListItems[2].focus).toHaveBeenCalled();
@@ -191,7 +251,14 @@ describe('Menu Utils - handleKeyDown function for Menu component keyboard naviga
         inputTriggerRef,
         listRef,
         subListRef,
-        false
+        false,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        lastKeyboardActionTime,
+        lastNavigationCall
       );
 
       expect((focusedOption as any).click).toHaveBeenCalled();
@@ -212,7 +279,13 @@ describe('Menu Utils - handleKeyDown function for Menu component keyboard naviga
         listRef,
         subListRef,
         false,
-        triggerRef
+        triggerRef,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        lastKeyboardActionTime,
+        lastNavigationCall
       );
 
       expect(setOpenPopover).toHaveBeenCalledWith(false);
@@ -232,7 +305,13 @@ describe('Menu Utils - handleKeyDown function for Menu component keyboard naviga
         listRef,
         subListRef,
         true,
-        triggerRef
+        triggerRef,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        lastKeyboardActionTime,
+        lastNavigationCall
       );
 
       expect(setOpenPopover).toHaveBeenCalledWith(false);
@@ -253,7 +332,14 @@ describe('Menu Utils - handleKeyDown function for Menu component keyboard naviga
         inputTriggerRef,
         listRef,
         subListRef,
-        false
+        false,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        lastKeyboardActionTime,
+        lastNavigationCall
       );
 
       expect(setOpenPopover).toHaveBeenCalledWith(false);
@@ -290,7 +376,10 @@ describe('Menu Utils - handleKeyDown function for Menu component keyboard naviga
         triggerRef,
         menuID,
         triggerID,
-        parentListRef
+        parentListRef,
+        undefined,
+        lastKeyboardActionTime,
+        lastNavigationCall
       );
 
       expect(document.querySelector).toHaveBeenCalledWith(`[data-name="${menuID}"]`);
@@ -315,7 +404,10 @@ describe('Menu Utils - handleKeyDown function for Menu component keyboard naviga
         triggerRef,
         menuID,
         triggerID,
-        parentListRef
+        parentListRef,
+        undefined,
+        lastKeyboardActionTime,
+        lastNavigationCall
       );
 
       expect(document.querySelector).toHaveBeenCalledWith(`[data-name="${menuID}"]`);
@@ -343,7 +435,10 @@ describe('Menu Utils - handleKeyDown function for Menu component keyboard naviga
         triggerRef,
         menuID,
         triggerID,
-        parentListRef
+        parentListRef,
+        undefined,
+        lastKeyboardActionTime,
+        lastNavigationCall
       );
 
       expect(parentListRef.current.querySelector).toHaveBeenCalledWith(`#${triggerID}`);
@@ -371,7 +466,10 @@ describe('Menu Utils - handleKeyDown function for Menu component keyboard naviga
         triggerRef,
         menuID,
         triggerID,
-        parentListRef
+        parentListRef,
+        undefined,
+        lastKeyboardActionTime,
+        lastNavigationCall
       );
 
       expect(parentListRef.current.querySelector).toHaveBeenCalledWith(`#${triggerID}`);
@@ -396,7 +494,10 @@ describe('Menu Utils - handleKeyDown function for Menu component keyboard naviga
         triggerRef,
         menuID,
         triggerID,
-        parentListRef
+        parentListRef,
+        undefined,
+        lastKeyboardActionTime,
+        lastNavigationCall
       );
 
       expect(mockSubListItems[0].focus).not.toHaveBeenCalled();
@@ -416,7 +517,14 @@ describe('Menu Utils - handleKeyDown function for Menu component keyboard naviga
         inputTriggerRef,
         listRef,
         subListRef,
-        false
+        false,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        lastKeyboardActionTime,
+        lastNavigationCall
       );
 
       expect(mockListItems[2].scrollIntoView).toHaveBeenCalledWith({ block: 'center' });
@@ -428,8 +536,7 @@ describe('Menu Utils - handleKeyDown function for Menu component keyboard naviga
       const event = new KeyboardEvent('keydown', { key: 'ArrowDown' }) as any;
       event.preventDefault = jest.fn();
 
-      // The function should handle null listRef without throwing
-      // but it currently doesn't, so we expect it to throw for now
+      // When listRef.current is null, navigateOptions returns early without throwing
       expect(() => {
         handleKeyDown(
           event,
@@ -439,9 +546,16 @@ describe('Menu Utils - handleKeyDown function for Menu component keyboard naviga
           inputTriggerRef,
           { current: null },
           subListRef,
-          false
+          false,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          lastKeyboardActionTime,
+          lastNavigationCall
         );
-      }).toThrow();
+      }).not.toThrow();
     });
 
     it('should handle empty list items', () => {
@@ -449,8 +563,7 @@ describe('Menu Utils - handleKeyDown function for Menu component keyboard naviga
       const event = new KeyboardEvent('keydown', { key: 'ArrowDown' }) as any;
       event.preventDefault = jest.fn();
 
-      // The function should handle empty list without throwing
-      // but it currently doesn't, so we expect it to throw for now
+      // When getAllFocusableElements returns [], navigateOptions returns early without throwing
       expect(() => {
         handleKeyDown(
           event,
@@ -460,9 +573,16 @@ describe('Menu Utils - handleKeyDown function for Menu component keyboard naviga
           inputTriggerRef,
           listRef,
           subListRef,
-          false
+          false,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          lastKeyboardActionTime,
+          lastNavigationCall
         );
-      }).toThrow();
+      }).not.toThrow();
     });
 
     it('should handle unknown key gracefully', () => {
@@ -477,7 +597,14 @@ describe('Menu Utils - handleKeyDown function for Menu component keyboard naviga
           inputTriggerRef,
           listRef,
           subListRef,
-          false
+          false,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          lastKeyboardActionTime,
+          lastNavigationCall
         );
       }).not.toThrow();
     });
@@ -559,16 +686,21 @@ describe('MenuTrigger Utils - handleKeyDown function for Menu trigger keyboard i
 describe('MenuTrigger Utils - focusListItem utility for programmatic focus management in Menu', () => {
   let setFocusedOption: React.Dispatch<React.SetStateAction<HTMLElement | undefined>>;
   let listRef: any;
-  let mockListItems: HTMLElement[];
+  let mockListItems: HTMLDivElement[];
+  let mockParentElements: HTMLDivElement[];
 
   beforeEach(() => {
     setFocusedOption = jest.fn();
     mockListItems = [document.createElement('div'), document.createElement('div'), document.createElement('div')];
+    mockParentElements = [document.createElement('div'), document.createElement('div'), document.createElement('div')];
+    mockParentElements.forEach((parent) => {
+      parent.focus = jest.fn();
+      parent.scrollIntoView = jest.fn();
+    });
 
     mockListItems.forEach((item, index) => {
       item.setAttribute('data-test', 'DesignSystem-Listbox-ItemWrapper');
-      item.focus = jest.fn();
-      item.scrollIntoView = jest.fn();
+      mockParentElements[index].appendChild(item);
       item.setAttribute('data-index', index.toString());
     });
 
@@ -587,9 +719,9 @@ describe('MenuTrigger Utils - focusListItem utility for programmatic focus manag
     it('should focus first item when position is down', () => {
       focusListItem('down', setFocusedOption, listRef);
 
-      expect(mockListItems[0].focus).toHaveBeenCalled();
-      expect(setFocusedOption).toHaveBeenCalledWith(mockListItems[0]);
-      expect(mockListItems[0].scrollIntoView).toHaveBeenCalledWith({ block: 'end' });
+      expect(mockParentElements[0].focus).toHaveBeenCalled();
+      expect(setFocusedOption).toHaveBeenCalledWith(mockParentElements[0]);
+      expect(mockParentElements[0].scrollIntoView).toHaveBeenCalledWith({ block: 'end' });
     });
   });
 
@@ -597,9 +729,9 @@ describe('MenuTrigger Utils - focusListItem utility for programmatic focus manag
     it('should focus last item when position is up', () => {
       focusListItem('up', setFocusedOption, listRef);
 
-      expect(mockListItems[2].focus).toHaveBeenCalled();
-      expect(setFocusedOption).toHaveBeenCalledWith(mockListItems[2]);
-      expect(mockListItems[2].scrollIntoView).toHaveBeenCalledWith({ block: 'end' });
+      expect(mockParentElements[2].focus).toHaveBeenCalled();
+      expect(setFocusedOption).toHaveBeenCalledWith(mockParentElements[2]);
+      expect(mockParentElements[2].scrollIntoView).toHaveBeenCalledWith({ block: 'end' });
     });
   });
 
@@ -625,18 +757,18 @@ describe('MenuTrigger Utils - focusListItem utility for programmatic focus manag
         focusListItem('down', undefined, listRef);
       }).not.toThrow();
 
-      expect(mockListItems[0].focus).toHaveBeenCalled();
+      expect(mockParentElements[0].focus).toHaveBeenCalled();
     });
 
     it('should handle item without scrollIntoView method', () => {
-      mockListItems[0].scrollIntoView = undefined as any;
+      mockParentElements[0].scrollIntoView = undefined as any;
 
       expect(() => {
         focusListItem('down', setFocusedOption, listRef);
       }).not.toThrow();
 
-      expect(mockListItems[0].focus).toHaveBeenCalled();
-      expect(setFocusedOption).toHaveBeenCalledWith(mockListItems[0]);
+      expect(mockParentElements[0].focus).toHaveBeenCalled();
+      expect(setFocusedOption).toHaveBeenCalledWith(mockParentElements[0]);
     });
   });
 
@@ -645,9 +777,9 @@ describe('MenuTrigger Utils - focusListItem utility for programmatic focus manag
       focusListItem('unknown', setFocusedOption, listRef);
 
       // Based on the implementation, unknown position falls to the else case (last item)
-      expect(mockListItems[2].focus).toHaveBeenCalled();
-      expect(setFocusedOption).toHaveBeenCalledWith(mockListItems[2]);
-      expect(mockListItems[2].scrollIntoView).toHaveBeenCalledWith({ block: 'end' });
+      expect(mockParentElements[2].focus).toHaveBeenCalled();
+      expect(setFocusedOption).toHaveBeenCalledWith(mockParentElements[2]);
+      expect(mockParentElements[2].scrollIntoView).toHaveBeenCalledWith({ block: 'end' });
     });
   });
 });

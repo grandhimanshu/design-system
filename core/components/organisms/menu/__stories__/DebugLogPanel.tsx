@@ -10,12 +10,16 @@ let logEntries: LogEntry[] = [];
 let listeners: Array<() => void> = [];
 
 export const addDebugLog = (message: string, data?: any) => {
-  logEntries.push({
+  const entry = {
     timestamp: Date.now(),
     message,
     data,
-  });
+  };
+  logEntries.push(entry);
   listeners.forEach((fn) => fn());
+  
+  // Also log to browser console for easy copying
+  console.log(`[DEBUG] ${message}`, data || '');
 };
 
 export const clearDebugLogs = () => {

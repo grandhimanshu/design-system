@@ -47,7 +47,7 @@ export const MenuItem = (props: MenuItemProps) => {
 
   const { triggerRef, menuID, setParentOpen, triggerID, parentListRef } = subMenuContextProp;
 
-  const { setOpenPopover, focusedOption, setFocusedOption, menuTriggerRef, listRef, isKeyboardNavigating, lastKeyboardActionTime } =
+  const { setOpenPopover, focusedOption, setFocusedOption, menuTriggerRef, listRef, isKeyboardNavigating, lastKeyboardActionTime, lastNavigationCall } =
     contextProp;
 
   const MenuItemClassName = classNames(
@@ -66,12 +66,25 @@ export const MenuItem = (props: MenuItemProps) => {
     };
 
     const handlePopoverClose = (event: FocusEvent) => {
+      // #region agent log
+      const target = event.target as HTMLElement;
+      const relatedTarget = event.relatedTarget as HTMLElement | null;
+      const targetText = target?.textContent?.trim();
+      const relatedText = relatedTarget?.textContent?.trim();
+      if (typeof window !== 'undefined' && (window as any).addDebugLog) {
+        (window as any).addDebugLog(`🔔 Blur on submenu trigger: from="${targetText}" to="${relatedText}" isKeyboardNav=${isKeyboardNavigating?.current}`);
+      }
+      // #endregion
+      
       // Don't close during keyboard navigation
       if (isKeyboardNavigating?.current) {
+        // #region agent log
+        if (typeof window !== 'undefined' && (window as any).addDebugLog) {
+          (window as any).addDebugLog(`🔔 Blur BLOCKED: keyboard navigation in progress`);
+        }
+        // #endregion
         return;
       }
-
-      const relatedTarget = event.relatedTarget as HTMLElement | null;
 
       if (relatedTarget) {
         // Find the submenu wrapper associated with this trigger
@@ -87,11 +100,21 @@ export const MenuItem = (props: MenuItemProps) => {
 
           if (submenuPopover && submenuPopover.contains(relatedTarget)) {
             // Focus moved into the submenu - keep parent menu open
+            // #region agent log
+            if (typeof window !== 'undefined' && (window as any).addDebugLog) {
+              (window as any).addDebugLog(`🔔 Blur BLOCKED: focus moving into submenu`);
+            }
+            // #endregion
             return;
           }
         }
       }
 
+      // #region agent log
+      if (typeof window !== 'undefined' && (window as any).addDebugLog) {
+        (window as any).addDebugLog(`🔔 Blur CLOSING PARENT MENU via setOpenPopover(false)`);
+      }
+      // #endregion
       setOpenPopover?.(false);
     };
 
@@ -107,17 +130,16 @@ export const MenuItem = (props: MenuItemProps) => {
   }, [triggerID]);
 
   const onFocusHandler = (event: React.FocusEvent) => {
-    // #region agent log
-    if (typeof window !== 'undefined' && (window as any).addDebugLog) {
-      (window as any).addDebugLog(`MenuItem onFocus: ${(event.target as HTMLElement)?.textContent?.trim()}`);
-    }
-    // #endregion
     setFocusedOption?.(event.target as HTMLElement);
     setOpenPopover?.(true);
     onFocus?.(event);
   };
 
   const onKeyDownHandler = (event: React.KeyboardEvent) => {
+    // #region agent log
+    const itemText = (event.currentTarget as HTMLElement)?.textContent?.trim();
+    typeof fetch === 'function' && fetch('http://127.0.0.1:7740/ingest/a079587f-b583-4696-8c0d-1727ae7ce7c2',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'fcaea9'},body:JSON.stringify({sessionId:'fcaea9',location:'MenuItem.tsx:onKeyDown',message:'MenuItem key pressed',data:{key:event.key,itemText,triggerID,menuID},timestamp:Date.now(),hypothesisId:'B'})}).catch(()=>{});
+    // #endregion
     handleKeyDown(
       event,
       focusedOption,
@@ -132,7 +154,8 @@ export const MenuItem = (props: MenuItemProps) => {
       triggerID,
       parentListRef,
       isKeyboardNavigating,
-      lastKeyboardActionTime
+      lastKeyboardActionTime,
+      lastNavigationCall // Phase 6: Pass context ref
     );
   };
 
@@ -146,22 +169,10 @@ export const MenuItem = (props: MenuItemProps) => {
   };
 
   const onMouseEnterHandler = (event: React.MouseEvent) => {
-    // #region agent log
-    if (typeof window !== 'undefined' && (window as any).addDebugLog) {
-      const text = (event.currentTarget as HTMLElement)?.textContent?.trim();
-      (window as any).addDebugLog(`MenuItem onMouseEnter: ${text}`);
-    }
-    // #endregion
     (rest as any).onMouseEnter?.(event);
   };
 
   const onMouseLeaveHandler = (event: React.MouseEvent) => {
-    // #region agent log
-    if (typeof window !== 'undefined' && (window as any).addDebugLog) {
-      const text = (event.currentTarget as HTMLElement)?.textContent?.trim();
-      (window as any).addDebugLog(`MenuItem onMouseLeave: ${text}`);
-    }
-    // #endregion
     (rest as any).onMouseLeave?.(event);
   };
 

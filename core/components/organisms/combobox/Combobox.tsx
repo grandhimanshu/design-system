@@ -226,18 +226,33 @@ export const Combobox = (props: ComboboxProps) => {
 
   React.useEffect(() => {
     if (highlightFirstItem && openPopover) {
+      // #region agent log
+      if (typeof window !== 'undefined' && (window as any).addDebugLog) {
+        (window as any).addDebugLog(`📍 Combobox effect: highlightFirstItem=true openPopover=true → calling focusListItem('down')`);
+      }
+      // #endregion
       requestAnimationFrame(() => focusListItem('down', setFocusedOption, listRef));
     }
   }, [highlightFirstItem, openPopover]);
 
   React.useEffect(() => {
     if (highlightLastItem && openPopover) {
+      // #region agent log
+      if (typeof window !== 'undefined' && (window as any).addDebugLog) {
+        (window as any).addDebugLog(`📍 Combobox effect: highlightLastItem=true openPopover=true → calling focusListItem('up')`);
+      }
+      // #endregion
       requestAnimationFrame(() => focusListItem('up', setFocusedOption, listRef));
     }
   }, [highlightLastItem, openPopover]);
 
   React.useEffect(() => {
     if (!openPopover) {
+      // #region agent log
+      if (typeof window !== 'undefined' && (window as any).addDebugLog) {
+        (window as any).addDebugLog(`📍 Combobox effect: openPopover=false → resetting highlight flags`);
+      }
+      // #endregion
       setHighlightFirstItem(false);
       setHighlightLastItem(false);
     }
@@ -264,6 +279,11 @@ export const Combobox = (props: ComboboxProps) => {
   };
 
   const onToggleHandler = (open: boolean) => {
+    // #region agent log
+    if (typeof window !== 'undefined' && (window as any).addDebugLog) {
+      (window as any).addDebugLog(`🔔 Combobox onToggle: open=${open}`);
+    }
+    // #endregion
     open ? setOpenPopover(true) : setOpenPopover(false);
   };
 
