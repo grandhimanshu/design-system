@@ -23,6 +23,7 @@ export interface InternalHandleProps extends HandleProps {
   tickSize: number;
   tickSizeRatio: number;
   zIndex?: number;
+  ariaLabel?: string;
 }
 
 export interface HandleState {
@@ -267,7 +268,7 @@ export class Handle extends React.Component<InternalHandleProps, HandleState> {
   };
 
   render() {
-    const { min, tickSizeRatio, value, disabled, label, isCurrentLabelHovered } = this.props;
+    const { min, tickSizeRatio, value, disabled, label, isCurrentLabelHovered, ariaLabel } = this.props;
     const { isHandleMoving, isHandleHovered } = this.state;
 
     const showTootlip = isHandleMoving || isHandleHovered || isCurrentLabelHovered;
@@ -306,6 +307,7 @@ export class Handle extends React.Component<InternalHandleProps, HandleState> {
           tabIndex={disabled ? -1 : 0}
           data-test="DesignSystem-MultiSlider-Handle"
           role="slider"
+          aria-label={ariaLabel}
           aria-valuemin={this.props.min}
           aria-valuemax={this.props.max}
           aria-valuenow={value}

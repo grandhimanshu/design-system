@@ -52,7 +52,7 @@
   width: var(--spacing-05);
   height: var(--spacing-10);
   border-radius: var(--border-radius-2-5);
-  background-color: var(--secondary-dark);
+  background-color: var(--text-subtle);
 }
 
 .Slider-tooltip--visible {

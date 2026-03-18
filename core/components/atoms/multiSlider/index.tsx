@@ -282,7 +282,7 @@ export class MultiSlider extends React.Component<InternalMultiSliderProps, Multi
   };
 
   renderHandles = () => {
-    const { disabled, max, min, stepSize } = this.props;
+    const { disabled, max, min, stepSize, label: sliderLabel } = this.props;
     const handleProps = this.getHandleValues(this.props);
 
     if (handleProps.length === 0) {
@@ -307,6 +307,7 @@ export class MultiSlider extends React.Component<InternalMultiSliderProps, Multi
           tickSizeRatio={this.state.tickSizeRatio}
           value={value}
           isCurrentLabelHovered={isCurrentLabelHovered}
+          ariaLabel={sliderLabel}
         />
       );
     });
