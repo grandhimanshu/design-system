@@ -1,0 +1,888 @@
+{
+  "tabs": [
+    "overflow",
+    "BasicTabs",
+    "CustomLabels",
+    "DisabledWithActive",
+    "InlineContent",
+    "DismissibleTab",
+    "Size",
+    "TabsWithIcon",
+    "index",
+    "TabsWithCount"
+  ],
+  "inputMask": [
+    "HelpText",
+    "index",
+    "CardNumber"
+  ],
+  "pagination": [
+    "Basic",
+    "Jump"
+  ],
+  "tooltip": [
+    "AutotooltipWithHook",
+    "Position",
+    "Size",
+    "index",
+    "ShowTooltip",
+    "Autotooltip"
+  ],
+  "chatBubble": [
+    "Type",
+    "defaultMessage",
+    "failedMessage",
+    "withImage",
+    "Outgoing",
+    "defaultMessage",
+    "WithMetadata",
+    "Incoming",
+    "WithImage",
+    "WithActionBar"
+  ],
+  "unreadMessage": [
+    "all"
+  ],
+  "chatInput": [
+    "overflow",
+    "disabled",
+    "withSecondaryAction",
+    "generatingAResponse",
+    "all",
+    "withStopButton",
+    "readonly"
+  ],
+  "typingIndicator": [
+    "all"
+  ],
+  "dateSeparator": [
+    "all"
+  ],
+  "newMessage": [
+    "all"
+  ],
+  "fullscreenModal": [
+    "Layering",
+    "Custom",
+    "TwoStepWorkflow",
+    "Scrolling",
+    "index",
+    "Medium",
+    "Large"
+  ],
+  "keyValuePair": [
+    "index",
+    "topBottom",
+    "leftRight",
+    "columnWithFixedWidth",
+    "columnWithVariableWidth",
+    "topBottom",
+    "leftRight"
+  ],
+  "editableChipInput": [
+    "OverflowBehavior",
+    "index",
+    "Uncontrolled"
+  ],
+  "stepper": [
+    "StepperInPageHeader",
+    "index",
+    "StepperWithAnimation",
+    "CompletedStep",
+    "StepperWithSkip",
+    "ActiveStep"
+  ],
+  "editableDropdown": [
+    "customRenderer",
+    "index"
+  ],
+  "dialog": [
+    "index",
+    "Basic",
+    "Transparent",
+    "Success",
+    "Primary",
+    "Alert",
+    "Basic",
+    "Transparent",
+    "Success",
+    "Primary",
+    "Alert",
+    "Medium",
+    "Small",
+    "Large"
+  ],
+  "popover": [
+    "Actions",
+    "Layering",
+    "DisabledTrigger",
+    "Light",
+    "Inputs",
+    "index",
+    "Dark",
+    "Menu",
+    "Position",
+    "boundaryElement"
+  ],
+  "chatMessage": [
+    "UserMessage"
+  ],
+  "editableInput": [
+    "index",
+    "Size",
+    "Uncontrolled",
+    "Error"
+  ],
+  "emptyState": [
+    "index",
+    "PageNotExist",
+    "FailedToLoadData",
+    "PreviewUnavailable",
+    "NoSearchResults",
+    "EmptyData",
+    "NoAccess",
+    "InternetIssue",
+    "RequestTimeout",
+    "NoFilterResults",
+    "ServerUnavailable",
+    "Tight",
+    "Compressed",
+    "Standard"
+  ],
+  "dropzone": [
+    "index",
+    "Format",
+    "Disabled",
+    "Size"
+  ],
+  "sidesheet": [
+    "scrolling",
+    "index",
+    "twoSteps",
+    "stickyFooter",
+    "CustomHeader",
+    "LayeringWithModal",
+    "Layering",
+    "Regular",
+    "Large"
+  ],
+  "fileList": [
+    "index"
+  ],
+  "placeholder": [
+    "skeletonLoaders",
+    "index"
+  ],
+  "fileUploader": [
+    "index"
+  ],
+  "verificationCodeInput": [
+    "resetFields",
+    "sixFields",
+    "index",
+    "fourFields",
+    "Disabled",
+    "Error"
+  ],
+  "modal": [
+    "Layering",
+    "Scrolling",
+    "index",
+    "Dialog",
+    "Alert",
+    "NoFooter",
+    "old",
+    "Input",
+    "Confirmation",
+    "Medium",
+    "Small",
+    "Large"
+  ],
+  "chipInput": [
+    "Size",
+    "ChipsInSingleLine",
+    "OverflowBehavior",
+    "index",
+    "ChipValidation",
+    "Disabled",
+    "Controlled"
+  ],
+  "avatarSelection": [
+    "withPresence",
+    "custom",
+    "states",
+    "withStatus",
+    "listSize",
+    "index",
+    "Shape"
+  ],
+  "avatarGroup": [
+    "withPresence",
+    "withStatus",
+    "OverflowBehavior",
+    "withIcon",
+    "index",
+    "withImage",
+    "BorderColor",
+    "Shape",
+    "Size",
+    "State",
+    "CustomPopover",
+    "Trigger"
+  ],
+  "placeholderImage": [
+    "shape",
+    "size"
+  ],
+  "caption": [
+    "index"
+  ],
+  "legend": [
+    "index",
+    "IconAppearance",
+    "labelWeight",
+    "labelAppearance"
+  ],
+  "dropdown": [
+    "Gender",
+    "MenuWithInfo",
+    "FetchErrorTemplate",
+    "CustomSearchPlaceholder",
+    "StandardDropdown",
+    "StatusWithoutLabel",
+    "WithCheckboxAndSubInfo",
+    "OptionsMoreThan50",
+    "DropdownWithHelpText",
+    "SearchInDropdown",
+    "DropdownItemsWithInfo",
+    "DropdownWIthIcon",
+    "index",
+    "LabelInline",
+    "OptionsLessThan50",
+    "DropdownWithActionButtons",
+    "DropdownItemsWithIcon",
+    "Languages",
+    "DropdownItemsWithCheckbox",
+    "LabelOnTop",
+    "Menu",
+    "CustomTrigger",
+    "OptionType",
+    "Disable",
+    "Section",
+    "Search",
+    "LoadingType",
+    "PreSelection",
+    "Size",
+    "DisabledOption",
+    "Align",
+    "MultiOptions",
+    "OptionsWrap",
+    "StaticLimit",
+    "CustomOption",
+    "WithErrorTemplate",
+    "BulkMultiSelectWithApply",
+    "MultiSelect",
+    "MultiSelectWithApply",
+    "SingleSelect",
+    "Placeholder",
+    "ButtonState"
+  ],
+  "helpText": [
+    "index",
+    "WithError"
+  ],
+  "metricInput": [
+    "index",
+    "DefaultMetric",
+    "WithPrefix",
+    "Controlled",
+    "Size",
+    "onlyInteger",
+    "withSuffix"
+  ],
+  "placeholderParagraph": [
+    "Size",
+    "index",
+    "Length"
+  ],
+  "radio": [
+    "Overflow",
+    "HelpText",
+    "index",
+    "DefaultChecked",
+    "Controlled",
+    "Vertical",
+    "Horizontal",
+    "Size",
+    "State",
+    "RadioError"
+  ],
+  "subheading": [
+    "Appearance",
+    "Color",
+    "index"
+  ],
+  "card": [
+    "empty",
+    "highlight",
+    "nested",
+    "index",
+    "scroll",
+    "shadow",
+    "default",
+    "subdued",
+    "flat"
+  ],
+  "backdrop": [
+    "index"
+  ],
+  "paragraph": [
+    "Appearance",
+    "Color",
+    "index"
+  ],
+  "input": [
+    "InputWithLabel",
+    "LabelPosition",
+    "BasicInput",
+    "InputWithHelpText",
+    "RequiredVsOptional",
+    "index",
+    "IconLeftInput",
+    "Size",
+    "ActionIcon",
+    "controlledInput",
+    "BasicInput",
+    "IconLeft"
+  ],
+  "actionCard": [
+    "state",
+    "index",
+    "cardGroup",
+    "layout"
+  ],
+  "selectionCard": [
+    "multiSelect",
+    "state",
+    "index",
+    "singleSelect",
+    "layout"
+  ],
+  "heading": [
+    "Appearance",
+    "Size",
+    "Color",
+    "index"
+  ],
+  "toast": [
+    "WithDescription",
+    "ToastWithActions",
+    "AlertToast",
+    "SuccessToast",
+    "InfoToast",
+    "WarningToast",
+    "index",
+    "Appearance",
+    "ToastWithAction",
+    "ToastMessage"
+  ],
+  "chip": [
+    "Size",
+    "OverflowBehavior",
+    "index",
+    "CustomLabel",
+    "Action",
+    "Selection",
+    "Input"
+  ],
+  "mdsGrid": [
+    "Gap",
+    "index",
+    "GridItem",
+    "Columns",
+    "Alignment",
+    "Responsive"
+  ],
+  "checkbox": [
+    "Overflow",
+    "HelpText",
+    "index",
+    "DefaultChecked",
+    "Disabled",
+    "Controlled",
+    "Size",
+    "Error",
+    "Nested",
+    "Vertical",
+    "Horizontal"
+  ],
+  "label": [
+    "Size",
+    "index",
+    "State",
+    "Required",
+    "withInfo",
+    "Optional"
+  ],
+  "slider": [
+    "CustomLabels",
+    "Disabled",
+    "index",
+    "FreeSlider",
+    "DiscreteSlider",
+    "Controlled",
+    "Uncontrolled"
+  ],
+  "message": [
+    "WithTitle",
+    "Size",
+    "CustomDescription",
+    "WithActions",
+    "index",
+    "Appearance",
+    "AppearanceTitle",
+    "Warning",
+    "Info",
+    "Success",
+    "Alert"
+  ],
+  "column": [
+    "Sizes",
+    "Column"
+  ],
+  "spinner": [
+    "Appearance",
+    "Size",
+    "index",
+    "InlineLoader"
+  ],
+  "progressBar": [
+    "Indeterminate",
+    "Size",
+    "index",
+    "FiftyPercent"
+  ],
+  "rangeSlider": [
+    "CustomLabels",
+    "Disabled",
+    "index",
+    "FreeSlider",
+    "DiscreteSlider",
+    "Controlled",
+    "Uncontrolled"
+  ],
+  "progressRing": [
+    "Size",
+    "index"
+  ],
+  "outsideClick": [
+    "index"
+  ],
+  "row": [
+    "Row"
+  ],
+  "textarea": [
+    "index",
+    "TextareaWithCaption",
+    "defaultTextarea",
+    "Disabled",
+    "Error"
+  ],
+  "button": [
+    "Appearance",
+    "SplitButton",
+    "Expanded",
+    "Size",
+    "index",
+    "LabelButtonGroup",
+    "Loading",
+    "styleType",
+    "Basic",
+    "Transparent",
+    "Primary",
+    "Alert",
+    "Basic",
+    "Primary",
+    "Alert",
+    "Basic",
+    "Transparent",
+    "Primary",
+    "Alert",
+    "IconLeft",
+    "IconButton",
+    "IconRight",
+    "IconButtonGroup"
+  ],
+  "link": [
+    "withIcon",
+    "index",
+    "Appearance",
+    "Disabled",
+    "Size"
+  ],
+  "collapsible": [
+    "CustomTrigger",
+    "index"
+  ],
+  "segmentedControl": [
+    "WithCustomContent",
+    "Disabled",
+    "Controlled",
+    "Expanded",
+    "Size",
+    "WithTooltips",
+    "index",
+    "WithoutEqualWidth",
+    "WithMaxWidth",
+    "IconOnly",
+    "WithIcons",
+    "Uncontrolled"
+  ],
+  "linkButton": [
+    "subtle",
+    "disabled",
+    "Size",
+    "WithIcon",
+    "index"
+  ],
+  "divider": [
+    "Vertical",
+    "index",
+    "IndentedDivider",
+    "HeaderDividerInCard",
+    "BasicDividerInCard",
+    "All"
+  ],
+  "pills": [
+    "Subtle",
+    "SubtleAlert",
+    "Solid",
+    "index",
+    "Alert"
+  ],
+  "avatar": [
+    "withSvg",
+    "defaultAvatar",
+    "states",
+    "withSuffix",
+    "statusWithIcon",
+    "statusWithImage",
+    "withIcon",
+    "index",
+    "Presence",
+    "withImage",
+    "Appearance",
+    "Shape",
+    "Size"
+  ],
+  "switchInput": [
+    "index",
+    "withLabel",
+    "Size",
+    "State"
+  ],
+  "statusHint": [
+    "LabelWrap",
+    "Size",
+    "index",
+    "warning",
+    "info",
+    "default",
+    "success",
+    "alert"
+  ],
+  "text": [
+    "Appearance",
+    "Size",
+    "Color",
+    "index",
+    "Weight"
+  ],
+  "icon": [
+    "index",
+    "Appearance",
+    "Type",
+    "Image"
+  ],
+  "meter": [
+    "appearance",
+    "customStepLogic",
+    "labelSize",
+    "size",
+    "customLabelSize",
+    "index",
+    "customHook",
+    "defaultMeter",
+    "customStepCount",
+    "multiColor"
+  ],
+  "flex": [
+    "index",
+    "JustifyContent",
+    "GapAndWrap",
+    "AlignItems",
+    "Direction"
+  ],
+  "breadcrumbs": [
+    "moreThan4Levels",
+    "LabelTruncate",
+    "lessThan4Levels"
+  ],
+  "timePicker": [
+    "withInputErrorState",
+    "withSearch",
+    "withSearchErrorState",
+    "fromTo",
+    "withDatePicker",
+    "TimeIntervals",
+    "disabledOption",
+    "showDuration",
+    "withInput"
+  ],
+  "calendar": [
+    "disabled",
+    "withEvents",
+    "index",
+    "firstDayOfWeek",
+    "view",
+    "size"
+  ],
+  "datePicker": [
+    "index",
+    "view",
+    "withInput"
+  ],
+  "listbox": [
+    "reorderList",
+    "nestedList",
+    "index",
+    "optionList",
+    "descriptionList",
+    "resourceList",
+    "tight",
+    "compressed",
+    "standard"
+  ],
+  "choiceList": [
+    "Overflow",
+    "AllowMultiple",
+    "Controlled",
+    "index",
+    "Alignment"
+  ],
+  "navigation": [
+    "index"
+  ],
+  "textField": [
+    "Size",
+    "unControlled",
+    "withInput",
+    "Size",
+    "withTextArea",
+    "unControlled"
+  ],
+  "pageHeader": [
+    "Responsiveness",
+    "withTabs",
+    "withNavigation",
+    "withStepper",
+    "withNavigationL1",
+    "withStepperL1",
+    "withTabsL1",
+    "withTabs",
+    "withNavigation",
+    "withStepper"
+  ],
+  "combobox": [
+    "overflow",
+    "customOptions",
+    "controlled",
+    "size",
+    "multiselect",
+    "all",
+    "uncontrolled",
+    "error",
+    "controlledMultiselect"
+  ],
+  "dateRangePicker": [
+    "index",
+    "withReverseSelection",
+    "rangeLimit",
+    "view",
+    "withSingleInput",
+    "withSingleInputReverseSelection",
+    "monthsInView",
+    "withInput"
+  ],
+  "inlineMessage": [
+    "InlineMessageWithinTable",
+    "Size",
+    "index",
+    "Warning",
+    "Info",
+    "Success",
+    "Error"
+  ],
+  "horizontalNav": [
+    "withAnimation",
+    "index",
+    "leftAlign",
+    "default",
+    "withIcon",
+    "withCount"
+  ],
+  "table": [
+    "PinnedColumnWithCheckbox",
+    "ToggleForHeaderRow",
+    "HighlightSearch",
+    "ToggleForHeaderCellMenu",
+    "ErrorInTable",
+    "index",
+    "PinnedColumn",
+    "syncTable",
+    "Alignment",
+    "withoutPagination",
+    "basicPagination",
+    "jumpPagination",
+    "BodyCell",
+    "HeaderCell",
+    "errorState",
+    "withVirtualization",
+    "asyncTable",
+    "customErrorState",
+    "ResourceTable",
+    "DataTable",
+    "withPagination",
+    "asyncTable",
+    "syncTable",
+    "TightStory",
+    "CompressedTable",
+    "StandardTable",
+    "DisabledRow",
+    "ActivatedState",
+    "ResourceTable",
+    "DataTable",
+    "LoadingState",
+    "SelectionBehavior",
+    "BulkAction",
+    "BulkActionWithSpaceConstraint",
+    "WithNestedRows",
+    "WithoutTrigger",
+    "WithNestedCard"
+  ],
+  "list": [
+    "index"
+  ],
+  "verticalNav": [
+    "index",
+    "CustomOptionsRenderer",
+    "CustomVerticalNav",
+    "CustomItemsRenderer",
+    "Grouping",
+    "CollapsibleNavigation",
+    "NonCollapsibleNavigation",
+    "Rounded",
+    "Flat",
+    "usingExternalTrigger",
+    "usingFooter",
+    "hover",
+    "LabelOverflow",
+    "NavigationBarOverflow",
+    "InsideCard",
+    "FloatingPanel"
+  ],
+  "menu": [
+    "State",
+    "all",
+    "nesting",
+    "customTrigger",
+    "defaultTrigger",
+    "rightClick",
+    "divider",
+    "subheading",
+    "withSubInfo",
+    "withCheck",
+    "withIcon",
+    "withInfo",
+    "withSubInfo",
+    "withIcon",
+    "overflow",
+    "nesting",
+    "withSubInfo",
+    "withIcon",
+    "standard",
+    "optionSize",
+    "triggerSize"
+  ],
+  "select": [
+    "preFilledValue",
+    "customTrigger",
+    "optionWithInfo",
+    "selectWithSearch",
+    "disabled",
+    "optionWithIcon",
+    "select",
+    "size",
+    "addOption",
+    "selectWithInlineLabel",
+    "selectWithIcon",
+    "selectWithHelptext",
+    "width",
+    "wrapOptions",
+    "fetchError",
+    "overflowOptions",
+    "loadingState",
+    "error",
+    "labelOnTop",
+    "selectOulined",
+    "selectFilled",
+    "selectedItem",
+    "preFilledValue",
+    "withSelectAll",
+    "withSections",
+    "withActionButton",
+    "multiselect",
+    "withSelectAllAndActionButton"
+  ],
+  "grid": [
+    "index",
+    "GridInModal",
+    "GridCell",
+    "loading"
+  ],
+  "Sara": [
+    "customSize",
+    "size",
+    "state",
+    "index"
+  ],
+  "AIButton": [
+    "state",
+    "index",
+    "withoutSparkle"
+  ],
+  "SaraSparkle": [
+    "customSize",
+    "states",
+    "sizes",
+    "index"
+  ],
+  "AIResponse": [
+    "custom",
+    "generatingContent",
+    "givingFeedback",
+    "index",
+    "glowEffect",
+    "loading"
+  ],
+  "AIIconButton": [
+    "iconPosition",
+    "states",
+    "iconSize",
+    "index"
+  ],
+  "AIChip": [
+    "states",
+    "all"
+  ]
+}
