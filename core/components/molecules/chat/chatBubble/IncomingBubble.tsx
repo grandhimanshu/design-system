@@ -44,12 +44,7 @@ export const IncomingBubble = (props: IncomingOptionProps) => {
   });
 
   return (
-    <div
-      data-test="DesignSystem-ChatBubble-IncomingWrapper"
-      {...rest}
-      role="group"
-      aria-labelledby="chat-bubble-header"
-    >
+    <div data-test="DesignSystem-ChatBubble-IncomingWrapper" {...rest}>
       {showMetaRow && (
         <Row className={metaDataClass} data-test="DesignSystem-IncomingChatBubble-MetaDataWrapper">
           {[

@@ -9,11 +9,10 @@ Object {
     <div>
       <div
         data-test="DesignSystem-Chat"
+        role="log"
       >
         <div
-          aria-labelledby="chat-bubble-header"
           data-test="DesignSystem-ChatBubble-IncomingWrapper"
-          role="group"
         >
           <div
             class="Row d-flex align-items-center mb-3 ChatBubble-metaData--incoming"
@@ -111,11 +110,10 @@ Object {
   "container": <div>
     <div
       data-test="DesignSystem-Chat"
+      role="log"
     >
       <div
-        aria-labelledby="chat-bubble-header"
         data-test="DesignSystem-ChatBubble-IncomingWrapper"
-        role="group"
       >
         <div
           class="Row d-flex align-items-center mb-3 ChatBubble-metaData--incoming"
@@ -272,12 +270,11 @@ Object {
     <div>
       <div
         data-test="DesignSystem-Chat"
+        role="log"
       >
         <div
-          aria-labelledby="chat-bubble-header"
           class="d-flex align-items-end w-100"
           data-test="DesignSystem-ChatBubble-OutgoingWrapper"
-          role="group"
         >
           <div
             class="ChatBubble-box"
@@ -354,12 +351,11 @@ Object {
   "container": <div>
     <div
       data-test="DesignSystem-Chat"
+      role="log"
     >
       <div
-        aria-labelledby="chat-bubble-header"
         class="d-flex align-items-end w-100"
         data-test="DesignSystem-ChatBubble-OutgoingWrapper"
-        role="group"
       >
         <div
           class="ChatBubble-box"

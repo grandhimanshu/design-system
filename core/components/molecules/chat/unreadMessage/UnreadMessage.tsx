@@ -18,8 +18,8 @@ const UnreadMessage: React.FC<UnreadMessageProps> = (props) => {
 
   return (
     <div data-test="DesignSystem-Chat-UnreadMessage" className={wrapperClass} {...rest}>
-      <span className={styles['Chat-UnreadMessage']} role="button" aria-label={text}>
-        <Icon appearance="white" name="arrow_Downward" className="mr-3" />
+      <span className={styles['Chat-UnreadMessage']} role="button">
+        <Icon appearance="white" name="arrow_Downward" className="mr-3" aria-hidden />
         <Text appearance="white" weight="strong" data-test="DesignSystem-Chat-UnreadMessage-Text">
           {text}
         </Text>

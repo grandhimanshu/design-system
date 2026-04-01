@@ -17,7 +17,7 @@ export interface ChatProps extends BaseProps {
 export const Chat = (props: ChatProps) => {
   const { children, ...rest } = props;
   return (
-    <div data-test="DesignSystem-Chat" {...rest}>
+    <div data-test="DesignSystem-Chat" role="log" {...rest}>
       {children}
     </div>
   );

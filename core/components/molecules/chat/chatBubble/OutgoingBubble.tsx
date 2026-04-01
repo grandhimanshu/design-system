@@ -49,13 +49,7 @@ export const OutgoingBubble = (props: OutgoingOptionProps) => {
   });
 
   return (
-    <div
-      className={chatBoxWrapperClass}
-      data-test="DesignSystem-ChatBubble-OutgoingWrapper"
-      {...rest}
-      role="group"
-      aria-labelledby="chat-bubble-header"
-    >
+    <div className={chatBoxWrapperClass} data-test="DesignSystem-ChatBubble-OutgoingWrapper" {...rest}>
       <div className={chatBoxClass}>
         {showMetaRow && (
           <Row className={metaRowClass}>

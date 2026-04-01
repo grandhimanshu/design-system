@@ -16,14 +16,7 @@ const NewMessage: React.FC<NewMessageProps> = (props) => {
   const classes = classNames('py-6 d-flex justify-content-center align-items-center', className);
 
   return (
-    <div
-      data-test="DesignSystem-Chat-NewMessage"
-      className={classes}
-      role="button"
-      aria-label={text}
-      aria-live="polite"
-      {...rest}
-    >
+    <div data-test="DesignSystem-Chat-NewMessage" className={classes} role="button" {...rest}>
       <span className={styles['NewMessage-Divider--left']} />
       <Text appearance="link" weight="strong" size="small">
         {text}
