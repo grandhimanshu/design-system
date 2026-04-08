@@ -162,7 +162,14 @@
   outline-offset: calc(-1 * var(--border-width-05));
 }
 
+.Listbox-item--description-draggable:focus-visible {
+  outline: none;
+}
+
 .Listbox-item--drag-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: grab;
   border: none;
   background: transparent;
@@ -182,7 +189,8 @@
 
 .Listbox-item--drag-icon:focus,
 .Listbox-item--drag-icon:focus-visible,
-.Listbox-item[data-force-state='focus-icon'] .Listbox-item--drag-icon {
+.Listbox-item[data-force-state='focus-icon'] .Listbox-item--drag-icon,
+.Listbox-item--description-draggable:focus-visible .Listbox-item--drag-icon {
   outline: var(--border-width-05) solid var(--primary-focus);
   outline-offset: var(--spacing-05);
 }

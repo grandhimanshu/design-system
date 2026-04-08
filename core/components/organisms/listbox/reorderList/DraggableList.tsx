@@ -57,9 +57,27 @@ export const DraggableList = (props: ListboxInternalProps) => {
         const itemClasses = classNames(styles['Listbox-item--draggable'], {
           [styles['Listbox-item--drag-picked']]: isDragged,
           [styles['Listbox-item--sticky-picked']]: isSelected,
+          [styles['Listbox-item--description-draggable']]: type === 'description',
         });
         return (
-          <div {...props} className={itemClasses} tabIndex={-1}>
+          // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+          <div
+            {...props}
+            onKeyDown={(e) => {
+              if (props.onKeyDown) props.onKeyDown(e as any);
+              if (type === 'description' && !e.defaultPrevented && (e.key === 'Enter' || e.key === ' ')) {
+                const listBody = e.currentTarget.querySelector(
+                  '[data-test="DesignSystem-Listbox-ItemWrapper"]'
+                ) as HTMLElement;
+                if (listBody) {
+                  listBody.click();
+                  e.preventDefault();
+                }
+              }
+            }}
+            className={itemClasses}
+            tabIndex={-1}
+          >
             {value}
           </div>
         );

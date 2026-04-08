@@ -7,21 +7,11 @@ export const selectAndReorderList = () => {
   const [selected, setSelected] = React.useState('Functional Assessment - Initial');
 
   const data = [
-    {
-      assessment: 'Alcohol Usage Disorders Identification Test - C (Audit C)',
-    },
-    {
-      assessment: 'Functional Assessment - Initial',
-    },
-    {
-      assessment: 'Functional Assessment - Discharge',
-    },
-    {
-      assessment: 'Hypertension - Diabetes Symptoms Identification Test',
-    },
-    {
-      assessment: 'Patient Health Question',
-    },
+    { assessment: 'Alcohol Usage Disorders Identification Test - C (Audit C)' },
+    { assessment: 'Functional Assessment - Initial' },
+    { assessment: 'Functional Assessment - Discharge' },
+    { assessment: 'Hypertension - Diabetes Symptoms Identification Test' },
+    { assessment: 'Patient Health Question' },
   ];
 
   return (
@@ -30,14 +20,14 @@ export const selectAndReorderList = () => {
         <Heading size="s">Select Assessment</Heading>
       </CardHeader>
 
-      <Listbox type="option" aria-label="Assessment options" draggable={true}>
+      <Listbox type="resource" aria-label="Assessment options" draggable={true}>
         {data.map((item, key) => {
           const labelId = `assessment-list-item-${key}`;
           return (
             <Listbox.Item
               key={key + 1}
               id={key + 1}
-              selected={selected === item.assessment}
+              activated={selected === item.assessment}
               onClick={() => setSelected(item.assessment)}
             >
               <div className="d-flex align-items-center w-100 justify-content-between">
@@ -55,21 +45,11 @@ const customCode = `() => {
   const [selected, setSelected] = React.useState('Functional Assessment - Initial');
 
   const data = [
-    {
-      assessment: 'Alcohol Usage Disorders Identification Test - C (Audit C)',
-    },
-    {
-      assessment: 'Functional Assessment - Initial',
-    },
-    {
-      assessment: 'Functional Assessment - Discharge',
-    },
-    {
-      assessment: 'Hypertension - Diabetes Symptoms Identification Test',
-    },
-    {
-      assessment: 'Patient Health Question',
-    },
+    { assessment: 'Alcohol Usage Disorders Identification Test - C (Audit C)' },
+    { assessment: 'Functional Assessment - Initial' },
+    { assessment: 'Functional Assessment - Discharge' },
+    { assessment: 'Hypertension - Diabetes Symptoms Identification Test' },
+    { assessment: 'Patient Health Question' },
   ];
 
   return (
@@ -78,14 +58,14 @@ const customCode = `() => {
         <Heading size="s">Select Assessment</Heading>
       </CardHeader>
 
-      <Listbox type="option" aria-label="Assessment options" draggable={true}>
+      <Listbox type="resource" aria-label="Assessment options" draggable={true}>
         {data.map((item, key) => {
           const labelId = \`assessment-list-item-\${key}\`;
           return (
             <Listbox.Item 
               key={key + 1} 
               id={key + 1}
-              selected={selected === item.assessment}
+              activated={selected === item.assessment}
               onClick={() => setSelected(item.assessment)}
             >
               <div className="d-flex align-items-center w-100 justify-content-between">
