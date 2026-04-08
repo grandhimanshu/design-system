@@ -293,14 +293,14 @@ describe('Listbox component test for reorder list', () => {
     );
 
     expect(getAllByTestId('DesignSystem-Text')[1]).toHaveTextContent('Item 2');
-    const sourceElement = getAllByTestId('DesignSystem-Listbox-Item')[0];
-    fireEvent.keyDown(sourceElement, { key: 'Tab' });
-    fireEvent.keyDown(sourceElement, { which: 32 });
-    fireEvent.keyDown(sourceElement, { key: 'ArrowDown' });
-    fireEvent.keyDown(getAllByTestId('DesignSystem-Listbox-Item')[1], { which: 32 });
+    const handles = getAllByTestId('DesignSystem-Listbox-DragIcon');
+    fireEvent.keyDown(handles[0], { key: ' ' });
+    fireEvent.keyDown(handles[0], { key: 'ArrowDown' });
+    fireEvent.keyDown(handles[0], { key: ' ' });
 
     await waitFor(() => {
-      expect(getAllByTestId('DesignSystem-Text')[1]).toHaveTextContent('Item 2');
+      expect(getAllByTestId('DesignSystem-Text')[0]).toHaveTextContent('Item 2');
+      expect(getAllByTestId('DesignSystem-Text')[1]).toHaveTextContent('Item 1');
     });
   });
 

@@ -2,7 +2,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { getTranslateOffset, transformItem, setItemTransition, binarySearch, schd, isTouchEvent } from './utils';
 import type { IItemProps, IProps, TEvent } from './types';
-import styles from '@css/components/listbox.module.css';
+import { DraggableListKeyboardContext } from './DraggableListKeyboardContext';
+import { onKeyDown as listboxOptionKeyDown } from '../utils';
 
 const AUTOSCROLL_ACTIVE_OFFSET = 200;
 const AUTOSCROLL_SPEED_RATIO = 10;
@@ -42,6 +43,8 @@ class Draggable<Value = string> extends React.Component<IProps<Value>> {
     scrollWindow: false,
     isClickAndFollow: false,
     ariaMessage: '',
+    /** Which part of the row owns tab focus: list row vs drag handle. */
+    focusedSegment: 'row' as 'row' | 'handle',
   };
   schdOnMouseMove: { (e: MouseEvent): void; cancel(): void };
   schdOnTouchMove: { (e: TouchEvent): void; cancel(): void };
@@ -159,6 +162,54 @@ class Draggable<Value = string> extends React.Component<IProps<Value>> {
     return this.getChildren().findIndex((child) => child === e.target || child.contains(e.target as Node));
   };
 
+  getEffectiveFocusedIndex = () => {
+    const firstEnabledIndex = this.props.values.findIndex((value: any) => !(value && value.props.disabled));
+    const isOutOfBounds = this.state.focusedIndex < 0 || this.state.focusedIndex >= this.props.values.length;
+    const currentItemIsDisabled =
+      !isOutOfBounds &&
+      this.props.values[this.state.focusedIndex] &&
+      this.props.values[this.state.focusedIndex].props.disabled;
+    return isOutOfBounds || currentItemIsDisabled ? firstEnabledIndex : this.state.focusedIndex;
+  };
+
+  focusRowBody = (index: number) => {
+    const shell = this.getChildren()[index] as HTMLElement | undefined;
+    if (!shell) return;
+    shell.querySelector<HTMLElement>('[data-test="DesignSystem-Listbox-ItemWrapper"]')?.focus();
+  };
+
+  focusDragHandle = (index: number) => {
+    const shell = this.getChildren()[index] as HTMLElement | undefined;
+    if (!shell) return;
+    shell.querySelector<HTMLElement>('[data-test="DesignSystem-Listbox-DragIcon"]')?.focus();
+  };
+
+  escapePointerDragFromKeyboard = () => {
+    if (this.state.itemDragged <= -1) return;
+    this.getChildren().forEach((item) => {
+      setItemTransition(item, 0);
+      transformItem(item, null);
+      (item as HTMLElement).style.touchAction = '';
+    });
+    this.hasDragStarted = false;
+    this.setState({
+      itemDragged: -1,
+      scrollingSpeed: 0,
+      isClickAndFollow: false,
+      ariaMessage: 'Reorder cancelled. Item returned to its original position.',
+    });
+    this.afterIndex = -2;
+    if (this.dropTimeout) {
+      window.clearTimeout(this.dropTimeout);
+      this.dropTimeout = undefined;
+    }
+    document.removeEventListener('mousemove', this.schdOnMouseMove);
+    document.removeEventListener('touchmove', this.schdOnTouchMove);
+    document.removeEventListener('mouseup', this.schdOnEnd);
+    document.removeEventListener('touchend', this.schdOnEnd);
+    document.removeEventListener('touchcancel', this.schdOnEnd);
+  };
+
   onMouseOrTouchStart = (e: MouseEvent & TouchEvent) => {
     if (this.dropTimeout && this.state.itemDragged > -1) {
       window.clearTimeout(this.dropTimeout);
@@ -200,7 +251,7 @@ class Draggable<Value = string> extends React.Component<IProps<Value>> {
     const index = this.getTargetIndex(e as any);
 
     const listItemTouched = this.getChildren()[index] as HTMLElement;
-    const isValidDragHandle = (e.target as Element)?.classList.contains(styles['Listbox-item--drag-icon']);
+    const isValidDragHandle = !!(e.target as Element)?.closest?.('[data-test="DesignSystem-Listbox-DragIcon"]');
     if (!isValidDragHandle) return;
     e.preventDefault();
 
@@ -509,8 +560,7 @@ class Draggable<Value = string> extends React.Component<IProps<Value>> {
         targetRect: this.getChildren()[this.needle].getBoundingClientRect(),
       });
 
-      const rowEl = this.getChildren()[this.needle] as HTMLElement;
-      rowEl.focus();
+      this.focusDragHandle(this.needle);
     }
     this.setState({
       selectedItem: -1,
@@ -536,73 +586,38 @@ class Draggable<Value = string> extends React.Component<IProps<Value>> {
     next?.focus();
   };
 
-  onKeyDown = (e: React.KeyboardEvent) => {
-    const selectedItem = this.state.selectedItem;
-    const index = this.getTargetIndex(e);
+  onRowKeyDown = (index: number, e: React.KeyboardEvent) => {
+    if (this.props.values[index] && this.props.values[index].props.disabled) return;
 
     if (e.key === 'Escape' && this.state.itemDragged > -1) {
-      this.getChildren().forEach((item) => {
-        setItemTransition(item, 0);
-        transformItem(item, null);
-        (item as HTMLElement).style.touchAction = '';
-      });
-      this.hasDragStarted = false;
-      this.setState({
-        itemDragged: -1,
-        scrollingSpeed: 0,
-        isClickAndFollow: false,
-        ariaMessage: 'Reorder cancelled. Item returned to its original position.',
-      });
-      this.afterIndex = -2;
-      if (this.dropTimeout) {
-        window.clearTimeout(this.dropTimeout);
-        this.dropTimeout = undefined;
-      }
-      document.removeEventListener('mousemove', this.schdOnMouseMove);
-      document.removeEventListener('touchmove', this.schdOnTouchMove);
-      document.removeEventListener('mouseup', this.schdOnEnd);
-      document.removeEventListener('touchend', this.schdOnEnd);
-      document.removeEventListener('touchcancel', this.schdOnEnd);
+      e.preventDefault();
+      this.escapePointerDragFromKeyboard();
       return;
     }
 
-    if (index === -1 || (this.props.values[index] && this.props.values[index].props.disabled)) {
+    if (e.key === 'Escape' && this.state.selectedItem > -1) {
+      e.preventDefault();
+      this.cancelKeyboardPick();
       return;
     }
 
-    if (e.key === ' ') {
+    if (e.key === 'ArrowRight') {
       e.preventDefault();
-      if (selectedItem === index) {
-        this.commitKeyboardReorder();
-      } else {
-        this.setState({
-          selectedItem: index,
-        });
-        this.needle = index;
-        this.calculateOffsets();
-      }
+      this.setState({ focusedIndex: index, focusedSegment: 'handle' }, () => {
+        queueMicrotask(() => this.focusDragHandle(index));
+      });
+      return;
     }
 
-    if (e.key === 'Enter' && selectedItem > -1 && selectedItem === index) {
-      e.preventDefault();
-      this.commitKeyboardReorder();
+    if (this.state.selectedItem > -1) {
+      return;
     }
 
-    if (e.key === 'Tab' && selectedItem > -1 && selectedItem === index) {
+    const listType = this.props.listType ?? 'resource';
+
+    if (e.key === 'ArrowDown' || e.key === 'j') {
       e.preventDefault();
-      const shiftKey = e.shiftKey;
-      this.commitKeyboardReorder();
-      queueMicrotask(() => this.advanceTabFocusFromActiveElement(shiftKey));
-    }
-    if ((e.key === 'ArrowDown' || e.key === 'j') && selectedItem > -1 && this.needle < this.props.values.length - 1) {
-      e.preventDefault();
-      const offset = getTranslateOffset(this.getChildren()[selectedItem]);
-      this.needle++;
-      this.animateItems(this.needle, selectedItem, offset, true);
-      this.ensureKeyboardReorderVisible(selectedItem, this.needle);
-    } else if ((e.key === 'ArrowDown' || e.key === 'j') && selectedItem === -1) {
-      e.preventDefault();
-      let nextIndex = this.state.focusedIndex + 1;
+      let nextIndex = index + 1;
       while (
         nextIndex < this.props.values.length &&
         this.props.values[nextIndex] &&
@@ -611,42 +626,155 @@ class Draggable<Value = string> extends React.Component<IProps<Value>> {
         nextIndex++;
       }
       if (nextIndex < this.props.values.length) {
-        this.setState({ focusedIndex: nextIndex });
-        (this.getChildren()[nextIndex] as HTMLElement).focus();
+        this.setState({ focusedIndex: nextIndex, focusedSegment: 'row' }, () => {
+          queueMicrotask(() => this.focusRowBody(nextIndex));
+        });
       }
+      return;
     }
-    if ((e.key === 'ArrowUp' || e.key === 'k') && selectedItem > -1 && this.needle > 0) {
+
+    if (e.key === 'ArrowUp' || e.key === 'k') {
       e.preventDefault();
-      const offset = getTranslateOffset(this.getChildren()[selectedItem]);
-      this.needle--;
-      this.animateItems(this.needle, selectedItem, offset, true);
-      this.ensureKeyboardReorderVisible(selectedItem, this.needle);
-    } else if ((e.key === 'ArrowUp' || e.key === 'k') && selectedItem === -1) {
-      e.preventDefault();
-      let nextIndex = this.state.focusedIndex - 1;
+      let nextIndex = index - 1;
       while (nextIndex >= 0 && this.props.values[nextIndex] && this.props.values[nextIndex].props.disabled) {
         nextIndex--;
       }
       if (nextIndex >= 0) {
-        this.setState({ focusedIndex: nextIndex });
-        (this.getChildren()[nextIndex] as HTMLElement).focus();
+        this.setState({ focusedIndex: nextIndex, focusedSegment: 'row' }, () => {
+          queueMicrotask(() => this.focusRowBody(nextIndex));
+        });
+      }
+      return;
+    }
+
+    if (listType === 'option' || listType === 'resource') {
+      if (e.key === ' ' || e.key === 'Enter') {
+        listboxOptionKeyDown(e);
       }
     }
+  };
+
+  onHandleKeyDown = (index: number, e: React.KeyboardEvent) => {
+    if (this.props.values[index] && this.props.values[index].props.disabled) return;
+
+    const selectedItem = this.state.selectedItem;
+
+    if (e.key === 'Escape' && this.state.itemDragged > -1) {
+      e.preventDefault();
+      this.escapePointerDragFromKeyboard();
+      return;
+    }
+
     if (e.key === 'Escape' && selectedItem > -1) {
       e.preventDefault();
       this.cancelKeyboardPick();
+      return;
+    }
+
+    if (selectedItem > -1) {
+      if ((e.key === 'ArrowDown' || e.key === 'j') && this.needle < this.props.values.length - 1) {
+        e.preventDefault();
+        const offset = getTranslateOffset(this.getChildren()[selectedItem]);
+        this.needle++;
+        this.animateItems(this.needle, selectedItem, offset, true);
+        this.ensureKeyboardReorderVisible(selectedItem, this.needle);
+        return;
+      }
+      if ((e.key === 'ArrowUp' || e.key === 'k') && this.needle > 0) {
+        e.preventDefault();
+        const offset = getTranslateOffset(this.getChildren()[selectedItem]);
+        this.needle--;
+        this.animateItems(this.needle, selectedItem, offset, true);
+        this.ensureKeyboardReorderVisible(selectedItem, this.needle);
+        return;
+      }
+      if (e.key === ' ') {
+        e.preventDefault();
+        if (selectedItem === index) {
+          this.commitKeyboardReorder();
+        }
+        return;
+      }
+      if (e.key === 'Enter' && selectedItem === index) {
+        e.preventDefault();
+        this.commitKeyboardReorder();
+        return;
+      }
+      if (e.key === 'Tab' && selectedItem === index) {
+        e.preventDefault();
+        const shiftKey = e.shiftKey;
+        this.commitKeyboardReorder();
+        queueMicrotask(() => this.advanceTabFocusFromActiveElement(shiftKey));
+        return;
+      }
+      return;
+    }
+
+    if (e.key === ' ') {
+      e.preventDefault();
+      if (selectedItem === index) {
+        this.commitKeyboardReorder();
+      } else {
+        this.setState({ selectedItem: index });
+        this.needle = index;
+        this.calculateOffsets();
+      }
+      return;
+    }
+
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (selectedItem === index) {
+        this.commitKeyboardReorder();
+      } else {
+        this.setState({ selectedItem: index });
+        this.needle = index;
+        this.calculateOffsets();
+      }
+      return;
+    }
+
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      this.setState({ focusedIndex: index, focusedSegment: 'row' }, () => {
+        queueMicrotask(() => this.focusRowBody(index));
+      });
+      return;
+    }
+
+    if (e.key === 'ArrowDown' || e.key === 'j') {
+      e.preventDefault();
+      let nextIndex = index + 1;
+      while (
+        nextIndex < this.props.values.length &&
+        this.props.values[nextIndex] &&
+        this.props.values[nextIndex].props.disabled
+      ) {
+        nextIndex++;
+      }
+      if (nextIndex < this.props.values.length) {
+        this.setState({ focusedIndex: nextIndex, focusedSegment: 'handle' }, () => {
+          queueMicrotask(() => this.focusDragHandle(nextIndex));
+        });
+      }
+      return;
+    }
+
+    if (e.key === 'ArrowUp' || e.key === 'k') {
+      e.preventDefault();
+      let nextIndex = index - 1;
+      while (nextIndex >= 0 && this.props.values[nextIndex] && this.props.values[nextIndex].props.disabled) {
+        nextIndex--;
+      }
+      if (nextIndex >= 0) {
+        this.setState({ focusedIndex: nextIndex, focusedSegment: 'handle' }, () => {
+          queueMicrotask(() => this.focusDragHandle(nextIndex));
+        });
+      }
     }
   };
 
   render() {
-    const firstEnabledIndex = this.props.values.findIndex((value: any) => !(value && value.props.disabled));
-    const isOutOfBounds = this.state.focusedIndex < 0 || this.state.focusedIndex >= this.props.values.length;
-    const currentItemIsDisabled =
-      !isOutOfBounds &&
-      this.props.values[this.state.focusedIndex] &&
-      this.props.values[this.state.focusedIndex].props.disabled;
-    const effectiveFocusedIndex = isOutOfBounds || currentItemIsDisabled ? firstEnabledIndex : this.state.focusedIndex;
-
     const baseStyle = {
       userSelect: 'none',
       WebkitUserSelect: 'none',
@@ -667,75 +795,98 @@ class Draggable<Value = string> extends React.Component<IProps<Value>> {
       position: 'fixed',
       boxShadow: 'var(--shadow-l)',
     } as React.CSSProperties;
+
+    const listType = (this.props.listType ?? 'resource') as 'option' | 'description' | 'resource';
+
+    const keyboardContextValue = {
+      listType,
+      getRowTabIndex: (rowIndex: number) => {
+        if (this.props.values[rowIndex]?.props.disabled) return -1;
+        const eff = this.getEffectiveFocusedIndex();
+        return eff === rowIndex && this.state.focusedSegment === 'row' ? 0 : -1;
+      },
+      getHandleTabIndex: (rowIndex: number) => {
+        if (this.props.values[rowIndex]?.props.disabled) return -1;
+        const eff = this.getEffectiveFocusedIndex();
+        return eff === rowIndex && this.state.focusedSegment === 'handle' ? 0 : -1;
+      },
+      onRowFocus: (rowIndex: number) => this.setState({ focusedIndex: rowIndex, focusedSegment: 'row' }),
+      onHandleFocus: (rowIndex: number) => this.setState({ focusedIndex: rowIndex, focusedSegment: 'handle' }),
+      onRowKeyDown: this.onRowKeyDown,
+      onHandleKeyDown: this.onHandleKeyDown,
+      ariaGrabbedOnHandle: (rowIndex: number) => this.state.selectedItem === rowIndex,
+    };
+
     return (
-      <React.Fragment>
-        {this.props.renderList({
-          children: this.props.values.map((value: any, index: number) => {
-            const isHidden = index === this.state.itemDragged;
-            const isSelected = index === this.state.selectedItem;
+      <DraggableListKeyboardContext.Provider value={keyboardContextValue}>
+        <React.Fragment>
+          {this.props.renderList({
+            children: this.props.values.map((value: any, index: number) => {
+              const isHidden = index === this.state.itemDragged;
+              const isSelected = index === this.state.selectedItem;
 
-            const isDisabled = this.props.values[index] && this.props.values[index].props.disabled;
-            const props: IItemProps = {
-              key: index,
-              tabIndex: isDisabled ? -1 : index === effectiveFocusedIndex ? 0 : -1,
-              onFocus: () => this.setState({ focusedIndex: index }),
-              onKeyDown: this.onKeyDown,
-              'aria-grabbed': isSelected,
-              style: {
-                ...baseStyle,
-                visibility: isHidden ? 'hidden' : undefined,
-                zIndex: isSelected ? 5000 : 0,
-              } as React.CSSProperties,
-            };
+              const props: IItemProps = {
+                key: index,
+                style: {
+                  ...baseStyle,
+                  visibility: isHidden ? 'hidden' : undefined,
+                  zIndex: isSelected ? 5000 : 0,
+                } as React.CSSProperties,
+              };
 
-            return this.props.renderItem({
-              value,
-              props,
-              index,
-              isDragged: false,
-              isSelected,
-              isOutOfBounds: false,
-            });
-          }),
-          isDragged: this.state.itemDragged > -1,
-          props: {
-            ref: this.listRef,
-          },
-        })}
-        {this.state.itemDragged > -1 &&
-          ReactDOM.createPortal(
-            this.props.renderItem({
-              value: this.props.values[this.state.itemDragged],
-              props: {
-                ref: this.ghostRef,
-                style: ghostStyle,
-                onWheel: this.onWheel,
-              },
-              index: this.state.itemDragged,
-              isDragged: !this.state.isClickAndFollow,
-              isSelected: this.state.isClickAndFollow,
-              isOutOfBounds: this.state.itemDraggedOutOfBounds > -1,
+              const clonedValue = React.isValidElement(value)
+                ? React.cloneElement(value, { reorderRowIndex: index } as any)
+                : value;
+
+              return this.props.renderItem({
+                value: clonedValue,
+                props,
+                index,
+                isDragged: false,
+                isSelected,
+                isOutOfBounds: false,
+              });
             }),
-            document.body
-          )}
-        <div
-          aria-live="assertive"
-          aria-atomic="true"
-          style={{
-            position: 'absolute',
-            width: 1,
-            height: 1,
-            padding: 0,
-            margin: -1,
-            overflow: 'hidden',
-            clip: 'rect(0, 0, 0, 0)',
-            whiteSpace: 'nowrap',
-            border: 0,
-          }}
-        >
-          {this.state.ariaMessage}
-        </div>
-      </React.Fragment>
+            isDragged: this.state.itemDragged > -1,
+            props: {
+              ref: this.listRef,
+            },
+          })}
+          {this.state.itemDragged > -1 &&
+            ReactDOM.createPortal(
+              this.props.renderItem({
+                value: this.props.values[this.state.itemDragged],
+                props: {
+                  ref: this.ghostRef,
+                  style: ghostStyle,
+                  onWheel: this.onWheel,
+                },
+                index: this.state.itemDragged,
+                isDragged: !this.state.isClickAndFollow,
+                isSelected: this.state.isClickAndFollow,
+                isOutOfBounds: this.state.itemDraggedOutOfBounds > -1,
+              }),
+              document.body
+            )}
+          <div
+            aria-live="assertive"
+            aria-atomic="true"
+            style={{
+              position: 'absolute',
+              width: 1,
+              height: 1,
+              padding: 0,
+              margin: -1,
+              overflow: 'hidden',
+              clip: 'rect(0, 0, 0, 0)',
+              whiteSpace: 'nowrap',
+              border: 0,
+            }}
+          >
+            {this.state.ariaMessage}
+          </div>
+        </React.Fragment>
+      </DraggableListKeyboardContext.Provider>
     );
   }
 }

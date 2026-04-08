@@ -66,6 +66,10 @@ export interface ListboxItemProps extends BaseProps, BaseHtmlProps<HTMLLIElement
    * Specify tabIndex to list item
    */
   tabIndex?: number;
+  /**
+   * Row index for draggable list keyboard context (injected by Draggable).
+   */
+  reorderRowIndex?: number;
 }
 
 export const ListboxItem = (props: ListboxItemProps) => {
@@ -80,6 +84,7 @@ export const ListboxItem = (props: ListboxItemProps) => {
     value,
     tagName: Tag = 'li',
     tabIndex,
+    reorderRowIndex,
     onKeyDown,
     onFocus,
     role,
@@ -162,6 +167,7 @@ export const ListboxItem = (props: ListboxItemProps) => {
         tabIndex={tabIndexProps.tabIndex ?? -1}
         onKeyDown={keyDownHandler}
         role={role ?? 'option'}
+        reorderRowIndex={reorderRowIndex}
       >
         {children}
       </ListBody>

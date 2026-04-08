@@ -49,6 +49,7 @@
   background-color: var(--secondary-lightest);
 }
 
+.Listbox-item--option:focus,
 .Listbox-item--option:focus-visible,
 .Listbox-item[data-force-state='focus'] {
   outline: var(--border-width-05) solid var(--primary-focus);
@@ -81,6 +82,7 @@
   background: color-mod(var(--primary-lighter) a(var(--opacity-12)));
 }
 
+.Listbox-item--selected:focus,
 .Listbox-item--selected:focus-visible {
   outline: var(--border-width-05) solid var(--primary-focus);
   outline-offset: calc(-1 * var(--border-width-05));
@@ -100,6 +102,7 @@
   background-color: var(--secondary-lightest);
 }
 
+.Listbox-item--resource:focus,
 .Listbox-item--resource:focus-visible {
   outline: var(--border-width-05) solid var(--primary-focus);
   outline-offset: calc(-1 * var(--border-width-05));
@@ -132,6 +135,13 @@
   outline: none;
 }
 
+/* Draggable lists: show row outline on pointer focus too (easier manual testing). */
+.Listbox-item--draggable .Listbox-item--description:focus,
+.Listbox-item--draggable .Listbox-item--description:focus-visible {
+  outline: var(--border-width-05) solid var(--primary-focus);
+  outline-offset: calc(-1 * var(--border-width-05));
+}
+
 /* Listbox type - disabled  */
 
 .Listbox-item--disabled {
@@ -146,6 +156,7 @@
   background-color: var(--secondary-lightest);
 }
 
+.Listbox-item--draggable:focus,
 .Listbox-item--draggable:focus-visible {
   outline: var(--border-width-05) solid var(--primary-focus);
   outline-offset: calc(-1 * var(--border-width-05));
@@ -153,6 +164,13 @@
 
 .Listbox-item--drag-icon {
   cursor: grab;
+  border: none;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   /* Add padding to create 24x24 box from 16x16 icon */
   padding: var(--spacing-10);
   /* Compensate margin to maintain exact position without drift */
@@ -162,6 +180,7 @@
   transition: background-color 200ms ease-in-out, color 200ms ease-in-out, box-shadow 200ms ease-in-out;
 }
 
+.Listbox-item--drag-icon:focus,
 .Listbox-item--drag-icon:focus-visible,
 .Listbox-item[data-force-state='focus-icon'] .Listbox-item--drag-icon {
   outline: var(--border-width-05) solid var(--primary-focus);

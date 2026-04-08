@@ -2543,10 +2543,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -2560,15 +2559,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -2596,10 +2605,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -2613,15 +2621,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -2654,10 +2672,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -2671,15 +2688,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -2707,10 +2734,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -2724,15 +2750,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -2765,10 +2801,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -2782,15 +2817,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -2818,10 +2863,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -2835,15 +2879,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -2876,10 +2930,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -2893,15 +2946,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -2929,10 +2992,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -2946,15 +3008,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -2987,10 +3059,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -3004,15 +3075,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -3040,10 +3121,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -3057,15 +3137,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -3098,10 +3188,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -3115,15 +3204,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -3151,10 +3250,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -3168,15 +3266,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -3209,10 +3317,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -3226,15 +3333,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -3262,10 +3379,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -3279,15 +3395,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -3320,10 +3446,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -3337,15 +3462,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -3373,10 +3508,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -3390,15 +3524,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -3431,10 +3575,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -3448,15 +3591,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -3484,10 +3637,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -3501,15 +3653,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -3542,10 +3704,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -3559,15 +3720,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -3595,10 +3766,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -3612,15 +3782,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -3653,10 +3833,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -3670,15 +3849,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -3706,10 +3895,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -3723,15 +3911,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -3764,10 +3962,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -3781,15 +3978,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -3817,10 +4024,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -3834,15 +4040,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -3875,10 +4091,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -3892,15 +4107,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -3928,10 +4153,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -3945,15 +4169,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -3986,10 +4220,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -4003,15 +4236,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -4039,10 +4282,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -4056,15 +4298,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -4097,10 +4349,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -4114,15 +4365,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -4150,10 +4411,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -4167,15 +4427,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -4208,10 +4478,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -4225,15 +4494,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -4261,10 +4540,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -4278,15 +4556,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -4319,10 +4607,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -4336,15 +4623,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -4372,10 +4669,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -4389,15 +4685,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -4430,10 +4736,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -4447,15 +4752,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -4483,10 +4798,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -4500,15 +4814,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -4541,10 +4865,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -4558,15 +4881,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -4621,10 +4954,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -4638,15 +4970,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -4672,10 +5014,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -4689,15 +5030,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -4730,10 +5081,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -4747,15 +5097,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -4783,10 +5143,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -4800,15 +5159,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -4841,10 +5210,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -4858,15 +5226,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -4894,10 +5272,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -4911,15 +5288,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -4952,10 +5339,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -4969,15 +5355,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -5005,10 +5401,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -5022,15 +5417,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -5063,10 +5468,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -5080,15 +5484,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -5116,10 +5530,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -5133,15 +5546,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -5174,10 +5597,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -5191,15 +5613,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -5227,10 +5659,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -5244,15 +5675,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -5285,10 +5726,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -5302,15 +5742,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -5338,10 +5788,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -5355,15 +5804,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -5396,10 +5855,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -5413,15 +5871,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -5449,10 +5917,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -5466,15 +5933,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -5507,10 +5984,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -5524,15 +6000,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -5560,10 +6046,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -5577,15 +6062,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -5618,10 +6113,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -5635,15 +6129,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -5671,10 +6175,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -5688,15 +6191,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -5729,10 +6242,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -5746,15 +6258,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -5782,10 +6304,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -5799,15 +6320,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -5840,10 +6371,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -5857,15 +6387,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -5893,10 +6433,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -5910,15 +6449,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -5951,10 +6500,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -5968,15 +6516,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -6004,10 +6562,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -6021,15 +6578,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -6062,10 +6629,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -6079,15 +6645,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -6115,10 +6691,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -6132,15 +6707,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -6173,10 +6758,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -6190,15 +6774,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -6226,10 +6820,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -6243,15 +6836,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -6284,10 +6887,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -6301,15 +6903,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -6337,10 +6949,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -6354,15 +6965,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -6395,10 +7016,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -6412,15 +7032,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -6448,10 +7078,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -6465,15 +7094,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -6506,10 +7145,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -6523,15 +7161,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>
@@ -6559,10 +7207,9 @@ exports[`Listbox component snapshot
       tabindex="-1"
     >
       <div
-        aria-grabbed="false"
         class="Listbox-item--draggable"
         style="user-select: none; box-sizing: border-box; position: relative; z-index: 0;"
-        tabindex="0"
+        tabindex="-1"
       >
         <li
           class=""
@@ -6576,15 +7223,25 @@ exports[`Listbox component snapshot
             id="list-item-id"
             parentprops="[object Object]"
             role="option"
-            tabindex="-1"
+            tabindex="0"
           >
-            <i
-              class="material-symbols material-symbols-rounded Icon Icon--subtle Listbox-item--drag-icon"
+            <button
+              aria-grabbed="false"
+              aria-label="Reorder item"
+              class="Listbox-item--drag-icon Listbox-item--drag-handle"
               data-test="DesignSystem-Listbox-DragIcon"
-              style="font-size: 16px; width: 16px;"
+              tabindex="-1"
+              type="button"
             >
-              drag_indicator
-            </i>
+              <i
+                aria-hidden="true"
+                class="material-symbols material-symbols-rounded Icon Icon--subtle"
+                data-test="DesignSystem-Icon"
+                style="font-size: 16px; width: 16px;"
+              >
+                drag_indicator
+              </i>
+            </button>
             <div>
               list item element
             </div>

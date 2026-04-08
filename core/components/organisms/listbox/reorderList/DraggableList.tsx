@@ -51,6 +51,7 @@ export const DraggableList = (props: ListboxInternalProps) => {
   return (
     <Draggable
       values={childList}
+      listType={type}
       onChange={onChangeHandler}
       renderItem={({ value, props, isDragged, isSelected }) => {
         const itemClasses = classNames(styles['Listbox-item--draggable'], {
@@ -58,7 +59,7 @@ export const DraggableList = (props: ListboxInternalProps) => {
           [styles['Listbox-item--sticky-picked']]: isSelected,
         });
         return (
-          <div {...props} className={itemClasses}>
+          <div {...props} className={itemClasses} tabIndex={-1}>
             {value}
           </div>
         );

@@ -49,6 +49,8 @@ export interface IProps<Value> {
   removableByMove: boolean;
   lockVertically: boolean;
   container?: Element | null;
+  /** Listbox `type` — drives row Space/Enter (option/resource vs description). */
+  listType?: 'option' | 'description' | 'resource';
 }
 
 export type TEvent = React.MouseEvent | React.TouchEvent | React.KeyboardEvent;
