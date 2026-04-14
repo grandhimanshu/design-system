@@ -52,7 +52,7 @@ export const Status = (props: StatusProps) => {
     case 'failed':
       return (
         <div {...baseProps} className={StatusClass}>
-          <Icon name="error" type="outlined" appearance="destructive" />
+          <Icon name="error" appearance="destructive" />
           <Text appearance="destructive" size="small" className="ml-1">
             Failed
           </Text>
@@ -63,7 +63,7 @@ export const Status = (props: StatusProps) => {
     case 'urgent':
       return (
         <div {...baseProps} className={StatusClass}>
-          <Icon name="notification_important" type="outlined" appearance="destructive" />
+          <Icon name="notification_important" appearance="destructive" />
           <Text appearance="destructive" size="small" className="ml-1">
             Urgent
           </Text>

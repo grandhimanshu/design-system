@@ -123,7 +123,7 @@ export const headerCell = () => {
       headerCellRenderer: () => {
         return (
           <>
-            <Icon name="info" />
+            <Icon name="info_outline" type="outlined" />
             <Badge>Custom Header</Badge>
           </>
         );
@@ -352,7 +352,7 @@ const customCode = `() => {
       headerCellRenderer: () => {
         return (
           <>
-            <Icon name="info" />
+            <Icon name="info_outline" type="outlined" />
             <Badge>Custom Header</Badge>
           </>
         )

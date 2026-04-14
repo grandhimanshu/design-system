@@ -103,7 +103,8 @@ export const Label = (props: LabelProps) => {
       <Tooltip tooltip={info}>
         <Icon
           data-test="DesignSystem-Label--Info"
-          name="info"
+          name="info_outline"
+          type="outlined"
           size={12}
           appearance="subtle"
           aria-label={info}

@@ -101,6 +101,8 @@ export const Message = (props: MessageProps) => {
     return null;
   };
 
+  const messageIconName = appearance === 'info' ? 'info_outline' : IconMapping[appearance];
+
   return (
     <div
       data-test="DesignSystem-Message"
@@ -111,7 +113,8 @@ export const Message = (props: MessageProps) => {
       <Icon
         data-test="DesignSystem-Message--Icon"
         aria-hidden="true"
-        name={IconMapping[appearance]}
+        name={messageIconName}
+        type={appearance === 'info' ? 'outlined' : undefined}
         size={size === 'small' ? 14 : 16}
         appearance={appearance}
         className={IconClass}

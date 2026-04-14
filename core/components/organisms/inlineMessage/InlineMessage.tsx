@@ -60,12 +60,15 @@ export const InlineMessage = (props: InlineMessageProps) => {
   const IconSize = size === 'small' ? 14 : 16;
   const TextWeight = size === 'small' ? 'medium' : undefined;
 
+  const messageIconName = appearance === 'info' ? 'info_outline' : IconMapping[appearance];
+
   return (
     <div data-test="DesignSystem-InlineMessage" {...baseProps} {...rest} className={InlineMessageClass}>
       {appearance !== 'default' && (
         <Icon
           data-test="DesignSystem-InlineMessage--Icon"
-          name={IconMapping[appearance]}
+          name={messageIconName}
+          type={appearance === 'info' ? 'outlined' : undefined}
           appearance={appearance}
           className={IconClass}
           size={IconSize}

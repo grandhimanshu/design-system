@@ -266,7 +266,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, forw
       className={rightIconClass} // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
       tabIndex={0}
     >
-      <Icon name={'info'} size={sizeMapping[size]} className={inputRightIconClass} />
+      <Icon name="info_outline" type="outlined" size={sizeMapping[size]} className={inputRightIconClass} />
     </div>
   );
 

@@ -77,7 +77,7 @@ export const Toast = (props: ToastProps) => {
     warning: 'warning',
   };
 
-  const icon = IconMapping[appearance];
+  const toastIconName = appearance === 'info' ? 'info_outline' : IconMapping[appearance];
 
   const titleClass = classNames({
     [styles['Toast-title']]: true,
@@ -115,7 +115,14 @@ export const Toast = (props: ToastProps) => {
       role={appearance === 'alert' || appearance === 'warning' ? 'alert' : 'status'}
       aria-live={appearance === 'alert' || appearance === 'warning' ? 'assertive' : 'polite'}
     >
-      {icon && <Icon name={icon} className={iconClass('left')} aria-hidden="true" />}
+      {toastIconName && (
+        <Icon
+          name={toastIconName}
+          type={appearance === 'info' ? 'outlined' : undefined}
+          className={iconClass('left')}
+          aria-hidden="true"
+        />
+      )}
       <div className={styles['Toast-body']}>
         <div className={titleClass}>
           <Heading size="s" className={headingClass} appearance={appearance !== 'warning' ? 'white' : 'default'}>
